@@ -25,8 +25,7 @@ public class User {
     @NotEmpty
     private String passWord;
 
-    @NotEmpty
-    private boolean isActivated;
+    private boolean isActivated = false;
 
 
 }

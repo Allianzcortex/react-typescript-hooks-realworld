@@ -1,4 +1,13 @@
 package com.laraforum.service;
 
-public class UserService {
+import com.laraforum.model.User;
+
+
+public interface UserService {
+
+    /**
+     * register function
+     * @param user
+     */
+    void save(User user);
 }
