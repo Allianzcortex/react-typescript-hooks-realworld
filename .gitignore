@@ -1,20 +1,31 @@
-vendor/
-node_modules/
-npm-debug.log
+HELP.md
+/target/
+!.mvn/wrapper/maven-wrapper.jar
 
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
-storage/*.key
-.env.*.php
-.env.php
-.env
-Homestead.yaml
-Homestead.json
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 
-# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
-.rocketeer/
+### mvn
+.mvn/
+mvnw
+mvnw.cmd
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/build/
