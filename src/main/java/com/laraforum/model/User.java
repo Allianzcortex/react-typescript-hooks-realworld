@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -33,8 +34,10 @@ public class User {
 
     private boolean isActivated = false;
 
+
     public void setRoles(Role newRole) {
         // TODO ??? add string cnnot work ?
+        this.roles = new ArrayList<Role>();
         this.roles.add(newRole);
     }
 

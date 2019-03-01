@@ -13,36 +13,43 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
 @Component
 public class JwtProvider {
 
-     @Value("${spring.security.jwt.token.secret-key}")
-    private String key;
+    @Value("${spring.security.jwt.token.secret-key}")
+    private String key="yourkey";
 
     @Value("${spring.security.jwt.token.expire-length}")
-    private long validateMillseconds;
+    private long validateMillseconds=36000000;
+
+    JwtProvider(){
+        this.key="yourkey";
+    }
 
     @PostConstruct
     private void init() {
         // TODO
         // how to deal with secret key ? directly or base64 encode ?
+        // base64-encoded secret key cannot be null or empty ?
+         key = "yourkey";
     }
 
     public String getUsername(String token) {
-    return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject();
-  }
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject();
+    }
 
-    public String createToken(String userName, List<Role> roles, Date date) {
+    public String createToken(String userName) {
         Claims claims = Jwts.claims().setSubject(userName);
         // TODO check whether convert list to arrayList
-        claims.put("auth",String.join(" ",(ArrayList) roles));
+//        claims.put("auth",String.join(" ",(ArrayList) roles));
 
         // add date
         Date now = new Date();
-        Date validity = new Date(now.getTime()+validateMillseconds);
+        Date validity = new Date(now.getTime() + validateMillseconds);
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -55,21 +62,15 @@ public class JwtProvider {
 
     // cannot use HttpRequest here because only getHeaders()
     // method will be used
-    public String resolveToken(HttpServletRequest request) {
-        String body = request.getHeader("Authorization");
-        if (body != null && body.startsWith("Bearer ")) {
-            return body.substring(7);
+
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(key).parseClaimsJws(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException e) {
+            e.printStackTrace();
+            throw new CustomException("Expired or invalid JWT token",HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
         }
-
-        return null;
     }
-
-     public boolean validateToken(String token) {
-    try {
-      Jwts.parser().setSigningKey(key).parseClaimsJws(token);
-      return true;
-    } catch (JwtException | IllegalArgumentException e) {
-      throw new CustomException("Expired or invalid JWT token", HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
-    }
-  }
 }

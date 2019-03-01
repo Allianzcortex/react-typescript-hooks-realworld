@@ -21,6 +21,10 @@ public class UserServiceImpl implements UserService {
     }
 
     public User signin(String userName, String passWord) {
-        return userRepository.findByUserNameAndPassWord(userName,passWord);
+        return userRepository.findByUserNameAndPassWord(userName, passWord);
+    }
+
+    public User LoginWithUserEmail(String email, String passWord) {
+        return userRepository.findByEmailAndPassWord(email,passWord);
     }
 }
