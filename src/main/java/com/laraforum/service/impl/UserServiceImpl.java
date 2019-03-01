@@ -6,6 +6,7 @@ import com.laraforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// TODO 这里应该在文档里记录一下如果没有 @Service 会报什么错误
 @Service
 public class UserServiceImpl implements UserService {
 
