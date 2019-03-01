@@ -7,7 +7,13 @@ public interface UserService {
 
     /**
      * register function
+     *
      * @param user
      */
     void save(User user);
+
+    /**
+     *
+     */
+    User signin(String userName, String passWord);
 }

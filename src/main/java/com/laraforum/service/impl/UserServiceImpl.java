@@ -1,6 +1,7 @@
 package com.laraforum.service.impl;
 
 import com.laraforum.model.User;
+import com.laraforum.model.enums.Role;
 import com.laraforum.repository.UserRepository;
 import com.laraforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,11 @@ public class UserServiceImpl implements UserService {
 
 
     public void save(User user) {
+        user.setRoles(Role.Lara_USER);
         userRepository.save(user);
+    }
+
+    public User signin(String userName, String passWord) {
+        return userRepository.findByUserNameAndPassWord(userName,passWord);
     }
 }
