@@ -1,9 +1,12 @@
 package com.laraforum.controller;
 
 import com.laraforum.authentication.JwtProvider;
+import com.laraforum.model.Token;
 import com.laraforum.model.User;
 import com.laraforum.model.dao.UserWithEmailAndPassWord;
+import com.laraforum.service.TokenService;
 import com.laraforum.service.UserService;
+import com.laraforum.service.impl.TokenServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.Map;
 
@@ -19,7 +23,7 @@ import java.util.Map;
  * User register/login function
  */
 
-@Controller
+@RestController
 @RequestMapping("api/users")
 public class UserContoller {
 
@@ -28,6 +32,9 @@ public class UserContoller {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * POST /api/users
@@ -49,7 +56,13 @@ public class UserContoller {
     @PostMapping("signin")
     public String save(@RequestBody User user) {
         userService.save(user);
-        return jwtProvider.createToken(user.getUserName());
+        String jwtToken = jwtProvider.createToken(user.getUserName());
+        // write token to repository
+        Date now = new Date();
+        Token token = new Token(user, jwtToken, now);
+        tokenService.save(token);
+        // return the result
+        return jwtToken;
     }
 
     @PostMapping("login")
@@ -61,16 +74,29 @@ public class UserContoller {
 
 
     // @RequestHeader(value="AuthUser") String userName
+    // header cannot work
     @GetMapping("current")
-    public @ResponseBody String getCurrentUser(
+    public @ResponseBody
+    String getCurrentUser(
             HttpServletRequest httpServletRequest, @RequestHeader HttpHeaders httpHeaders) {
-//
-       Map<String,String> headerMap=httpHeaders.toSingleValueMap();
 
-       System.out.println(headerMap);
+        Map<String, String> headerMap = httpHeaders.toSingleValueMap();
 
-       return (String) httpServletRequest.getAttribute("AuthUser");
+        System.out.println(headerMap);
 
+        return (String) httpServletRequest.getAttribute("AuthUser");
+
+
+    }
+
+    @Transactional
+    @PostMapping("logout")
+    public void logout(HttpServletRequest httpServletRequest) {
+        // remove jwt token from database
+        String userName = (String) httpServletRequest.getAttribute("AuthUser");
+        User user = userService.findByUserName(userName);
+        System.out.println("user name is " + userName);
+        tokenService.deleteToken(user);
 
     }
 

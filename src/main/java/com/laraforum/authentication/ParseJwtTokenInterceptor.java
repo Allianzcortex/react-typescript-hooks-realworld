@@ -1,6 +1,7 @@
 package com.laraforum.authentication;
 
 import com.laraforum.exception.UnAuthorizedException;
+import com.laraforum.service.TokenService;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,20 +17,25 @@ public class ParseJwtTokenInterceptor extends HandlerInterceptorAdapter {
     // @Autowired
     private JwtProvider jwtProvider;
 
+    @Autowired
+    private TokenService tokenService;
 
-
-    public ParseJwtTokenInterceptor(){
-        this.jwtProvider=new JwtProvider();
+    public ParseJwtTokenInterceptor() {
+        this.jwtProvider = new JwtProvider();
     }
 
     @Override
     public boolean preHandle(
             HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+
         String body = request.getHeader("Authorization");
         try {
             if (body != null && body.startsWith("Bearer ")) {
                 body = body.substring(7);
+            }
+            if (!tokenService.findByToken(body)) {
+                throw new UnAuthorizedException("Unauthorized");
             }
             System.out.println(body);
             jwtProvider.validateToken(body);

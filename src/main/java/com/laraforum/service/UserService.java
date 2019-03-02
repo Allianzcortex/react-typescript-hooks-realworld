@@ -15,8 +15,10 @@ public interface UserService {
     /**
      *
      */
-   // User LoginWithUserName(String userName, String passWord);
+    // User LoginWithUserName(String userName, String passWord);
     // TODO later implement feature
-   User LoginWithUserEmail(String email,String passWord);
+    User LoginWithUserEmail(String email, String passWord);
+
+    User findByUserName(String userName);
 
 }
