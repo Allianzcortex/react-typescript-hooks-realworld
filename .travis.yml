@@ -1,0 +1,2 @@
+language: Java
+Script: mvn test -B

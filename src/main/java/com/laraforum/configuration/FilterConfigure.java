@@ -21,16 +21,17 @@ public class FilterConfigure {
         return registrationBean;
     }
 
-    @Bean
-    public FilterRegistrationBean<ParseJwtTokenFilter> ParseJwtTokenFilter() {
-        FilterRegistrationBean<ParseJwtTokenFilter> registrationBean
-                = new FilterRegistrationBean<>();
-
-        registrationBean.setFilter(new ParseJwtTokenFilter());
-        registrationBean.addUrlPatterns("/api/users/current");
-
-        return registrationBean;
-    }
+    // Don't need it since we have ParseJwtTokenInterceptor
+//    @Bean
+//    public FilterRegistrationBean<ParseJwtTokenFilter> ParseJwtTokenFilter() {
+//        FilterRegistrationBean<ParseJwtTokenFilter> registrationBean
+//                = new FilterRegistrationBean<>();
+//
+//        registrationBean.setFilter(new ParseJwtTokenFilter());
+//        registrationBean.addUrlPatterns("/api/users/current");
+//
+//        return registrationBean;
+//    }
 
 
 }

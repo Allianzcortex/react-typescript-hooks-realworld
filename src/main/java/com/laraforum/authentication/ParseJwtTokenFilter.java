@@ -49,13 +49,12 @@ public class ParseJwtTokenFilter extends OncePerRequestFilter {
         //responseWrapper.addHeader("AuthUser", jwtProvider.getUsername(body));
         response.setHeader("AuthUser", jwtProvider.getUsername(body));
 
-        response.addHeader("Access-Control-Allow-Origin", "*");
         request.setAttribute("AuthUser", jwtProvider.getUsername(body));
 
         System.out.println("真的执行了吗：");
 
         chain.doFilter(request, response);
-        response.setHeader("fuck", "fuck");
+
 
     }
 
