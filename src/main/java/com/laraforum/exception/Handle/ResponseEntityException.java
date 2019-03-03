@@ -16,8 +16,7 @@ public class ResponseEntityException extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = UnAuthorizedException.class)
     public ResponseEntity<Object> handleAuthorized(
             RuntimeException ex, WebRequest request) {
-        System.out.println("fuck");
-        return handleExceptionInternal(ex, "xx",
+        return handleExceptionInternal(ex, "Unauthorized Exception",
                 new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 

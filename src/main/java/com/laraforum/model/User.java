@@ -10,7 +10,6 @@ import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
-@Order(1)
 @Data
 @Entity
 @Table(name = "User")

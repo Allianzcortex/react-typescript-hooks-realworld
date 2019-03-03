@@ -5,6 +5,7 @@ import com.laraforum.model.User;
 
 import java.util.Date;
 
+
 public interface TokenService {
 
     boolean isTokenExists(String token);

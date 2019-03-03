@@ -2,8 +2,10 @@ package com.laraforum.authentication;
 
 import com.laraforum.exception.UnAuthorizedException;
 import com.laraforum.service.TokenService;
+import com.laraforum.service.impl.TokenServiceImpl;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -14,15 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 public class ParseJwtTokenInterceptor extends HandlerInterceptorAdapter {
 
     // @Autowired 也不能用？ 也会报 null
-    // @Autowired
+
+    @Autowired
     private JwtProvider jwtProvider;
 
     @Autowired
-    private TokenService tokenService;
+    private TokenServiceImpl tokenService;
 
-    public ParseJwtTokenInterceptor() {
-        this.jwtProvider = new JwtProvider();
-    }
 
     @Override
     public boolean preHandle(
@@ -34,6 +34,7 @@ public class ParseJwtTokenInterceptor extends HandlerInterceptorAdapter {
             if (body != null && body.startsWith("Bearer ")) {
                 body = body.substring(7);
             }
+            System.out.println("body is : " + body);
             if (!tokenService.findByToken(body)) {
                 throw new UnAuthorizedException("Unauthorized");
             }

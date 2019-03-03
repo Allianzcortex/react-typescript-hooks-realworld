@@ -43,6 +43,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public boolean findByToken(String token) {
-        return tokenRepository.findByToken(token);
+        System.out.println(tokenRepository==null);
+        return tokenRepository.existsByToken(token);
     }
 }
