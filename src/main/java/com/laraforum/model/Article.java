@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * relationship between user and article: use logic
@@ -16,6 +17,8 @@ import java.util.List;
 @Setter
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,9 +40,12 @@ public class Article {
     // https://stackoverflow.com/questions/2302802/object-references-an-unsaved-transient-instance-save-the-transient-instance-be/2302814
     // About manytomany and manytoone , still a lot to watch
     @NonNull
-    @OneToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "article_tag",
+            joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     // refer: https://projectlombok.org/features/Builder
-    private List<Tag> tagList = new ArrayList<>();
+    private Set<Tag> tagList ;
 
     @NonNull
     private Date createdAt;

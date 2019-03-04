@@ -5,6 +5,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -16,9 +18,10 @@ public class Tag {
 
 
     @NonNull
+    // @Column(unique = true,length = 32)
     private String tagName;
 
-    @ManyToOne
-    private Article article;
+    @ManyToMany(mappedBy = "tagList")
+    private Set<Article> articles;
 
 }

@@ -23,7 +23,7 @@ public class User {
     @Email(message = "please provide valid email")
     // This will make no sense if you create database by yourself
     // https://stackoverflow.com/questions/30460596/jpa-column-unique-true-what-is-really-point-of-having-unique-attribute
-    @Column(unique = true)
+//    @Column(unique = true)
     private String email;
 
     @NotEmpty
