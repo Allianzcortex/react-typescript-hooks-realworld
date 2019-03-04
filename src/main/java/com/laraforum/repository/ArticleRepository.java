@@ -19,6 +19,4 @@ public interface ArticleRepository extends CrudRepository<Article, Integer> {
 
     Article findBySlug(String slug);
 
-    @Query(value = "select tag_name from article_tag  join tag on tag_id=tag.id where article_tag.article_id= :id", nativeQuery = true)
-    List<String> findTagByArticleID(@Param("name") String id)
 }

@@ -31,8 +31,5 @@ public class Tag {
     @ManyToMany(mappedBy = "tagList")
     private Set<Article> articles=new HashSet<Article>();
 
-    public Set<Article> getArticles(){
-
-    }
 
 }

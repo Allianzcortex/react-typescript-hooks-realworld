@@ -1,5 +1,6 @@
 package com.laraforum.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.laraforum.repository.ArticleRepository;
 import lombok.*;
@@ -20,10 +21,6 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Article {
-
-    @Autowired
-    private ArticleRepository articleRepository;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -44,7 +41,7 @@ public class Article {
     // https://stackoverflow.com/questions/2302802/object-references-an-unsaved-transient-instance-save-the-transient-instance-be/2302814
     // About manytomany and manytoone , still a lot to watch
     @NonNull
-    // @JsonIgnore
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "article_tag",
             joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id"),
@@ -52,12 +49,14 @@ public class Article {
     // refer: https://projectlombok.org/features/Builder
     private Set<Tag> tagList = new HashSet<Tag>();
 
-    public Set<Tag> getTagList(){
-        Set<Tag> ff=articleRepository.fi
+    public Set<Tag> getTagList() {
+        return new HashSet<Tag>();
     }
 
 
     @NonNull
+    // refer : https://www.baeldung.com/jackson-jsonformat
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
     private Date createdAt;
 
     @NonNull
@@ -72,4 +71,6 @@ public class Article {
 
     @NonNull
     private int userId;
+
+
 }
