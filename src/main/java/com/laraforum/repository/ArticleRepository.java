@@ -19,4 +19,5 @@ public interface ArticleRepository extends CrudRepository<Article, Integer> {
 
     Article findBySlug(String slug);
 
+
 }
