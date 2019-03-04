@@ -69,11 +69,11 @@ public class ArticleServiceImpl {
                 .userId(user.getId())
                 .tagList(outputTagList)
                 .build();
+        article1.getTagList().add(new Tag("fuck"));
+        System.out.println(article1.getTagList());
         articleRepository.save(article1);
         return article1;
     }
-
-
 
 
 }
