@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.laraforum.exception.CustomException;
 import com.laraforum.exception.UnAuthorizedException;
 import com.laraforum.model.Article;
+import com.laraforum.model.Favorite;
 import com.laraforum.model.Tag;
 import com.laraforum.model.User;
 import com.laraforum.model.dao.ArticleView;
 import com.laraforum.model.dao.ArticleWhenCreated;
 import com.laraforum.repository.ArticleRepository;
 import com.laraforum.service.impl.ArticleServiceImpl;
+import com.laraforum.service.impl.FavoriteServiceImpl;
 import com.laraforum.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,9 @@ public class ArticleController {
 
     @Autowired
     private ArticleRepository articleRepository;
+
+    @Autowired
+    private FavoriteServiceImpl favoriteService;
 
     @PostMapping("create")
     public Article createArticle(HttpServletRequest httpServletRequest, @RequestBody Map<String, ArticleWhenCreated> article) {
@@ -69,6 +74,28 @@ public class ArticleController {
         return articleRepository.findBySlug(slug);
     }
 
+    // Next,all about favorite
+    // 用户喜欢某篇文章
+    @PostMapping("{slug}/favorite")
+    @Transactional
+    public void createFavoriteArticle(HttpServletRequest httpServletRequest, @PathVariable String slug) {
+        String userName = (String) httpServletRequest.getAttribute("AuthUser");
+        int userId = userService.findByUserName(userName).getId();
+        int articleId = articleService.findBySlug(slug).getId();
+        Favorite favorite = new Favorite(articleId, userId);
+        favoriteService.save(favorite);
+    }
+
+    @DeleteMapping("{slug}/favorite")
+    @Transactional
+    public void cancelFavoriteArticle(HttpServletRequest httpServletRequest, @PathVariable String slug) {
+        String userName = (String) httpServletRequest.getAttribute("AuthUser");
+        int userId = userService.findByUserName(userName).getId();
+        int articleId = articleService.findBySlug(slug).getId();
+        // org.hibernate.InstantiationException: No default constructor for entity:  : com.laraforum.model.Favorite
+        // This exception why ?
+        favoriteService.deleteByArticleIdAndUserId(articleId, userId);
+    }
 
 
 

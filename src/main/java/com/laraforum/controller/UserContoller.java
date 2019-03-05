@@ -1,6 +1,7 @@
 package com.laraforum.controller;
 
 import com.laraforum.authentication.JwtProvider;
+import com.laraforum.model.Article;
 import com.laraforum.model.Token;
 import com.laraforum.model.User;
 import com.laraforum.model.dao.UserWithEmailAndPassWord;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -99,5 +101,12 @@ public class UserContoller {
         tokenService.deleteToken(user);
 
     }
+
+    // TODO
+//    @GetMapping("get/favorite")
+//    public List<Article> findArticlesFavoritedByUser(HttpServletRequest httpServletRequest) {
+//        String userName = (String) httpServletRequest.getAttribute("AuthUser");
+//
+//    }
 
 }
