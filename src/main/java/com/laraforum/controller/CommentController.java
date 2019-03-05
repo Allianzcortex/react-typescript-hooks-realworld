@@ -72,11 +72,14 @@ public class CommentController {
 
     @GetMapping("/get/batch/{slug}")
     public List<Comment> getAllCommentsInOneArticle(@PathVariable String slug) {
+        // TODO check whether slug is legan
+
         int articleId = articleService.findBySlug(slug).getId();
         List<ArticleComment> middleResults = articleCommentService.findByArticleId(articleId);
         List<Comment> commentResults = new ArrayList<>();
         for (ArticleComment articleComment : middleResults) {
             int commentId = articleComment.getCommendID();
+            // should add more judgement
             commentResults.add(commentService.findById(commentId).get());
         }
         return commentResults;
