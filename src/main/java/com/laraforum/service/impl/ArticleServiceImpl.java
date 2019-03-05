@@ -79,5 +79,4 @@ public class ArticleServiceImpl {
         return articleRepository.findBySlug(slug);
     }
 
-
 }

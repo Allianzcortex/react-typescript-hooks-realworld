@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -63,8 +64,23 @@ public class ArticleController {
         return articles.get().get(0);
     }
 
-    @GetMapping("get/{slug}")
+    @GetMapping("get/single/{slug}")
     public Article findBySlug(@PathVariable String slug) {
         return articleRepository.findBySlug(slug);
+    }
+
+    //TODO 待完成
+    // 关于 requestparam required=false,参考：
+    // https://stackoverflow.com/questions/22373696/requestparam-in-spring-mvc-handling-optional-parameters
+    @GetMapping("get/batch/")
+    public List<Article> getBatchArticles(
+            @RequestParam("tag") String tag,
+            @RequestParam("author") String author,
+            @RequestParam("favorited") String favoritedByUser,
+            @RequestParam(value = "limit", required = false) String limit,
+            @RequestParam(value = "offset", required = false) String offset) {
+
+        return new ArrayList<>();
+
     }
 }

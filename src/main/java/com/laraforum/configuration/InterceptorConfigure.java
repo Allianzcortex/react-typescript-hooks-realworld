@@ -15,6 +15,9 @@ public class InterceptorConfigure implements WebMvcConfigurer {
         return new ParseJwtTokenInterceptor();
     }
 
+    // 关于 */* 的代指
+    // https://stackoverflow.com/questions/33864252/spring-mvc-handler-interceptor-with-exclude-path-pattern-with-pathparam/33866377#33866377
+    // 所以 */* 等价于 **
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(parseJwtTokenInterceptor1())
@@ -22,6 +25,7 @@ public class InterceptorConfigure implements WebMvcConfigurer {
                 .addPathPatterns("/api/users/current")
                 .addPathPatterns("/api/users/logout")
                 .addPathPatterns("/api/articles/create")
-                .addPathPatterns("/api/comment/create/*");
+                .addPathPatterns("/api/comment/create/*")
+                .addPathPatterns("/api/comment/delete/*/*");
     }
 }

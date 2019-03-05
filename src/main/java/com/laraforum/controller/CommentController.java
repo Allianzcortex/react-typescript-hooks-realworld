@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/comment")
@@ -52,12 +54,32 @@ public class CommentController {
         commentService.save(comment1);
 
         int comment1Id = comment1.getId();
+        // TODO 虽然功能实现但这里还是需要再仔细查查，分配的 ID 显示的为空？但实际却是可以写进去
         System.out.println("分配的 ID 是： ");
         // Next,add relationship
         ArticleComment articleComment = new ArticleComment(articleID, comment1Id);
         articleCommentService.save(articleComment);
 
         return comment1;
+    }
+
+    @Transactional
+    @DeleteMapping("delete/{slug}/{commentId}")
+    public void deleteComment(@PathVariable String slug, @PathVariable Integer commentId) {
+        commentService.delete(commentId);
+        articleCommentService.delete(commentId);
+    }
+
+    @GetMapping("/get/batch/{slug}")
+    public List<Comment> getAllCommentsInOneArticle(@PathVariable String slug) {
+        int articleId = articleService.findBySlug(slug).getId();
+        List<ArticleComment> middleResults = articleCommentService.findByArticleId(articleId);
+        List<Comment> commentResults = new ArrayList<>();
+        for (ArticleComment articleComment : middleResults) {
+            int commentId = articleComment.getCommendID();
+            commentResults.add(commentService.findById(commentId).get());
+        }
+        return commentResults;
     }
 
 }
