@@ -72,7 +72,7 @@ public class CommentController {
 
     @GetMapping("/get/batch/{slug}")
     public List<Comment> getAllCommentsInOneArticle(@PathVariable String slug) {
-        // TODO check whether slug is legan
+        // TODO check whether slug is legal
 
         int articleId = articleService.findBySlug(slug).getId();
         List<ArticleComment> middleResults = articleCommentService.findByArticleId(articleId);

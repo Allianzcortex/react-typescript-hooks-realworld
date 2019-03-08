@@ -3,16 +3,11 @@ package com.laraforum.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.laraforum.exception.CustomException;
 import com.laraforum.exception.UnAuthorizedException;
-import com.laraforum.model.Article;
-import com.laraforum.model.Favorite;
-import com.laraforum.model.Tag;
-import com.laraforum.model.User;
+import com.laraforum.model.*;
 import com.laraforum.model.dao.ArticleView;
 import com.laraforum.model.dao.ArticleWhenCreated;
 import com.laraforum.repository.ArticleRepository;
-import com.laraforum.service.impl.ArticleServiceImpl;
-import com.laraforum.service.impl.FavoriteServiceImpl;
-import com.laraforum.service.impl.UserServiceImpl;
+import com.laraforum.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +35,12 @@ public class ArticleController {
 
     @Autowired
     private FavoriteServiceImpl favoriteService;
+
+    @Autowired
+    private CommentServiceImpl commentService;
+
+    @Autowired
+    private ArticleCommentServiceImpl articleCommentService;
 
     @PostMapping("create")
     public Article createArticle(HttpServletRequest httpServletRequest, @RequestBody Map<String, ArticleWhenCreated> article) {
@@ -97,6 +98,17 @@ public class ArticleController {
         favoriteService.deleteByArticleIdAndUserId(articleId, userId);
     }
 
+
+    @GetMapping("{slug}/comments")
+    public List<Comment> getCommentsOfArticle(HttpServletRequest httpServletRequest, @PathVariable String slug) {
+        int articleId = articleService.findBySlug(slug).getId();
+        List<Integer> commentsId = articleCommentService.findBatchCommmentsId(articleId);
+        List<Comment> batchComments = new ArrayList<>();
+        for (Integer id : commentsId) {
+            batchComments.add(commentService.findById(id).get());
+        }
+        return batchComments;
+    }
 
 
     //TODO 待完成

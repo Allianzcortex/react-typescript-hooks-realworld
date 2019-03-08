@@ -24,4 +24,8 @@ public class ArticleCommentServiceImpl {
     public List<ArticleComment> findByArticleId(int articleId) {
         return articleCommentRepository.findByArticleID(articleId);
     }
+
+    public List<Integer> findBatchCommmentsId(int articleId) {
+        return articleCommentRepository.findBatchCommmentsId(articleId);
+    }
 }
