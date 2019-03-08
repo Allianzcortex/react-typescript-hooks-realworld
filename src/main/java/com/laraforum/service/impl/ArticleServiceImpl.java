@@ -69,7 +69,6 @@ public class ArticleServiceImpl {
                 .userId(user.getId())
                 .tagList(outputTagList)
                 .build();
-        article1.getTagList().add(new Tag("fuck"));
         System.out.println(article1.getTagList());
         articleRepository.save(article1);
         return article1;
@@ -77,6 +76,11 @@ public class ArticleServiceImpl {
 
     public Article findBySlug(String slug) {
         return articleRepository.findBySlug(slug);
+    }
+
+
+    public Optional<List<Article>> findByTagAnduAndUserNameAndFavorite(String tag, int authorId, int favorited) {
+        return articleRepository.findByTagAnduAndUserNameAndFavorite(tag,authorId, favorited);
     }
 
 }

@@ -114,15 +114,18 @@ public class ArticleController {
     //TODO 待完成
     // 关于 requestparam required=false,参考：
     // https://stackoverflow.com/questions/22373696/requestparam-in-spring-mvc-handling-optional-parameters
-    @GetMapping("get/batch/")
+    @GetMapping("get/batch")
     public List<Article> getBatchArticles(
             @RequestParam("tag") String tag,
             @RequestParam("author") String author,
             @RequestParam("favorited") String favoritedByUser,
             @RequestParam(value = "limit", required = false) String limit,
             @RequestParam(value = "offset", required = false) String offset) {
-
-        return new ArrayList<>();
+        System.out.println("fuck");
+        int authorId = userService.findByUserName(author).getId();
+        int favoritedId = userService.findByUserName(favoritedByUser).getId();
+        System.out.println(authorId);
+        return articleService.findByTagAnduAndUserNameAndFavorite(tag, authorId, favoritedId).get();
 
     }
 }
