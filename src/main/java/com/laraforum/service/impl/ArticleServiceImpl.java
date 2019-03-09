@@ -5,6 +5,7 @@ import com.laraforum.model.Tag;
 import com.laraforum.model.User;
 import com.laraforum.model.dao.ArticleWhenCreated;
 import com.laraforum.repository.ArticleRepository;
+import com.laraforum.service.ArticleService;
 import com.laraforum.util.ArticleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
-public class ArticleServiceImpl {
+public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleRepository articleRepository;
@@ -45,6 +46,7 @@ public class ArticleServiceImpl {
      * @return
      */
     @Transactional
+    @Override
     public Article createArticle(User user, ArticleWhenCreated article) {
 
         // TODO 检测文章 title 是否已存在，
@@ -74,13 +76,18 @@ public class ArticleServiceImpl {
         return article1;
     }
 
+    @Override
     public Article findBySlug(String slug) {
         return articleRepository.findBySlug(slug);
     }
 
-
+    @Override
     public Optional<List<Article>> findByTagAnduAndUserNameAndFavorite(String tag, int authorId, int favorited) {
-        return articleRepository.findByTagAnduAndUserNameAndFavorite(tag,authorId, favorited);
+        return articleRepository.findByTagAnduAndUserNameAndFavorite(tag, authorId, favorited);
+    }
+
+    public List<Article> findByKeyWord(String keyWord) {
+        return articleRepository.findByKeyWord(keyWord);
     }
 
 }

@@ -24,6 +24,7 @@ import java.util.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="article")
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

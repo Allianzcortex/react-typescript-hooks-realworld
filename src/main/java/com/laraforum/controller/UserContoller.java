@@ -49,14 +49,10 @@ public class UserContoller {
      * }
      */
 
-    @GetMapping("1")
-    public String xx() {
-        return "hello";
-    }
-
     // TODO shoud remember the path problem
     @PostMapping("signin")
     public String save(@RequestBody User user) {
+        String userName=user.getUserName();
         userService.save(user);
         String jwtToken = jwtProvider.createToken(user.getUserName());
         // write token to repository
