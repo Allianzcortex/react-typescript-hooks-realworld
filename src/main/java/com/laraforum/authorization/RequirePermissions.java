@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 // @interface not class
 // or not applicable to type
 public @interface RequirePermissions {
-    public String permissions() default "";
+    public String value() default "";
 
 }

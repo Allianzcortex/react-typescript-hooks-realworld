@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 // @interface not class
 // or not applicable to type
 public @interface RequireRoles {
-    public String roles() default "";
+    public String value() default "";
 
 }

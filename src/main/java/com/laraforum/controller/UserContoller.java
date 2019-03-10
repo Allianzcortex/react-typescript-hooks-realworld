@@ -75,8 +75,8 @@ public class UserContoller {
 
     // @RequestHeader(value="AuthUser") String userName
     // header cannot work
-    @RequirePermissions(permissions = "create")
-    @RequireRoles(roles = "administer")
+    @RequirePermissions("create")
+    @RequireRoles("administer")
     @GetMapping("current")
     public @ResponseBody
     String getCurrentUser(
@@ -85,7 +85,6 @@ public class UserContoller {
         Map<String, String> headerMap = httpHeaders.toSingleValueMap();
 
         System.out.println(headerMap);
-        System.out.println("开始返回");
         return (String) httpServletRequest.getAttribute("AuthUser");
 
 
