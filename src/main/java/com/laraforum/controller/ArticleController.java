@@ -1,6 +1,7 @@
 package com.laraforum.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.laraforum.authorization.RequirePermissions;
 import com.laraforum.exception.CustomException;
 import com.laraforum.exception.UnAuthorizedException;
 import com.laraforum.model.*;
@@ -70,6 +71,7 @@ public class ArticleController {
         return articles.get().get(0);
     }
 
+    @RequirePermissions
     @GetMapping("get/single/{slug}")
     public Article findBySlug(@PathVariable String slug) {
         return articleRepository.findBySlug(slug);

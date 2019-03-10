@@ -6,7 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.laraforum.repository.ArticleRepository;
 import lombok.*;
+import org.hibernate.search.annotations.Indexed;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.hibernate.search.annotations.Field;
+
 
 import javax.persistence.*;
 import java.util.*;
@@ -22,6 +26,7 @@ import java.util.*;
 @Getter
 @Setter
 @Builder
+@Indexed
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="article")
@@ -39,6 +44,7 @@ public class Article {
     @NonNull
     private String description;
 
+    @Field
     @NonNull
     private String body;
 

@@ -1,6 +1,8 @@
 package com.laraforum.controller;
 
 import com.laraforum.authentication.JwtProvider;
+import com.laraforum.authorization.RequirePermissions;
+import com.laraforum.authorization.RequireRoles;
 import com.laraforum.model.Article;
 import com.laraforum.model.Token;
 import com.laraforum.model.User;
@@ -52,7 +54,7 @@ public class UserContoller {
     // TODO shoud remember the path problem
     @PostMapping("signin")
     public String save(@RequestBody User user) {
-        String userName=user.getUserName();
+        String userName = user.getUserName();
         userService.save(user);
         String jwtToken = jwtProvider.createToken(user.getUserName());
         // write token to repository
@@ -73,6 +75,8 @@ public class UserContoller {
 
     // @RequestHeader(value="AuthUser") String userName
     // header cannot work
+    @RequirePermissions(permissions = "create")
+    @RequireRoles(roles = "administer")
     @GetMapping("current")
     public @ResponseBody
     String getCurrentUser(
@@ -81,7 +85,7 @@ public class UserContoller {
         Map<String, String> headerMap = httpHeaders.toSingleValueMap();
 
         System.out.println(headerMap);
-
+        System.out.println("开始返回");
         return (String) httpServletRequest.getAttribute("AuthUser");
 
 
