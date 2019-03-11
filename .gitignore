@@ -28,4 +28,7 @@ mvnw.cmd
 /dist/
 /nbdist/
 /.nb-gradle/
-/build/
+/build/i
+
+# Lucene index file
+com.laraforum.model.Article/

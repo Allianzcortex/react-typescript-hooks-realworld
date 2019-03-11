@@ -1,12 +1,23 @@
 package com.laraforum.model.enums;
 
-// Here I don't need to implemnt GrantedAuthority interface
-// or maybe I can ?
 
-public enum Role {
-    Lara_VISITOR,
-    Lara_USER,
-    Lara_ADMIN;
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Data
+@Entity
+@Table(name = "role")
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+
+    private int roleNumber;
+
+    @Column(name = "role_value")
+    private String roleValue;
 
 
 }

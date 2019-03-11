@@ -8,7 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -32,18 +34,15 @@ public class User {
     @NotEmpty
     private String passWord;
 
-    @ElementCollection(targetClass = Role.class)
-    @Enumerated(EnumType.STRING)
-    private List<Role> roles;
-
     private boolean isActivated = false;
 
+//    @ElementCollection
+//    private Set<Integer> roles = new HashSet<>();
+//    Not available , because it means spring jpa will still generate user_roles to
+//    store the relationship , and this is not what we want
 
-    public void setRoles(Role newRole) {
-        // TODO ??? add string cnnot work ?
-        this.roles = new ArrayList<Role>();
-        this.roles.add(newRole);
-    }
+
+    private String roles="";
 
 
 }

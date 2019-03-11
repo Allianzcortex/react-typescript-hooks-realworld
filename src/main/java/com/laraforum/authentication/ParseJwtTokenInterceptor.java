@@ -3,6 +3,7 @@ package com.laraforum.authentication;
 import com.laraforum.exception.UnAuthorizedException;
 import com.laraforum.service.TokenService;
 import com.laraforum.service.impl.TokenServiceImpl;
+import com.laraforum.service.impl.UserServiceImpl;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,9 @@ public class ParseJwtTokenInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     private TokenServiceImpl tokenService;
+
+    @Autowired
+    private UserServiceImpl userService;
 
 
     @Override
@@ -44,7 +48,11 @@ public class ParseJwtTokenInterceptor extends HandlerInterceptorAdapter {
             throw new UnAuthorizedException("UnParsed");
         }
         response.setHeader("test", "test");
-        request.setAttribute("AuthUser", jwtProvider.getUsername(body));
+        String userName = jwtProvider.getUsername(body);
+        request.setAttribute("AuthUser", userName);
+        // So still missing question
+        // Do we need to use a special method to get single field ? (e.g. just like roles)
+        request.setAttribute("Roles", userService.getUserRoles(userName));
         return true;
     }
 //
