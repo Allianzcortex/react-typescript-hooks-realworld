@@ -12,6 +12,10 @@ public class Permission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "permission")
-    private String permission;
+    private int permissionNumber;
+
+    @Column(name = "permission_value")
+    private String permissionValue;
+
+
 }

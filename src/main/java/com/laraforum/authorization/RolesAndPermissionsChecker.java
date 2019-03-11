@@ -47,7 +47,7 @@ public class RolesAndPermissionsChecker {
             }
         }
         Object object = point.proceed();
-        System.out.println("Permission is " + roles.value());
+        System.out.println("role is " + roles.value());
         return object;
 
     }
@@ -57,6 +57,14 @@ public class RolesAndPermissionsChecker {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes()).getRequest();
         System.out.println(request.getAttribute("AuthUser"));
+        List<String> userPermissions = (List<String>) request.getAttribute("Permissions");
+        System.out.println("用户的权限是：" + userPermissions);
+        System.out.println("要求的权限是：" + requirePermissions.value());
+        for (String targetPermission : requirePermissions.value().split(":")) {
+            if (!userPermissions.contains(targetPermission)) {
+                throw new UnAuthorizedException("No permissions");
+            }
+        }
         Object object = point.proceed();
         System.out.println("Permission is " + requirePermissions.value());
         return object;

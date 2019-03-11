@@ -24,6 +24,7 @@ public interface ArticleRepository extends CrudRepository<Article, Integer> {
                                                                 @Param("authorId") int authorId,
                                                                 @Param("favorited") int favorited);
 
+
     Article findBySlug(String slug);
 
     @Query(value = "select * from article where MATCH(body) AGAINST (:keyWord)", nativeQuery = true)

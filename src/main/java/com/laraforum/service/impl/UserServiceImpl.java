@@ -2,6 +2,8 @@ package com.laraforum.service.impl;
 
 import com.laraforum.model.User;
 import com.laraforum.model.enums.Role;
+import com.laraforum.repository.PermissionRepository;
+import com.laraforum.repository.RoleRepository;
 import com.laraforum.repository.UserRepository;
 import com.laraforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleServiceImpl roleService;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PermissionRepository permissionRepository;
 
     public void save(User user) {
         userRepository.save(user);
@@ -46,8 +54,12 @@ public class UserServiceImpl implements UserService {
             xx.add(Integer.parseInt(f));
         }
         System.out.println("xx 是 ： " + xx);
-        System.out.println("目标是："+roleService.findRoleNameByRoleNumber(xx));
-        return roleService.findRoleNameByRoleNumber(xx);
+        System.out.println("目标是：" + roleService.findRoleNameByRoleNumber(xx));
+        return roleRepository.findRoleNameByRoleNumber(xx);
+    }
+
+    public List<String> gerUserPermissions(String userName) {
+        return permissionRepository.findPermissionsByUserName(userName);
     }
 
     public User findByUserName(String userName) {

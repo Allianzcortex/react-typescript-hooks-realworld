@@ -41,8 +41,12 @@ public class User {
 //    Not available , because it means spring jpa will still generate user_roles to
 //    store the relationship , and this is not what we want
 
+    private String roles = "";
 
-    private String roles="";
+    @Column(name = "permissions")
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_permissions")
+    private Set<Integer> permissions = new HashSet<>();
 
 
 }

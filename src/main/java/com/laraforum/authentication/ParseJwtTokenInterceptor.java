@@ -53,6 +53,7 @@ public class ParseJwtTokenInterceptor extends HandlerInterceptorAdapter {
         // So still missing question
         // Do we need to use a special method to get single field ? (e.g. just like roles)
         request.setAttribute("Roles", userService.getUserRoles(userName));
+        request.setAttribute("Permissions", userService.gerUserPermissions(userName));
         return true;
     }
 //

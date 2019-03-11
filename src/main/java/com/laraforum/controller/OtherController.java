@@ -1,19 +1,19 @@
 package com.laraforum.controller;
 
+import com.laraforum.authorization.RequirePermissions;
 import com.laraforum.authorization.RequireRoles;
 import com.laraforum.exception.UnAuthorizedException;
 import com.laraforum.model.Article;
 import com.laraforum.model.User;
-import com.laraforum.service.impl.ArticleServiceImpl;
-import com.laraforum.service.impl.RoleServiceImpl;
-import com.laraforum.service.impl.SearchServiceImpl;
-import com.laraforum.service.impl.UserServiceImpl;
+import com.laraforum.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import sun.security.acl.PermissionImpl;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/")
@@ -30,6 +30,9 @@ public class OtherController {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private PermissionServiceImpl permissionService;
 
     @Value("${fulltext.search.hibernate.search.use}")
     private boolean useHibernateSearch = false;
@@ -58,7 +61,7 @@ public class OtherController {
     @RequireRoles("admin")
     @Transactional
     @PostMapping("role/add/{userName}/{rNumber}")
-    public void addUserPermission(@PathVariable String userName, @PathVariable Integer rNumber) {
+    public void addUserRole(@PathVariable String userName, @PathVariable Integer rNumber) {
         // first check whether r(ow)Number exists
         if (!roleService.findByRowNumber(rNumber).isPresent()) {
             throw new UnAuthorizedException("No Such Role");
@@ -67,5 +70,19 @@ public class OtherController {
         User user1 = userService.findByUserName(userName);
         user1.setRoles(user1.getRoles() + ":" + rNumber);
 
+    }
+
+
+    @RequirePermissions("create_post")
+    @Transactional
+    @PostMapping("permission/add/{userName}/{pNumber}")
+    public void addUserPermission(@PathVariable String userName, @PathVariable Integer pNumber) {
+        if (!permissionService.findByPermissionNumber(pNumber).isPresent()) {
+            throw new UnAuthorizedException("No such permission");
+        }
+        User user = userService.findByUserName(userName);
+        Set<Integer> newPermissions = user.getPermissions();
+        newPermissions.add(pNumber);
+        user.setPermissions(newPermissions);
     }
 }
