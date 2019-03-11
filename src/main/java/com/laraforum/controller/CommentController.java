@@ -3,10 +3,7 @@ package com.laraforum.controller;
 
 import com.laraforum.model.ArticleComment;
 import com.laraforum.model.Comment;
-import com.laraforum.service.impl.ArticleCommentServiceImpl;
-import com.laraforum.service.impl.ArticleServiceImpl;
-import com.laraforum.service.impl.CommentServiceImpl;
-import com.laraforum.service.impl.UserServiceImpl;
+import com.laraforum.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,11 +30,15 @@ public class CommentController {
     @Autowired
     private ArticleCommentServiceImpl articleCommentService;
 
+    @Autowired
+    private NotificationServiceImpl notificationService;
+
     @Transactional
     @PostMapping("create/{slug}")
     public Comment createComment(HttpServletRequest httpServletRequest, @PathVariable String slug, @RequestBody HashMap<String, HashMap<String, String>> comment) {
         int articleID = articleService.findBySlug(slug).getId();
-
+        // TODO reduce to 1 line
+        int receiveId = articleService.findBySlug(slug).getUserId();
         // TODO
         // Tis is not the best way to parse the param
         Date now = new Date();
@@ -60,8 +61,12 @@ public class CommentController {
         ArticleComment articleComment = new ArticleComment(articleID, comment1Id);
         articleCommentService.save(articleComment);
 
+        // create notification
+        notificationService.createNotification(userID, receiveId, articleID);
+
         return comment1;
     }
+
 
     @Transactional
     @DeleteMapping("delete/{slug}/{commentId}")

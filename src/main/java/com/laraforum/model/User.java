@@ -48,5 +48,7 @@ public class User {
     @CollectionTable(name = "user_permissions")
     private Set<Integer> permissions = new HashSet<>();
 
+    private int notificationCount = 0;
+
 
 }

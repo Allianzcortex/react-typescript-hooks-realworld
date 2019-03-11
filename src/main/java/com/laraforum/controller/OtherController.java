@@ -4,7 +4,9 @@ import com.laraforum.authorization.RequirePermissions;
 import com.laraforum.authorization.RequireRoles;
 import com.laraforum.exception.UnAuthorizedException;
 import com.laraforum.model.Article;
+import com.laraforum.model.Notification;
 import com.laraforum.model.User;
+import com.laraforum.repository.NotificationRepository;
 import com.laraforum.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,12 +14,18 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import sun.security.acl.PermissionImpl;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 @RestController
 @RequestMapping("api/")
 public class OtherController {
+
+    @Autowired
+    private NotificationRepository notificationRepository;
 
     @Autowired
     private ArticleServiceImpl articleService;
@@ -33,6 +41,9 @@ public class OtherController {
 
     @Autowired
     private PermissionServiceImpl permissionService;
+
+    @Autowired
+    private NotificationServiceImpl notificationService;
 
     @Value("${fulltext.search.hibernate.search.use}")
     private boolean useHibernateSearch = false;
@@ -84,5 +95,22 @@ public class OtherController {
         Set<Integer> newPermissions = user.getPermissions();
         newPermissions.add(pNumber);
         user.setPermissions(newPermissions);
+    }
+
+    // TODO test delete
+    @PostMapping("read/notice/{notificationIdList}")
+    public void readNotification(HttpServletRequest httpServletRequest, @PathVariable Integer[] notificationIdList) {
+        String userName = (String) httpServletRequest.getAttribute("AuthUser");
+        Integer userId = userService.findByUserName(userName).getId();
+        notificationService.deleteNotification(userId, new ArrayList(Arrays.asList(notificationIdList)));
+    }
+
+    @GetMapping("get/notice")
+    public List<Notification> getNotifications(HttpServletRequest httpServletRequest) {
+        String userName = (String) httpServletRequest.getAttribute("AuthUser");
+        Integer userId = userService.findByUserName(userName).getId();
+        // if isRead=false,then return all unread messages; while isRead=true ,return all read messages
+        boolean isRead = false;
+        return notificationService.getNotifications(isRead, userId);
     }
 }
