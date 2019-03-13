@@ -10,9 +10,9 @@
   `notification_count` int(11) DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY (`user_name`,`email`)
-) ENGINE=InnoDB  AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
  CREATE TABLE IF NOT EXISTS `user_permissions` (
   `user_id` int(11) NOT NULL,
   `permissions` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
