@@ -1,7 +1,7 @@
 package com.laraforum.model;
 
 import com.laraforum.model.enums.Role;
-import lombok.Data;
+import lombok.*;
 import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
@@ -14,11 +14,14 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "User")
+@Table(name = "user")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotEmpty
@@ -29,11 +32,14 @@ public class User {
     private String email;
 
     @NotEmpty
+    @Column(name="user_name")
     private String userName;
 
     @NotEmpty
+    @Column(name="pass_word")
     private String passWord;
 
+    @Column(name="is_activated")
     private boolean isActivated = false;
 
 //    @ElementCollection
@@ -48,7 +54,13 @@ public class User {
     @CollectionTable(name = "user_permissions")
     private Set<Integer> permissions = new HashSet<>();
 
+    @Column(name="notification_count")
     private int notificationCount = 0;
 
 
+//    public User(@NotEmpty @NonNull @Email(message = "please provide valid email") String email, @NotEmpty @NonNull String userName, @NotEmpty @NonNull String passWord) {
+//        this.email = email;
+//        this.userName = userName;
+//        this.passWord = passWord;
+//    }
 }

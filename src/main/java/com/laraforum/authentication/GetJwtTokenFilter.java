@@ -50,7 +50,7 @@ public class GetJwtTokenFilter implements Filter {
                 throw new UnAuthorizedException("Unauthorized");
             }
 
-            req.setAttribute("Authen-User", jwtProvider.getUsername(body));
+            req.setAttribute("Authen-user", jwtProvider.getUsername(body));
         }
         chain.doFilter(request, response);
     }

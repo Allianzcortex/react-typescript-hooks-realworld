@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User register/login function
+ * user register/login function
  */
 
 @RestController
@@ -58,8 +58,8 @@ public class UserContoller {
         // basic authorization
         user.setRoles(user.getRoles() + "1");
         user.getPermissions().add(1);
-
         userService.save(user);
+
         String jwtToken = jwtProvider.createToken(user.getUserName());
         // write token to repository
         Date now = new Date();

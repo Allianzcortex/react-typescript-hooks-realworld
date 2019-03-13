@@ -95,6 +95,14 @@
             <version>1.8.9</version>
         </dependency>
 
+        <!-- H2 Database for test -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.195</version>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
 
 

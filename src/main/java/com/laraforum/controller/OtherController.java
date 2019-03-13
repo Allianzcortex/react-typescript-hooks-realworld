@@ -105,6 +105,11 @@ public class OtherController {
         notificationService.deleteNotification(userId, new ArrayList(Arrays.asList(notificationIdList)));
     }
 
+    @GetMapping("test")
+    public String read(){
+        return "test";
+    }
+
     @GetMapping("get/notice")
     public List<Notification> getNotifications(HttpServletRequest httpServletRequest) {
         String userName = (String) httpServletRequest.getAttribute("AuthUser");
