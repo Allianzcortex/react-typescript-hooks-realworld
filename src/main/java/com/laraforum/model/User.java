@@ -46,14 +46,16 @@ public class User {
 //    private Set<Integer> roles = new HashSet<>();
 //    Not available , because it means spring jpa will still generate user_roles to
 //    store the relationship , and this is not what we want
-
+    @Builder.Default
     private String roles = "";
 
+    @Builder.Default
     @Column(name = "permissions")
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_permissions")
     private Set<Integer> permissions = new HashSet<>();
 
+    @Builder.Default
     @Column(name="notification_count")
     private int notificationCount = 0;
 

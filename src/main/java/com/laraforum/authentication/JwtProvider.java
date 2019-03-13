@@ -26,7 +26,7 @@ public class JwtProvider {
     @Value("${spring.security.jwt.token.expire-length}")
     private long validateMillseconds=36000000;
 
-    JwtProvider(){
+    public JwtProvider(){
         this.key="yourkey";
     }
 

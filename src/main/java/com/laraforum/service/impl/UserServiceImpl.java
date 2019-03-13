@@ -6,6 +6,7 @@ import com.laraforum.repository.PermissionRepository;
 import com.laraforum.repository.RoleRepository;
 import com.laraforum.repository.UserRepository;
 import com.laraforum.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 // TODO 这里应该在文档里记录一下如果没有 @Service 会报什么错误
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     @Autowired

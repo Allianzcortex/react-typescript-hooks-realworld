@@ -9,7 +9,9 @@ import com.laraforum.model.User;
 import com.laraforum.model.dao.UserWithEmailAndPassWord;
 import com.laraforum.service.TokenService;
 import com.laraforum.service.UserService;
+import com.laraforum.service.impl.RoleServiceImpl;
 import com.laraforum.service.impl.TokenServiceImpl;
+import com.laraforum.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,10 +37,14 @@ public class UserContoller {
     private JwtProvider jwtProvider;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
-    private TokenService tokenService;
+    private TokenServiceImpl tokenService;
+
+    @Autowired
+    private RoleServiceImpl roleService;
+
 
     /**
      * POST /api/users
@@ -51,22 +57,40 @@ public class UserContoller {
      * }
      */
 
+    @GetMapping("test")
+    public String fuck() {
+        return "fuck";
+    }
+
     // TODO shoud remember the path problem
     @PostMapping("signin")
     public String save(@RequestBody User user) {
         String userName = user.getUserName();
         // basic authorization
+        // bwlow line is for test
+        roleService.findByRowNumber(1);
+        System.err.println("roleService 是：" + roleService
+                + " | " + roleService.findByRowNumber(1)
+        );
+        // also for test
+        System.out.println("tokenservice 是：" + tokenService);
+        tokenService.findByToken("f");
         user.setRoles(user.getRoles() + "1");
         user.getPermissions().add(1);
+        System.out.println("userservice is" + userService);
         userService.save(user);
+        System.out.println("jwtProvider is " + jwtProvider);
+
 
         String jwtToken = jwtProvider.createToken(user.getUserName());
         // write token to repository
         Date now = new Date();
-        Token token = new Token(user, jwtToken, now);
-        tokenService.save(token);
+//        Token token = new Token(user, jwtToken, now);
+//        tokenService.save(token);
         // return the result
-        return jwtToken;
+        return "test";
+        // return jwtToken;
+
     }
 
     @PostMapping("login")

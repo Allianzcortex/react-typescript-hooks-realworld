@@ -1,4 +1,4 @@
-package com.laraforum.repository;
+package com.laraforum;
 
 
 import com.laraforum.configuration.MySqlRepositoryConfigure;
