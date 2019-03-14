@@ -2,16 +2,11 @@ package com.laraforum.authentication;
 
 import com.laraforum.exception.UnAuthorizedException;
 import io.jsonwebtoken.JwtException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 
 
@@ -44,14 +39,11 @@ public class ParseJwtTokenFilter extends OncePerRequestFilter {
         } catch (JwtException ex) {
             throw new UnAuthorizedException("UnParsed");
         }
-        //req.setAttribute("AuthenUser", jwtProvider.getUsername(body));
-        //ResponseRequestWrapper responseWrapper = new ResponseRequestWrapper(response);
-        //responseWrapper.addHeader("AuthUser", jwtProvider.getUsername(body));
+
+        // setHeader will not be read, and setAttribute is a better way
         response.setHeader("AuthUser", jwtProvider.getUsername(body));
 
         request.setAttribute("AuthUser", jwtProvider.getUsername(body));
-
-        System.out.println("真的执行了吗：");
 
         chain.doFilter(request, response);
 

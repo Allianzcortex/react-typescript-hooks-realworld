@@ -1,14 +1,9 @@
 package com.laraforum.controller;
 
 import com.laraforum.authentication.JwtProvider;
-import com.laraforum.authorization.RequirePermissions;
-import com.laraforum.authorization.RequireRoles;
-import com.laraforum.model.Article;
 import com.laraforum.model.Token;
 import com.laraforum.model.User;
-import com.laraforum.model.dao.UserWithEmailAndPassWord;
-import com.laraforum.service.TokenService;
-import com.laraforum.service.UserService;
+import com.laraforum.model.dto.UserWithEmailAndPassWord;
 import com.laraforum.service.impl.RoleServiceImpl;
 import com.laraforum.service.impl.TokenServiceImpl;
 import com.laraforum.service.impl.UserServiceImpl;
@@ -16,13 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,12 +49,6 @@ public class UserContoller {
      * }
      * }
      */
-
-    @GetMapping("test")
-    public String fuck() {
-        return "fuck";
-    }
-
     // TODO shoud remember the path problem
     @PostMapping("signin")
     public String save(@RequestBody User user) {
@@ -85,11 +72,11 @@ public class UserContoller {
         String jwtToken = jwtProvider.createToken(user.getUserName());
         // write token to repository
         Date now = new Date();
-//        Token token = new Token(user, jwtToken, now);
-//        tokenService.save(token);
+        Token token = new Token(user, jwtToken, now);
+        tokenService.save(token);
         // return the result
-        return "test";
-        // return jwtToken;
+
+        return jwtToken;
 
     }
 
@@ -100,9 +87,6 @@ public class UserContoller {
         return new ResponseEntity<>(userService.LoginWithUserEmail(email, passWord), HttpStatus.OK);
     }
 
-
-    // @RequestHeader(value="AuthUser") String userName
-    // header cannot work
 
     @GetMapping("current")
     public @ResponseBody

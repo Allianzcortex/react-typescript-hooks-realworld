@@ -84,7 +84,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return title + description + "fuck";
+        return title + description + "unique";
 
     }
 

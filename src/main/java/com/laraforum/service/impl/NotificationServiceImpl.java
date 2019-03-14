@@ -4,6 +4,7 @@ import com.laraforum.model.Notification;
 import com.laraforum.model.User;
 import com.laraforum.repository.NotificationRepository;
 import com.laraforum.repository.UserRepository;
+import com.laraforum.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class NotificationServiceImpl {
+public class NotificationServiceImpl implements NotificationService {
 
     @Autowired
     private UserRepository userRepository;
@@ -20,6 +21,7 @@ public class NotificationServiceImpl {
     @Autowired
     private NotificationRepository notificationRepository;
 
+    @Override
     @Transactional
     public void createNotification(int sendId, int receiveId, int articleId) {
         // set unread
@@ -44,6 +46,7 @@ public class NotificationServiceImpl {
      *
      * @param NotificationIDList
      */
+    @Override
     @Transactional
     public void deleteNotification(int receiveId, List<Integer> NotificationIDList) {
         // set read amount
@@ -59,7 +62,8 @@ public class NotificationServiceImpl {
         }
     }
 
-    public List<Notification> getNotifications(boolean isRead,int receiverId) {
+    @Override
+    public List<Notification> getNotifications(boolean isRead, int receiverId) {
         return notificationRepository.findByReceiveId(isRead, receiverId);
     }
 }

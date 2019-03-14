@@ -1,9 +1,8 @@
-package com.laraforum.model.dao;
+package com.laraforum.model.dto;
 
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor

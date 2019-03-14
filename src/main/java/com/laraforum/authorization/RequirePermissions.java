@@ -7,8 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-// @interface not class
-// or not applicable to type
+
 public @interface RequirePermissions {
     public String value() default "";
 

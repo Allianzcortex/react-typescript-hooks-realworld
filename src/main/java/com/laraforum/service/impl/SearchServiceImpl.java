@@ -25,7 +25,7 @@ import java.util.Map;
  */
 
 @Service
-public class SearchServiceImpl {
+public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private final EntityManager centityManager;
@@ -37,7 +37,7 @@ public class SearchServiceImpl {
 //        this.centityManager = entityManager;
 //    }
 
-        @Autowired
+    @Autowired
     public SearchServiceImpl(final EntityManagerFactory entityManagerFactory) {
         this.centityManager = entityManagerFactory.createEntityManager();
     }
@@ -68,15 +68,15 @@ public class SearchServiceImpl {
 
         // execute search
 
-        List<Article> BaseballCardList = null;
+        List<Article> articleList = null;
         try {
-            BaseballCardList = jpaQuery.getResultList();
+            articleList = jpaQuery.getResultList();
         } catch (NoResultException nre) {
             ;// do nothing
 
         }
 
-        return BaseballCardList;
+        return articleList;
 
 
     }

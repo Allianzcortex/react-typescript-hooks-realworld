@@ -1,6 +1,6 @@
 package com.laraforum.repository;
 
-import com.laraforum.model.User;
+
 import com.laraforum.model.enums.Permission;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,7 +18,7 @@ public interface PermissionRepository extends CrudRepository<Permission, Integer
             "(select permissions from user_permissions where user_id in (select id from user where user_name= :userName))\n" +
             "as x\n" +
             "join permission on x.permissions=permission.permission_number;\n", nativeQuery = true)
-    // 直接查询永远不可行
+    // 直接查询永远不可行,TODO 用 jpql 来优化
     //@Query("select u.permissions from user u where u.userName= :userName")
     List<String> findPermissionsByUserName(@Param("userName") String userName);
 }

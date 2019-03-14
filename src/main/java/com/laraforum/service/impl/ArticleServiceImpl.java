@@ -3,7 +3,7 @@ package com.laraforum.service.impl;
 import com.laraforum.model.Article;
 import com.laraforum.model.Tag;
 import com.laraforum.model.User;
-import com.laraforum.model.dao.ArticleWhenCreated;
+import com.laraforum.model.dto.ArticleWhenCreated;
 import com.laraforum.repository.ArticleRepository;
 import com.laraforum.service.ArticleService;
 import com.laraforum.util.ArticleUtils;

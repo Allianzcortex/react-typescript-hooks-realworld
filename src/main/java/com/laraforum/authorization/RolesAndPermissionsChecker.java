@@ -23,15 +23,12 @@ import static java.util.Objects.requireNonNull;
 @Component
 public class RolesAndPermissionsChecker {
 
-    @Pointcut("@annotation(permissions)")
-    public void callAt(RequirePermissions permissions) {
-    }
 
     @Pointcut("@annotation(roles)")
-    public void callAt1(RequireRoles roles) {
+    public void callAtRoles(RequireRoles roles) {
     }
 
-    @Around(value = "callAt1(roles)")
+    @Around(value = "callAtRoles(roles)")
     public Object dealWith(ProceedingJoinPoint point, RequireRoles roles) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes()).getRequest();
@@ -52,7 +49,11 @@ public class RolesAndPermissionsChecker {
 
     }
 
-    @Around(value = "callAt(requirePermissions)")
+    @Pointcut("@annotation(permissions)")
+    public void callAtPermissions(RequirePermissions permissions) {
+    }
+
+    @Around(value = "callAtPermissions(requirePermissions)")
     public Object dealWith(ProceedingJoinPoint point, RequirePermissions requirePermissions) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes()).getRequest();

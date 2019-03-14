@@ -1,16 +1,11 @@
 package com.laraforum.repository;
 
-import com.laraforum.LaraApplication;
-import com.laraforum.configuration.H2RepositoryConfig;
 import com.laraforum.configuration.MySqlRepositoryConfigure;
 import com.laraforum.model.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -56,11 +51,11 @@ public class UserRepositoryTest {
 
         userRepository.save(user);
 
-//        System.err.println("fuck:----------------------------- " + user.getUserName());
-//        System.out.println("fuck1 " + userRepository.findAll());
+
         entityManager.flush();
 
         User user1 = userRepository.findByUserName("123");
+
         System.out.println("user1 是：" + user1);
         System.err.println("得到的 UserId 是：" + user1.getId());
 

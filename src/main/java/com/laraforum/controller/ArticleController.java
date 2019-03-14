@@ -1,17 +1,12 @@
 package com.laraforum.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.laraforum.authorization.RequirePermissions;
-import com.laraforum.exception.CustomException;
+
 import com.laraforum.exception.UnAuthorizedException;
 import com.laraforum.model.*;
-import com.laraforum.model.dao.ArticleView;
-import com.laraforum.model.dao.ArticleWhenCreated;
+import com.laraforum.model.dto.ArticleWhenCreated;
 import com.laraforum.repository.ArticleRepository;
 import com.laraforum.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,15 +47,14 @@ public class ArticleController {
         return articleService.createArticle(user, article.get("article"));
     }
 
-    //    @Transactional
     @GetMapping("getBy/{tagName}")
     public Article findByTag(@PathVariable String tagName) {
         System.out.println("要求的 tag 是 " + tagName);
         // why not ...
-//        Tag tag = new Tag(tagName);
+        // Tag tag = new Tag(tagName);
         Optional<List<Article>> articles = articleRepository.findByTag(tagName);
         if (!articles.isPresent()) {
-            throw new UnAuthorizedException("fuck");
+            throw new UnAuthorizedException("NotAuthorized");
         }
 
         System.out.println(articles.get().size());
@@ -71,14 +65,12 @@ public class ArticleController {
         return articles.get().get(0);
     }
 
-    @RequirePermissions
     @GetMapping("get/single/{slug}")
     public Article findBySlug(@PathVariable String slug) {
         return articleRepository.findBySlug(slug);
     }
 
-    // Next,all about favorite
-    // 用户喜欢某篇文章
+
     @PostMapping("{slug}/favorite")
     @Transactional
     public void createFavoriteArticle(HttpServletRequest httpServletRequest, @PathVariable String slug) {
@@ -96,7 +88,7 @@ public class ArticleController {
         int userId = userService.findByUserName(userName).getId();
         int articleId = articleService.findBySlug(slug).getId();
         // org.hibernate.InstantiationException: No default constructor for entity:  : com.laraforum.model.Favorite
-        // This exception why ?
+        // This exception is because @NoArgusConstructor
         favoriteService.deleteByArticleIdAndUserId(articleId, userId);
     }
 
@@ -123,10 +115,10 @@ public class ArticleController {
             @RequestParam("favorited") String favoritedByUser,
             @RequestParam(value = "limit", required = false) String limit,
             @RequestParam(value = "offset", required = false) String offset) {
-        System.out.println("fuck");
+
         int authorId = userService.findByUserName(author).getId();
         int favoritedId = userService.findByUserName(favoritedByUser).getId();
-        System.out.println(authorId);
+
         return articleService.findByTagAnduAndUserNameAndFavorite(tag, authorId, favoritedId).get();
 
     }

@@ -48,14 +48,12 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<String> getUserRoles(String userName) {
-        System.out.println("开始----------------------------------");
         String userRoles = userRepository.findRolesByUserName(userName);
         String[] ff = userRoles.split(":");
         List<Integer> xx = new ArrayList<>();
         for (String f : ff) {
             xx.add(Integer.parseInt(f));
         }
-        System.out.println("xx 是 ： " + xx);
         System.out.println("目标是：" + roleService.findRoleNameByRoleNumber(xx));
         return roleRepository.findRoleNameByRoleNumber(xx);
     }

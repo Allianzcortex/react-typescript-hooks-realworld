@@ -1,7 +1,6 @@
 package com.laraforum.authentication;
 
 import com.laraforum.exception.CustomException;
-import com.laraforum.model.enums.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -11,11 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
-import java.util.List;
 
 @Component
 public class JwtProvider {

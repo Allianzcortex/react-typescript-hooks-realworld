@@ -1,15 +1,13 @@
 package com.laraforum.model;
 
-import com.laraforum.model.enums.Role;
+
 import lombok.*;
-import org.springframework.core.annotation.Order;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -60,9 +58,4 @@ public class User {
     private int notificationCount = 0;
 
 
-//    public User(@NotEmpty @NonNull @Email(message = "please provide valid email") String email, @NotEmpty @NonNull String userName, @NotEmpty @NonNull String passWord) {
-//        this.email = email;
-//        this.userName = userName;
-//        this.passWord = passWord;
-//    }
 }

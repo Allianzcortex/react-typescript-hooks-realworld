@@ -1,4 +1,4 @@
-package com.laraforum.model.dao;
+package com.laraforum.model.dto;
 
 /**
  * TODO
