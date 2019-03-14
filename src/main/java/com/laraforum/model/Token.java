@@ -12,7 +12,6 @@ import java.util.Date;
 @Data
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Token {
 
     @Id
@@ -27,7 +26,7 @@ public class Token {
     // @NonNull is for @SomeArgsConstructor
     // https://stackoverflow.com/questions/23761242/java-lombok-omitting-one-field-in-allargsconstructor
     @NotEmpty
-    @NonNull
+    // @NonNull
     private String token;
 
 //    @NotEmpty
@@ -36,4 +35,10 @@ public class Token {
     // java8 suuport issue
     @NonNull
     private Date updateTime;
+
+    public Token(@NonNull User user, @NotEmpty String token, @NonNull Date updateTime) {
+        this.user = user;
+        this.token = token;
+        this.updateTime = updateTime;
+    }
 }

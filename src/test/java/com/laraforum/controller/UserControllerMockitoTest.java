@@ -87,8 +87,8 @@ public class UserControllerMockitoTest {
 
         mockMvc.perform(post("/api/users/signin").contentType(
                 APPLICATION_JSON_UTF8).content(convertObjectToJson(user)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(content().string("test"));
+                // different time generate different jwt
+                .andExpect(MockMvcResultMatchers.status().isOk());
         user.setRoles(user.getRoles() + "1");
         user.getPermissions().add(1);
         verify(userServiceMock).save(user);
