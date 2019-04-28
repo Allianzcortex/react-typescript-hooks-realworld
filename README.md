@@ -106,7 +106,116 @@ Postman 的截图吧(：
 
 整体来说还有很多要优化的点，后续也会一直开发这个项目并写前端进行匹配，多谢大家的支持quq
 
+---
 
+#### Project Structure 
+
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── laraforum
+│   │           ├── authentication
+│   │           │   ├── GetJwtTokenFilter.java
+│   │           │   ├── JwtProvider.java
+│   │           │   ├── ParseJwtTokenFilter.java
+│   │           │   └── ParseJwtTokenInterceptor.java
+│   │           ├── authorization
+│   │           │   ├── RequirePermissions.java
+│   │           │   ├── RequireRoles.java
+│   │           │   └── RolesAndPermissionsChecker.java
+│   │           ├── configuration
+│   │           │   ├── FilterConfigure.java
+│   │           │   ├── InterceptorConfigure.java
+│   │           │   ├── MySqlRepositoryConfigure.java
+│   │           │   ├── RepositoryConfig.java
+│   │           │   └── SearchConfiguration.java
+│   │           ├── controller
+│   │           │   ├── ArticleController.java
+│   │           │   ├── CommentController.java
+│   │           │   ├── OtherController.java
+│   │           │   └── UserContoller.java
+│   │           ├── exception
+│   │           │   ├── CustomException.java
+│   │           │   ├── Handle
+│   │           │   │   └── ResponseEntityException.java
+│   │           │   └── UnAuthorizedException.java
+│   │           ├── LaraApplication.java
+│   │           ├── model
+│   │           │   ├── ArticleComment.java
+│   │           │   ├── Article.java
+│   │           │   ├── Comment.java
+│   │           │   ├── dto
+│   │           │   │   ├── ArticleView.java
+│   │           │   │   ├── ArticleWhenCreated.java
+│   │           │   │   └── UserWithEmailAndPassWord.java
+│   │           │   ├── enums
+│   │           │   │   ├── Permission.java
+│   │           │   │   └── Role.java
+│   │           │   ├── Favorite.java
+│   │           │   ├── Notification.java
+│   │           │   ├── Tag.java
+│   │           │   ├── Token.java
+│   │           │   └── User.java
+│   │           ├── repository
+│   │           │   ├── ArticleCommentRepository.java
+│   │           │   ├── ArticleRepository.java
+│   │           │   ├── CommentRepository.java
+│   │           │   ├── FavoriteRepository.java
+│   │           │   ├── NotificationRepository.java
+│   │           │   ├── PermissionRepository.java
+│   │           │   ├── RoleRepository.java
+│   │           │   ├── TagRepocitory.java
+│   │           │   ├── TokenRepository.java
+│   │           │   └── UserRepository.java
+│   │           ├── service
+│   │           │   ├── ArticleCommentService.java
+│   │           │   ├── ArticleService.java
+│   │           │   ├── CommentService.java
+│   │           │   ├── FavoriteService.java
+│   │           │   ├── impl
+│   │           │   │   ├── ArticleCommentServiceImpl.java
+│   │           │   │   ├── ArticleServiceImpl.java
+│   │           │   │   ├── CommentServiceImpl.java
+│   │           │   │   ├── FavoriteServiceImpl.java
+│   │           │   │   ├── NotificationServiceImpl.java
+│   │           │   │   ├── PermissionServiceImpl.java
+│   │           │   │   ├── RoleServiceImpl.java
+│   │           │   │   ├── SearchServiceImpl.java
+│   │           │   │   ├── TokenServiceImpl.java
+│   │           │   │   └── UserServiceImpl.java
+│   │           │   ├── NotificationService.java
+│   │           │   ├── PermissionService.java
+│   │           │   ├── RoleService.java
+│   │           │   ├── SearchService.java
+│   │           │   ├── TokenService.java
+│   │           │   └── UserService.java
+│   │           └── util
+│   │               ├── ArticleUtils.java
+│   │               └── TestUtils.java
+│   └── resources
+│       ├── application.properties
+│       ├── db-schema.sql
+│       └── static
+│           └── images
+│               └── register.png
+└── test
+    └── java
+        └── com
+            └── laraforum
+                ├── authentication
+                │   └── JwtTokenTest.java
+                ├── configuration
+                │   └── ServiceTestConfiguration.java
+                ├── controller
+                │   └── UserControllerMockitoTest.java
+                ├── LaraApplicationTests.java
+                ├── repository
+                │   └── UserRepositoryTest.java
+                ├── service
+                │   └── UserServiceMockitoTest.java
+                ├── UserEntityTest.java
+                └── utils
+                    └── ArticleUtilsTest.java
 
 
 
