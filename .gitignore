@@ -32,3 +32,6 @@ mvnw.cmd
 
 # Lucene index file
 com.laraforum.model.Article/
+
+# FrontEnd File
+LaraFE/node_modules/

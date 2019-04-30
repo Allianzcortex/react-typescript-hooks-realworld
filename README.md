@@ -3,6 +3,13 @@
 
 一个提供论坛纯后端 API 的应用
 
+
+对后端，我可以熟练使用 Java/Python，同时也可以处理与维护 PHP/C#/Golang 。
+对前端，我熟练使用 Jquery 与后端交互，同时也在这个项目中尝试使用 Angular(更现代的前端框架)、、
+
+可以参考我的这个 [课程作业](https://github.com/Allianzcortex/code_collection/tree/master/Spring-Boot-Based-Database-TeamProject) 得到更多信息
+
+
 最近开发了这个应用，包括用户的注册/登陆/登出权限管理，发帖/删帖/评论/删评/信息提醒，主题创造/删除，文章分类分页搜索，以及基于 `MySQL Full-text Search` 与 `Lucene` 的模糊匹配关键词搜索。
 
 列举 API 如下：
