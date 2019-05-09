@@ -1,26 +1,34 @@
 # LaraForum [![Build Status](https://travis-ci.com/Allianzcortex/LaraForum.svg?token=eY1dQPtFsNYcmsgAHTB5&branch=master)](https://travis-ci.com/Allianzcortex/LaraForum)
 
 
-一个提供论坛纯后端 API 的应用
+`LaraForum` is a full-stack forum with Spring Boot as skeleton and Spring Data JPA as ORM to provide restful api in controller.
 
+If you just want to a MVP(Minimal Valuable Product) to learn Angular , I will recommend you to my [class-project](https://github.com/Allianzcortex/code_collection/tree/master/Spring-Boot-Based-Database-TeamProject) which is simplier and implemented all CRUD functions.
 
-对后端，我可以熟练使用 Java/Python，同时也可以处理与维护 PHP/C#/Golang 。
-对前端，我熟练使用 Jquery 与后端交互，同时也在这个项目中尝试使用 Angular(更现代的前端框架)、、
+---
 
-可以参考我的这个 [课程作业](https://github.com/Allianzcortex/code_collection/tree/master/Spring-Boot-Based-Database-TeamProject) 得到更多信息
+This application includes :
 
+- `user registration/login/Change Account Info/logout` function
 
-最近开发了这个应用，包括用户的注册/登陆/登出权限管理，发帖/删帖/评论/删评/信息提醒，主题创造/删除，文章分类分页搜索，以及基于 `MySQL Full-text Search` 与 `Lucene` 的模糊匹配关键词搜索。
+- Users can `add/delete  posts/comments`,the action above will trigger `notifications` that can be read
 
-列举 API 如下：
+- `topic creation/deletion`
 
-得到某篇单独发帖：
+- article classification by `tag`
+
+- page search  based on `MySQL Full-text Search` or `Fuzzy matching` keyword with `Lucene`.
+
+---
+
+Some APIs will be like:
+
+- get single article by slug
 
 ```
 get /api/articles/get/single/{slug}
 
 return:
-
 {
     'id':{id},
     'name':{name},
@@ -28,37 +36,39 @@ return:
 }
 ```
 
-多重条件设置：
+- get batch articles by multiple conditions ：
 ```
 get /api/articles/get/batch?tag=xx&author=yy
 ```
 
-为某个用户增加消息提醒
+- push notifications to certain user
 ```
 post /api/read/notice/{userId}
 ```
 
-为某个用户设置权限
+- add permissions for user
 ```
 /api/permission/add/{user}/2
 ```
 
-为某个用户设置角色
+- set roles for user
+
 ```
 /api/role/add/{user}/2
 ```
-根据关键字进行搜索，默认采用 MySQL ，可以配置为 Lucene
+
+- search by keyword
 ```
 /api/search/{keyWord}
 ```
-etc...
+... etc
 
 ---
 
-除了大家都会用到的 `@ControllerAdvice` 全局处理 Exception 
-和 `@ResponseEntity` 返回数据外，这里主要想描述一下这个应用的几个特点吧：
+Except using `@ControllerAdvice` to handle global exception and `@ResponseEntity` to return the header and data both.There are also some other features:
 
-1. 轻量级：
+
+1. LightWeight:
 
 这里轻量级指的是除了 Springboot+Spring JPA+Spring MVC 外其它的
 组件都没有涉及到，两个比较重要的功能①`认证(authentication)`和
