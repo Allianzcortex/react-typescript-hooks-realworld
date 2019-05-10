@@ -73,7 +73,7 @@ Except using `@ControllerAdvice` to handle global exception and `@ResponseEntity
 Lightweight here refers to components other than `Springboot+Spring JPA+Spring MVC` are not involved. Two more important features :`authentication` and
 `Authorization` are implemented based on Spring framework without rely on third-party packages(e.g. `spring-security` or `shrio`) 
 
-① `authentication` is achieved by `JWT(Json Web Token)`. You can check the [verification-code by filter]( https://github.com/Allianzcortex/LaraForum/blob/master/src/main/java/com/laraforum/authentication/GetJwtTokenFilter.java) and [judgement-code by interceptor] (https://github.com/Allianzcortex/LaraForum/blob/master/src/main/java/com/laraforum/authentication/ParseJwtTokenInterceptor.java). Results calculated will be read by backend application after `request.setAttribute` to avoid duplicate verification.
+① `authentication` is achieved by `JWT(Json Web Token)`. You can check the [verification-code by filter]( https://github.com/Allianzcortex/LaraForum/blob/master/src/main/java/com/laraforum/authentication/GetJwtTokenFilter.java) and           [judgement-code by interceptor](https://github.com/Allianzcortex/LaraForum/blob/master/src/main/java/com/laraforum/authentication/ParseJwtTokenInterceptor.java). Results calculated will be read by backend application after `request.setAttribute` to avoid duplicate verification.
 <!-- 关于 jwt 实现过期 logout 在纯后端应用里相对难实现(前端直接删除 jwtToken 即可，现在采用的方法是存储到数据库里，不符合 stateless 无状态思想，因为原话是会 requires a DB lookup each time)。比较理想
 的做法是在 SO 上看到的这个 [评论](https://stackoverflow.com/questions/21978658/invalidating-json-web-tokens#comment45057142_23089839)，在写入 Token 的值里进行操作，后续会实现这一点。 -->
 
