@@ -34,4 +34,4 @@ mvnw.cmd
 com.laraforum.model.Article/
 
 # FrontEnd File
-LaraFE/node_modules/
+frontend/node_modules/
