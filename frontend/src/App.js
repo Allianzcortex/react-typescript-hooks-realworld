@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, Fragment, memo, useMemo} from 'react';
+import {GlobalStyle} from "./style";
+import {useState} from 'react'
+
+import Header from "./componnets/header";
+import SplitLine from "./componnets/split-line";
+// import TodoItems from "./componnets/todoItem";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <Fragment>
+        <GlobalStyle></GlobalStyle>
+        <Header/>
+        <SplitLine/>
+      </Fragment>
+  )
 }
+
+// const Child=(props)=>{
+//   // {coumt}=props;
+//   console.log('--child is called--')
+//   return (
+//       <div>child component </div>
+//   )
+// }
+//
+// Child.props= {
+// }
+//
+// const ChildMemo=memo(Child)
+
+// function App() {
+//   const [count,setCount]=useState(0);
+//
+//   const countMemo=useMemo(()=>(count),[])
+//   useEffect(()=>{
+//     document.title=`you clicked ${count} times`
+//   })
+//
+//   return (
+//       <Fragment>
+//       <div>
+//         <p> you clicked {count} times</p>
+//         <button onClick={()=>{setCount(count+1)}}>
+//         click me
+//         </button>
+//       </div>
+//         {/*<Child/>*/}
+//         <ChildMemo count={countMemo} />
+//       </Fragment>
+//   )
+
+  // return (
+  //     <Fragment>
+  //     <Header/>
+  //     <TodoItems/>
+  //     </Fragment>
+  // )
+
+// }
 
 export default App;

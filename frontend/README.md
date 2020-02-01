@@ -72,3 +72,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 # TODO
 
 - [] use react-loadable to split the application into different parts and optimize the speed
+
+- [ ] about useMemo/useCallback to optimize the application
+
+- [ ] d
