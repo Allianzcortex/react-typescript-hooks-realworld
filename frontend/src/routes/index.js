@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Link, Redirect} from "react-router-dom";
 import {renderRoutes} from "react-router-config";
 import register from "../componnets/register";
 import Header from "../componnets/header";
+import About from "../componnets/about";
 
 const defaultLayout = ({route}) => (
     <div>
@@ -19,7 +20,14 @@ const routes = [
             // register
             {
                 path: '/',
+                exact:true,
                 component: Header
+            },
+            {
+                // TODO use carousel to show the stack
+                path:'/about',
+                exact:true,
+                component:About
             }
         ]
     }
