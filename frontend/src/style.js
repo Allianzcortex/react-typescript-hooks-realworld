@@ -25,12 +25,6 @@ export const GlobalStyle = createGlobalStyle`
 		vertical-align: baseline;
 	}
 	body {
-	margin: 0;
-		padding: 0;
-		border: 0;
-		font-size: 100%;
-		font: inherit;
-		vertical-align: baseline;
 		 background-color: rgb(226, 226, 226);
           --avatar-size: 2rem;
 	}
@@ -42,9 +36,7 @@ export const GlobalStyle = createGlobalStyle`
 	body {
 		line-height: 1;
 	}
-	html, body{
-		background: #f2f3f4;;
-	}
+
 	ol, ul {
 		list-style: none;
 	}

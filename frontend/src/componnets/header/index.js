@@ -1,18 +1,26 @@
 import React from "react";
+
+import {HeaderNavBar,HeaderRightNavBar} from "./style";
+
+// 注销：Sign Out
+// 注册 Sign Up
+// 登录 Sign In
+
 const Header=(props)=>{
     return (
-        <div className="navbar">
+       <HeaderNavBar>
+            {/* TODO use <Link> to replace heref*/}
             <div className="navbar-logo">
-                <a href="v2ex">V2EX</a>
+                <a href="v2ex">LaraForum</a>
             </div>
-            <div className="navbar-right-group">
+           <HeaderRightNavBar>
                 <a href="Home">Home</a>
                 <a href="Notes">Notes</a>
                 <a href="Timeline">Timeline</a>
                 <a href="Settings">Settings</a>
                 <a href="Signon">Signon</a>
-            </div>
-        </div>
+           </HeaderRightNavBar>
+       </HeaderNavBar>
     )
 }
 

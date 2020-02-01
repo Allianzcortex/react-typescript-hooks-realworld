@@ -1,19 +1,26 @@
 import React, {useEffect, Fragment, memo, useMemo} from 'react';
 import {GlobalStyle} from "./style";
 import {useState} from 'react'
+import {renderRoutes} from "react-router-config";
+import {BrowserRouter} from "react-router-dom"
 
 import Header from "./componnets/header";
 import SplitLine from "./componnets/split-line";
+import {routes} from './routes/index.js'
+
 // import TodoItems from "./componnets/todoItem";
 
 function App() {
-  return (
-      <Fragment>
-        <GlobalStyle></GlobalStyle>
-        <Header/>
-        <SplitLine/>
-      </Fragment>
-  )
+    return (
+        <Fragment>
+            <BrowserRouter>
+                <GlobalStyle></GlobalStyle>
+                {renderRoutes(routes)}
+                <Header/>
+                <SplitLine/>
+            </BrowserRouter>
+        </Fragment>
+    )
 }
 
 // const Child=(props)=>{
@@ -50,12 +57,12 @@ function App() {
 //       </Fragment>
 //   )
 
-  // return (
-  //     <Fragment>
-  //     <Header/>
-  //     <TodoItems/>
-  //     </Fragment>
-  // )
+// return (
+//     <Fragment>
+//     <Header/>
+//     <TodoItems/>
+//     </Fragment>
+// )
 
 // }
 
