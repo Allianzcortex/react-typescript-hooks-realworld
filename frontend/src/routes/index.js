@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter, Route, Link, Redirect} from "react-router-dom";
 import {renderRoutes} from "react-router-config";
-import register from "../componnets/register";
+import Register from "../componnets/register";
 import Header from "../componnets/header";
 import About from "../componnets/about";
 
@@ -18,6 +18,11 @@ const routes = [
         component: defaultLayout,
         routes: [
             // register
+            {
+                path:'/register',
+                component:Register,
+            }
+            ,
             {
                 path: '/',
                 exact:true,
