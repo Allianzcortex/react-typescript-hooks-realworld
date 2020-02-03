@@ -75,6 +75,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 - [ ] about useMemo/useCallback to optimize the application
 
-- [ ] 
+- [ ] use eslint to formal all files
+
+
 
 
