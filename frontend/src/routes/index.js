@@ -4,6 +4,7 @@ import {renderRoutes} from "react-router-config";
 import Register from "../componnets/register";
 import Header from "../componnets/header";
 import About from "../componnets/about";
+import HomeLayout from '../layouts/HomeLayout'
 
 const defaultLayout = ({route}) => (
     <div>
@@ -24,16 +25,20 @@ const routes = [
             }
             ,
             {
-                path: '/',
-                exact:true,
-                component: Header
-            },
-            {
                 // TODO use carousel to show the stack
                 path:'/about',
                 exact:true,
                 component:About
-            }
+            },
+            {
+                path: '/',
+                exact:true,
+                component: HomeLayout,
+                routes:[
+
+                ]
+            },
+
         ]
     }
 ]
