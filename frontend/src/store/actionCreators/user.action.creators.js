@@ -15,7 +15,7 @@ export const userRegisterAction=(data)=>{
         return (dispatch)=>{
             userSerivce.register(data).then(
                 res=>{console.log(res)
-                dispatch(userRegister(res))}
+                dispatch(userRegister(res.data))}
             ).catch(
                 err=>console.log(err)
             )

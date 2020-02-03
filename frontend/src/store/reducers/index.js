@@ -4,5 +4,5 @@ import {combineReducers} from "redux-immutable";
 import reducer  from './user.reducers'
 
 export default combineReducers({
-    user:reducer
+    auth:reducer
 })
