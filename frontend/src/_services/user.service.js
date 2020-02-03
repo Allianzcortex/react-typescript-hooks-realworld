@@ -5,9 +5,11 @@ const headers = {
     'Content-Type': 'application/json'
 }
 
-function register() {
-    return restfulApiService.get(baseUrl + 'register', {
-        headers: headers
+function register({user,email,password}) {
+    return restfulApiService.post(baseUrl + 'register', {
+        user:user,
+        email:email,
+        password:password
     })
 }
 

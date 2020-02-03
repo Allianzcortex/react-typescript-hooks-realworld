@@ -12,7 +12,9 @@ function Register(props) {
         userSerivce.register()
     }, [])
     const {register, handleSubmit, errors} = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {console.log(data);
+
+    }
 
     const registerForm = () => {
         return (
@@ -20,10 +22,12 @@ function Register(props) {
                 <div className={'register-field'}>
                     <TextField inputRef={register({required: true, maxLength: 80})} placeholder="username"
                                name="username"/>
+
                 </div>
                 <div className={'register-field'}>
                     <TextField inputRef={register({required: true, pattern: /^\S+@\S+$/i})} placeholder="Email"
-                               name="Email"/>
+                               name="email"/>
+
                 </div>
                 <div className={'register-field'}>
                     <TextField inputRef={register({required: true, maxLength: 15})} placeholder="password" name="password"/>
