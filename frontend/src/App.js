@@ -3,16 +3,18 @@ import {GlobalStyle} from "./style";
 import {useState} from 'react'
 import {renderRoutes} from "react-router-config";
 import {BrowserRouter,Switch} from "react-router-dom"
+import { Provider } from "react-redux";
 
 import Header from "./componnets/header";
 import SplitLine from "./componnets/split-line";
 import {routes} from './routes/index.js'
+import store from "./store";
 
 // import TodoItems from "./componnets/todoItem";
 
 function App() {
     return (
-        <Fragment>
+        <Provider store={store}>
             <GlobalStyle></GlobalStyle>
             <BrowserRouter>
                 {/*<Switch>*/}
@@ -20,7 +22,7 @@ function App() {
                 {/*<Header/>*/}
                 {/*</Switch>*/}
             </BrowserRouter>
-        </Fragment>
+        </Provider>
     )
 }
 

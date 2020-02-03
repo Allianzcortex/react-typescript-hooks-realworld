@@ -1,5 +1,8 @@
 import {combineReducers} from "redux-immutable";
 
-export default combineReducers({
+// still about import order
+import reducer  from './user.reducers'
 
+export default combineReducers({
+    user:reducer
 })

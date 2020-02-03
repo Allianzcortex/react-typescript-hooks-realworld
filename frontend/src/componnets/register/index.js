@@ -3,17 +3,23 @@ import {useForm} from "react-hook-form";
 import {userSerivce} from "../../_services/user.service";
 import {Button, TextField} from "@material-ui/core";
 import {RegisterWrapper} from "./style";
+import {useSelector,useDispatch} from "react-redux";
+import {userConstants} from "../../store/constants";
 
 // name should be in Upper case
 // https://stackoverflow.com/questions/56462812/react-hook-usestate-is-called-in-function-setresults-which-is-neither-a-reac
 function Register(props) {
 
-    useEffect(() => {
-        userSerivce.register()
-    }, [])
+    // useEffect(() => {
+    //     userSerivce.register()
+    // }, [])
     const {register, handleSubmit, errors} = useForm();
+    const dispatch=useDispatch();
     const onSubmit = data => {console.log(data);
-
+            dispatch({
+                type:userConstants.USER_REGISTER,
+                data:'aaa'
+            })
     }
 
     const registerForm = () => {
