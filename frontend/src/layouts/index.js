@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MainContentWrapper=styled.div`
+export const MainContentWrapper = styled.div`
 /* background-color: white; */
     position: relative;
     box-sizing: border-box;
@@ -21,7 +21,7 @@ export const MainContentWrapper=styled.div`
     grid-template-columns: 2fr 1fr;
 `
 
-export const LeftBarWrapper=styled.div`
+export const LeftBarWrapper = styled.div`
  background-color:white;
     margin:20px;
     display:flex;
@@ -29,7 +29,7 @@ export const LeftBarWrapper=styled.div`
     border-radius: 3px;
 `
 
-export const RightBarWrapper=styled.div`
+export const RightBarWrapper = styled.div`
 background-color:white;
     margin-top:20px;
     margin-right:30px;
@@ -40,5 +40,3 @@ background-color:white;
     grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
     gap:5px;
 `
-
-

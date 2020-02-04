@@ -29,6 +29,25 @@ Profile:
 
 Single post:
 
+应该加上一个 single-single-post，来获得略观页面的展示
+
+{
+  "posts":[
+    {
+      "author":"MS1",
+      "title":"aws title11111",
+      "tagList":["aa","bb","cc","dd"],
+      "commentCount":12
+    },
+    {
+      "author":"MS2",
+      "title":"aws title12222",
+      "tagList":["ee","ff","gg","hh"],
+      "commentCount":14
+    },
+  ]
+}
+
 ```
 {
   "post": {
