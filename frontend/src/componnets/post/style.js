@@ -29,7 +29,7 @@ display: flex;
     margin-left:10px;
 }
 
-.post-initial-content>h4 {
+h4 {
     /* border:1px solid; */
     position: relative;
    margin-left:0;
@@ -64,6 +64,7 @@ display: flex;
     height: 1rem;
     line-height: 1rem;
     font-weight: 400;
+    font-size: 16px;
 }
 
 `

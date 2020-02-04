@@ -8,5 +8,10 @@ export const setCurrentTopic=(data)=>({
     data:fromJS(data)
 })
 
+export const setCurrentTag=(data)=>({
+    type:utilConstants.SET_CURRENT_TAG,
+    data:fromJS(data)
+})
+
 
 

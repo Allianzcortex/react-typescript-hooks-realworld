@@ -36,7 +36,7 @@ background-color:white;
     width:70%;
     /* 让 tag 自动排列就好 */
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
     gap:5px;
 `

@@ -4,6 +4,7 @@ import Header from '../componnets/header'
 import TopicBar from "../componnets/topicBar";
 import PostList from "../componnets/postList";
 import SplitLine from "../componnets/split-line";
+import TagList from "../componnets/tagList";
 import {MainContentWrapper,LeftBarWrapper,RightBarWrapper} from "./index";
 
 function HomeLayout(props) {
@@ -16,7 +17,9 @@ function HomeLayout(props) {
                     <SplitLine/>
                     <PostList/>
                 </LeftBarWrapper>
-                <RightBarWrapper></RightBarWrapper>
+                <RightBarWrapper>
+                    <TagList/>
+                </RightBarWrapper>
             </MainContentWrapper>
         </Fragment>
     )
