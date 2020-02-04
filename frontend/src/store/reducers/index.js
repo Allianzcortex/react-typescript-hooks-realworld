@@ -1,8 +1,10 @@
 import {combineReducers} from "redux-immutable";
 
 // still about import order
-import reducer  from './user.reducers'
+import userReducer  from './user.reducers'
+import utilReducer from './util.reducers'
 
 export default combineReducers({
-    auth:reducer
+    auth:userReducer,
+    util:utilReducer
 })

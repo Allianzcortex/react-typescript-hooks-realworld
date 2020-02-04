@@ -10,12 +10,27 @@ background-color:white;
     display:flex;
     flex-direction: flex-start;
     
-    a {
+    button {
+    outline: none;
+    border:none;
+    background:none;
     text-decoration: none;
     color:black;
+    font-size:16px;
     /* border:1px solid blue; */
-    margin:5px;
+    margin:3px 3px;
     /* TODO 这里用 :nth-firstchild 来
     调节让第一个目录左边的空格再大一点 */
+    
+    &:hover{
+    background-color: rgb(226, 226, 226);
+    cursor:pointer;
+    }
+    
+    &:focus{
+    // border:none cannot work
+    outline:none;
+     background-color: rgb(226, 226, 226);
+    }
 }
 `
