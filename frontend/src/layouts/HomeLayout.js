@@ -5,6 +5,7 @@ import TopicBar from "../componnets/topicBar";
 import PostList from "../componnets/postList";
 import SplitLine from "../componnets/split-line";
 import TagList from "../componnets/tagList";
+import Pagination from "../componnets/pagination";
 import {MainContentWrapper,LeftBarWrapper,RightBarWrapper} from "./index";
 
 function HomeLayout(props) {
@@ -16,11 +17,13 @@ function HomeLayout(props) {
                     <TopicBar/>
                     <SplitLine/>
                     <PostList/>
+                    <Pagination/>
                 </LeftBarWrapper>
                 <RightBarWrapper>
                     <TagList/>
                 </RightBarWrapper>
             </MainContentWrapper>
+
         </Fragment>
     )
 }
