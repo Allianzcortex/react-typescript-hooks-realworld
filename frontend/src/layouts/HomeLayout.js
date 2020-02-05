@@ -1,29 +1,28 @@
 import React,{Fragment} from "react";
 import { renderRoutes } from "react-router-config";
 import Header from '../componnets/header'
-import TopicBar from "../componnets/topicBar";
-import PostList from "../componnets/postList";
-import SplitLine from "../componnets/split-line";
-import TagList from "../componnets/tagList";
-import Pagination from "../componnets/pagination";
-import {MainContentWrapper,LeftBarWrapper,RightBarWrapper} from "./index";
+import {Link} from "react-router-dom";
+import About from "../componnets/about";
+
+// import route from '../routes/index'
+
+
 
 function HomeLayout(props) {
+    const {route}=props
     return (
         <Fragment>
-            <Header></Header>
-            <MainContentWrapper>
-                <LeftBarWrapper>
-                    <TopicBar/>
-                    <SplitLine/>
-                    <PostList/>
-                    <Pagination/>
-                </LeftBarWrapper>
-                <RightBarWrapper>
-                    <TagList/>
-                </RightBarWrapper>
-            </MainContentWrapper>
-
+            <Header/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <Link  to='/about'>post</Link>
+            {renderRoutes(route.routes)}
         </Fragment>
     )
 }

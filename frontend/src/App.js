@@ -10,17 +10,13 @@ import SplitLine from "./componnets/split-line";
 import {routes} from './routes/index.js'
 import store from "./store";
 
-// import TodoItems from "./componnets/todoItem";
-
 function App() {
     return (
         <Provider store={store}>
             <GlobalStyle></GlobalStyle>
             <BrowserRouter>
-                {/*<Switch>*/}
                 {renderRoutes(routes)}
                 {/*<Header/>*/}
-                {/*</Switch>*/}
             </BrowserRouter>
         </Provider>
     )

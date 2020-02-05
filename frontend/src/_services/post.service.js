@@ -9,5 +9,6 @@ function getAllPosts() {
     return restfulApiService.get(baseUrl + 'posts',)
 }
 
+function 
 
 export const postSerivce = {getAllPosts}

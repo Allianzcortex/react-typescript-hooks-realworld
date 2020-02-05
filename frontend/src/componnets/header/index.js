@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {HeaderNavBar, HeaderRightNavBar} from "./style";
@@ -10,6 +10,8 @@ import {HeaderNavBar, HeaderRightNavBar} from "./style";
 const Header = (props) => {
 
     const currentUser = useSelector(state => state.getIn(['auth', 'currentUserName']))
+
+    useEffect(()=>{console.log('header loaded')},[])
 
     return (
         <HeaderNavBar>

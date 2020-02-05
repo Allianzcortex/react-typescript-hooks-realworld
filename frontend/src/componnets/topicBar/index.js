@@ -10,7 +10,8 @@ import {useDispatch} from "react-redux";
 function TopicBar(props) {
     const [allTabs,setAllTabs]=useState([]);
 
-    useEffect(async ()=>{
+    useEffect(
+        async ()=>{
         await utilSerivce.getAllTopics().then(
             res=>{setAllTabs(res.data);
             console.log(res.data)}

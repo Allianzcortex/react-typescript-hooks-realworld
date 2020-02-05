@@ -5,6 +5,8 @@ import Register from "../componnets/register";
 import Header from "../componnets/header";
 import About from "../componnets/about";
 import HomeLayout from '../layouts/HomeLayout'
+import MainPageLayout from "../layouts/MainPageLayout";
+import PostPageLayout from "../layouts/PostPageLayout";
 
 const defaultLayout = ({route}) => (
     <div>
@@ -18,26 +20,45 @@ const routes = [
     {
         component: defaultLayout,
         routes: [
+            // {
+            //
+            //     routes:[
+            // {
+            //     path:'/about',
+            //     exact:true,
+            //     component:MainPageLayout
+            //         // },
+            //         {
+            //             path:'/post',
+            //             exact:true,
+            //             component:PostPageLayout
+            //         }
+            //     ]
+            // },
             // register
             {
-                path:'/register',
-                component:Register,
-            }
-            ,
+
+                path: '/',
+                exact: true,
+                component: MainPageLayout
+            },
+            {
+                path: '/post',
+                exact: true,
+                component: PostPageLayout
+            },
+            {
+                path: '/register',
+                exact: true,
+                component: Register,
+            },
             {
                 // TODO use carousel to show the stack
-                path:'/about',
-                exact:true,
-                component:About
+                path: '/about',
+                exact: true,
+                component: About
             },
-            {
-                path: '/',
-                exact:true,
-                component: HomeLayout,
-                routes:[
 
-                ]
-            },
 
         ]
     }
