@@ -1,6 +1,6 @@
 import React, {useEffect, Fragment, useState} from "react";
-import Post from "./post";
-import {postSerivce} from "../_services/post.service";
+import AbbreviatedPost from "./abbreviatedPost";
+import {postSerivce} from "../../_services/post.service";
 import styled from "styled-components";
 import {renderRoutes} from "react-router-config";
 
@@ -24,7 +24,7 @@ function PostList(props) {
     return (
         <Fragment>
             {Object.keys(posts).map(x => {
-                return (<Post key={posts[x].title} author={posts[x].author}
+                return (<AbbreviatedPost key={posts[x].title} author={posts[x].author}
                               title={posts[x].title} tagList={posts[x].tagList}
                               commentCount={posts[x].commentCount}/>)
             })

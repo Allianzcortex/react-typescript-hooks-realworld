@@ -1,5 +1,13 @@
-// import React from "react"
-//
+import React from "react"
+
+function Notification(props) {
+    return (
+        <div></div>
+    )
+}
+
+export default Notification
+
 // const [open, setOpen] = React.useState(false);
 //
 // const handleClick = () => {

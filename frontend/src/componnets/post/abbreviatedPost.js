@@ -1,10 +1,10 @@
 import React, {useEffect, Fragment} from "react";
 import {PostWrapper} from "./style";
-import SplitLine from "../split-line";
+import SplitLine from "../utils/split-line";
 import PropTypes from "prop-types"
 import {renderRoutes} from "react-router-config";
 
-function Post(props) {
+function AbbreviatedPost(props) {
     const {author, title, tatList, commentCount} = props;
     console.log(`author is ${author}`)
     return (
@@ -29,14 +29,14 @@ function Post(props) {
     )
 }
 
-Post.defaultProps = {
+AbbreviatedPost.defaultProps = {
     author: 'MS',
     title: 'MS 111',
     tagList: ['aa', 'bb', 'cc'],
     commentCount: 12,
 }
 
-Post.propTypes = {
+AbbreviatedPost.propTypes = {
     author: PropTypes.string,
     title: PropTypes.string,
     tagList: PropTypes.array,
@@ -45,4 +45,4 @@ Post.propTypes = {
 
 // Post.prototype
 
-export default Post
+export default AbbreviatedPost

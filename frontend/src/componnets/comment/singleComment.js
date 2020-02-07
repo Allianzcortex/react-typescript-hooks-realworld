@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect} from "react";
 import styled from "styled-components";
-import SplitLine from "../split-line";
+import SplitLine from "../utils/split-line";
 import PropTypes from "prop-types"
 
 const SingleCommentWrapper = styled.div`

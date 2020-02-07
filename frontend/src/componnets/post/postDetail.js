@@ -1,7 +1,7 @@
 import React, {useEffect, Fragment} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import SplitLine from "../split-line";
+import SplitLine from "../utils/split-line";
 import PropTypes from "prop-types"
 
 const PostDetailWrapper = styled.div`
@@ -49,19 +49,19 @@ function PostDetail(porps) {
     return (
         <Fragment>
             <PostDetailWrapper>
-            <div >
-                <p>LaraForum &nbsp;>&nbsp; {topic}</p>
-                <h3>{title}</h3>
-                <div>
-                    {/*TODO add a button to user to show its clickable*/}
-                    <Link to='/{author}'>{author}</Link>  · {editedTime} · {commentCount} comments
-                </div>
-                <SplitLine/>
-                <p className="main-content">
-                   {postContent}
-                </p>
+                <div >
+                    <p>LaraForum &nbsp;>&nbsp; {topic}</p>
+                    <h3>{title}</h3>
+                    <div>
+                        {/*TODO add a button to user to show its clickable*/}
+                        <Link to='/{author}'>{author}</Link>  · {editedTime} · {commentCount} comments
+                    </div>
+                    <SplitLine/>
+                    <p className="main-content">
+                        {postContent}
+                    </p>
 
-            </div>
+                </div>
             </PostDetailWrapper>
         </Fragment>
     )

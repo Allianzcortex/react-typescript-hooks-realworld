@@ -4,11 +4,12 @@ import {renderRoutes} from "react-router-config";
 import Register from "../componnets/auth/register";
 import Login from "../componnets/auth/login"
 import Header from "../componnets/header";
-import About from "../componnets/about";
+import About from "../componnets/utils/about";
 import HomeLayout from '../layouts/HomeLayout'
-import PostList from "../componnets/postList";
+import PostList from "../componnets/post/postList";
 import MainPageLayout from "../layouts/MainPageLayout";
 import PostPageLayout from "../layouts/PostPageLayout";
+import CreatePost from "../componnets/post/createPost";
 
 const defaultLayout = ({route}) => (
     <div>
@@ -38,14 +39,14 @@ const routes = [
                         path: '/post',
                         exact: true,
                         component: PostPageLayout
+                    },
+                    {
+                        path: '/edit',
+                        exact:true,
+                        component: CreatePost
                     }
                 ]
             },
-            // {
-            //     path: '/post',
-            //     exact: true,
-            //     component: PostPageLayout
-            // },
             {
                 path: '/login',
                 exact: true,

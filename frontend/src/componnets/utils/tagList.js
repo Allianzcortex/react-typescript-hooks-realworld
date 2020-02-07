@@ -2,7 +2,7 @@ import React, {useEffect, Fragment, useState} from "react";
 import {useDispatch} from "react-redux";
 import styled from "styled-components";
 import {FormControlLabel,Checkbox} from "@material-ui/core";
-import {setCurrentTag} from "../store/actionCreators/util.action.creators";
+import {setCurrentTag} from "../../store/actionCreators/util.action.creators";
 import PropTypes from "prop-types"
 
 const TagWrapper=styled(Checkbox)`

@@ -1,19 +1,27 @@
 import React,{Fragment} from "react";
 import TopicBar from "../componnets/topicBar";
-import PostList from "../componnets/postList";
-import SplitLine from "../componnets/split-line";
-import TagList from "../componnets/tagList";
-import Pagination from "../componnets/pagination";
+import PostList from "../componnets/post/postList";
+import SplitLine from "../componnets/utils/split-line";
+import TagList from "../componnets/utils/tagList";
+import Pagination from "../componnets/utils/pagination";
 import Header from '../componnets/header'
 import {MainContentWrapper,LeftBarWrapper,RightBarWrapper} from "./index";
 
 function MainPageLayout(props) {
     return (
         <Fragment>
-            <TopicBar/>
-            <SplitLine/>
-            <PostList/>
-            <Pagination/>
+            <MainContentWrapper>
+                <LeftBarWrapper>
+                    <TopicBar/>
+                    <SplitLine/>
+                    <PostList/>
+                    <Pagination/>
+                </LeftBarWrapper>
+                <RightBarWrapper>
+                    <TagList/>
+                </RightBarWrapper>
+            </MainContentWrapper>
+
         </Fragment>
     )
 }
