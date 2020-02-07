@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const RegisterWrapper = styled.div`
+export const AuthFormWrapper = styled.div`
         display:flex;
+        flex-direction: column;
          align-items:center;
          justify-content:center;
         // height:'-webkit-fill-available',
@@ -12,7 +13,15 @@ export const RegisterWrapper = styled.div`
         padding-top:0;
         height:400px;
         
-        .register-field {
-        margin:20px auto;
+        .auth-field {
+        margin:15px auto;
+        }
+        
+        form {
+        display:flex;
+        flex-direction: column;
+        button {
+         justify-content: center;
+        }
         }
 `

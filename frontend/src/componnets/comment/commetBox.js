@@ -22,7 +22,7 @@ const CommentBoxWrapper=styled.div`
     }
 `
 
-// TODO we may want to move 
+// TODO we may want to move
 function CommentBox(props) {
 
     return (

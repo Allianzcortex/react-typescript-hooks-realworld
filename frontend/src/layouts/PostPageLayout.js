@@ -12,14 +12,9 @@ import {MainContentWrapper, LeftBarWrapper, RightBarWrapper} from "./index";
 function PostPageLayout(props) {
     return (
         <Fragment>
-            <Header/>
-            <MainContentWrapper>
-                <LeftBarWrapper>
-                    <PostDetail/>
-                    <SplitLine/>
-                    <CommentList/>
-                </LeftBarWrapper>
-            </MainContentWrapper>
+            <PostDetail/>
+            <SplitLine/>
+            <CommentList/>
         </Fragment>
     )
 }

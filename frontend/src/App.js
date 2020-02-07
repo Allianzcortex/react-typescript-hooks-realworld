@@ -2,7 +2,7 @@ import React, {useEffect, Fragment, memo, useMemo} from 'react';
 import {GlobalStyle} from "./style";
 import {useState} from 'react'
 import {renderRoutes} from "react-router-config";
-import {BrowserRouter,Switch} from "react-router-dom"
+import {BrowserRouter,HashRouter,Switch} from "react-router-dom"
 import { Provider } from "react-redux";
 
 import Header from "./componnets/header";

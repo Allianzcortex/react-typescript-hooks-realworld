@@ -10,18 +10,10 @@ import {MainContentWrapper,LeftBarWrapper,RightBarWrapper} from "./index";
 function MainPageLayout(props) {
     return (
         <Fragment>
-            <Header/>
-            <MainContentWrapper>
-                <LeftBarWrapper>
-                    <TopicBar/>
-                    <SplitLine/>
-                    <PostList/>
-                    <Pagination/>
-                </LeftBarWrapper>
-                <RightBarWrapper>
-                    <TagList/>
-                </RightBarWrapper>
-            </MainContentWrapper>
+            <TopicBar/>
+            <SplitLine/>
+            <PostList/>
+            <Pagination/>
         </Fragment>
     )
 }

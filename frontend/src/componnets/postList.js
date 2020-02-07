@@ -2,6 +2,7 @@ import React, {useEffect, Fragment, useState} from "react";
 import Post from "./post";
 import {postSerivce} from "../_services/post.service";
 import styled from "styled-components";
+import {renderRoutes} from "react-router-config";
 
 export const PostListWrapper = styled.div`
  display:flex;

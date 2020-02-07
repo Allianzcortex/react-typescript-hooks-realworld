@@ -2,7 +2,7 @@ import React, {useEffect, Fragment} from "react";
 import {useForm} from "react-hook-form";
 import {userSerivce} from "../../_services/user.service";
 import {Button, TextField,Snackbar} from "@material-ui/core";
-import {RegisterWrapper} from "./style";
+import {AuthFormWrapper} from "./style";
 import {useSelector,useDispatch} from "react-redux";
 import {userConstants} from "../../store/constants";
 import {userRegisterAction} from "../../store/actionCreators/user.action.creators";
@@ -19,48 +19,51 @@ function Register(props) {
     const dispatch=useDispatch();
     const dispatchUserRegister=(data)=>{dispatch(userRegisterAction(data))}
     const onSubmit = async data => {console.log(data);
-    const postData={"user":{
-            "username":data.username,
-            "email":data.email,
-            "password":data.password
-        }};
+        const postData={"user":{
+                "username":data.username,
+                "email":data.email,
+                "password":data.password
+            }};
         await dispatchUserRegister(postData)
         history.push('/');
     }
 
     const registerForm = () => {
         return (
+            <Fragment>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className={'register-field'}>
+                <div className={'auth-field'}>
                     <TextField
                         label="username"
                         inputRef={register({required: true, maxLength: 80})} placeholder="username"
-                               name="username" fullWidth label='username' />
+                        name="username" fullWidth label='username' />
 
                 </div>
-                <div className={'register-field'}>
+                <div className={'auth-field'}>
                     <TextField label="email" inputRef={register({required: true, pattern: /^\S+@\S+$/i})} placeholder="Email"
                                name="email"/>
 
                 </div>
-                <div className={'register-field'}>
+                <div className={'auth-field'}>
                     <TextField label="password" inputRef={register({required: true, maxLength: 15})} placeholder="password" name="password"/>
                 </div>
-                <div className={'register-field'}>
+                <div className={'auth-field'}>
                     <TextField label="confirm password" inputRef={register({required: true, maxLength: 15})} placeholder="confirmPassword"
                                name="confirmPassword"/>
                 </div>
-                <Button className={'register-field'} variant="contained" color="primary" type="submit">
+                <Button className={'auth-field'} variant="contained" color="primary" type="submit">
                     Register
                 </Button>
             </form>
+            </Fragment>
         )
     }
 
     return (
-        <RegisterWrapper>
+        <AuthFormWrapper>
+            Register Form
             {registerForm()}
-        </RegisterWrapper>
+        </AuthFormWrapper>
     )
 }
 

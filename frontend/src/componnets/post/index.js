@@ -2,6 +2,7 @@ import React, {useEffect, Fragment} from "react";
 import {PostWrapper} from "./style";
 import SplitLine from "../split-line";
 import PropTypes from "prop-types"
+import {renderRoutes} from "react-router-config";
 
 function Post(props) {
     const {author, title, tatList, commentCount} = props;
@@ -23,6 +24,7 @@ function Post(props) {
                 </div>
             </PostWrapper>
             <SplitLine/>
+            {/*{ renderRoutes (props.route.routes) }*/}
         </Fragment>
     )
 }

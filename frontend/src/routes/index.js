@@ -1,10 +1,12 @@
 import React from "react";
 import {BrowserRouter, Route, Link, Redirect} from "react-router-dom";
 import {renderRoutes} from "react-router-config";
-import Register from "../componnets/register";
+import Register from "../componnets/auth/register";
+import Login from "../componnets/auth/login"
 import Header from "../componnets/header";
 import About from "../componnets/about";
 import HomeLayout from '../layouts/HomeLayout'
+import PostList from "../componnets/postList";
 import MainPageLayout from "../layouts/MainPageLayout";
 import PostPageLayout from "../layouts/PostPageLayout";
 
@@ -20,32 +22,34 @@ const routes = [
     {
         component: defaultLayout,
         routes: [
-            // {
-            //
-            //     routes:[
-            // {
-            //     path:'/about',
-            //     exact:true,
-            //     component:MainPageLayout
-            //         // },
-            //         {
-            //             path:'/post',
-            //             exact:true,
-            //             component:PostPageLayout
-            //         }
-            //     ]
-            // },
-            // register
             {
-
                 path: '/',
-                exact: true,
-                component: MainPageLayout
+                // TODO figure it out why the nested route
+                // cannot work when `exactRoute` is true
+                // exact: true,
+                component: HomeLayout,
+                routes: [
+                    {
+                        path: '/',
+                        exact: true,
+                        component: MainPageLayout
+                    },
+                    {
+                        path: '/post',
+                        exact: true,
+                        component: PostPageLayout
+                    }
+                ]
             },
+            // {
+            //     path: '/post',
+            //     exact: true,
+            //     component: PostPageLayout
+            // },
             {
-                path: '/post',
+                path: '/login',
                 exact: true,
-                component: PostPageLayout
+                component: Login,
             },
             {
                 path: '/register',
