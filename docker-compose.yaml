@@ -1,0 +1,19 @@
+version: '2.1'
+
+services:
+    Lara-nginx:
+    environment:
+      TZ: America/Halifax
+
+    Lara-mysql:
+    environment:
+      TZ: America/Halifax
+
+    Lara-backend:
+    environment:
+      TZ: America/Halifax
+
+    Lara-frontend:
+    environment:
+      TZ: America/Halifax
+
