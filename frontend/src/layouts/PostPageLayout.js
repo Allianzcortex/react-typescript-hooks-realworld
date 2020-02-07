@@ -6,6 +6,7 @@ import TagList from "../componnets/tagList";
 import Pagination from "../componnets/pagination";
 import Header from '../componnets/header'
 import PostDetail from "../componnets/postDetail";
+import CommentList from "../componnets/comment/commentList";
 import {MainContentWrapper, LeftBarWrapper, RightBarWrapper} from "./index";
 
 function PostPageLayout(props) {
@@ -16,6 +17,7 @@ function PostPageLayout(props) {
                 <LeftBarWrapper>
                     <PostDetail/>
                     <SplitLine/>
+                    <CommentList/>
                 </LeftBarWrapper>
             </MainContentWrapper>
         </Fragment>
