@@ -44,7 +44,7 @@ function PostDetail(porps) {
     const {topic,title,author,editedTime,commentCount,postContent} = porps
 
     // use web ajax call to retrieve the result
-    useEffect((),[])
+    // useEffect((),[])
 
     return (
         <Fragment>
