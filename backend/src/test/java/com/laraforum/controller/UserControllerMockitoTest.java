@@ -44,12 +44,7 @@ public class UserControllerMockitoTest {
 
     @Mock
     private RoleServiceImpl roleServiceMock;
-
-    @Mock
-    private TokenRepository tokenRepositoryMock;
-
-    @Mock
-    private TokenServiceImpl tokenServiceMock;
+    
 
     @Mock
     private UserServiceImpl userServiceMock;
@@ -76,7 +71,6 @@ public class UserControllerMockitoTest {
         System.err.println(userServiceMock);
         System.err.println(roleRepositoryMock);
         System.err.println(jwtProviderMock);
-        System.err.println(tokenServiceMock);
         System.err.println(userContoller);
         System.err.println(roleServiceMock);
 

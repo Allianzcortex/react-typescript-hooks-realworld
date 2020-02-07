@@ -1,12 +1,9 @@
 package com.laraforum.authentication;
 
 import com.laraforum.exception.UnAuthorizedException;
-import com.laraforum.service.TokenService;
-import com.laraforum.service.impl.TokenServiceImpl;
 import com.laraforum.service.impl.UserServiceImpl;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -21,8 +18,7 @@ public class ParseJwtTokenInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private JwtProvider jwtProvider;
 
-    @Autowired
-    private TokenServiceImpl tokenService;
+
 
     @Autowired
     private UserServiceImpl userService;
@@ -39,9 +35,7 @@ public class ParseJwtTokenInterceptor extends HandlerInterceptorAdapter {
                 body = body.substring(7);
             }
             System.out.println("body is : " + body);
-            if (!tokenService.findByToken(body)) {
-                throw new UnAuthorizedException("Unauthorized");
-            }
+
             System.out.println(body);
             jwtProvider.validateToken(body);
         } catch (JwtException ex) {

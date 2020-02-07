@@ -1,11 +1,9 @@
 package com.laraforum.controller;
 
 import com.laraforum.authentication.JwtProvider;
-import com.laraforum.model.Token;
 import com.laraforum.model.User;
 import com.laraforum.model.dto.UserWithEmailAndPassWord;
 import com.laraforum.service.impl.RoleServiceImpl;
-import com.laraforum.service.impl.TokenServiceImpl;
 import com.laraforum.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -33,9 +31,6 @@ public class UserContoller {
     private UserServiceImpl userService;
 
     @Autowired
-    private TokenServiceImpl tokenService;
-
-    @Autowired
     private RoleServiceImpl roleService;
 
 
@@ -60,8 +55,7 @@ public class UserContoller {
                 + " | " + roleService.findByRowNumber(1)
         );
         // also for test
-        System.out.println("tokenservice 是：" + tokenService);
-        tokenService.findByToken("f");
+
         user.setRoles(user.getRoles() + "1");
         user.getPermissions().add(1);
         System.out.println("userservice is" + userService);
@@ -72,8 +66,7 @@ public class UserContoller {
         String jwtToken = jwtProvider.createToken(user.getUserName());
         // write token to repository
         Date now = new Date();
-        Token token = new Token(user, jwtToken, now);
-        tokenService.save(token);
+
         // return the result
 
         return jwtToken;
@@ -108,7 +101,6 @@ public class UserContoller {
         String userName = (String) httpServletRequest.getAttribute("AuthUser");
         User user = userService.findByUserName(userName);
         System.out.println("user name is " + userName);
-        tokenService.deleteToken(user);
 
     }
 
