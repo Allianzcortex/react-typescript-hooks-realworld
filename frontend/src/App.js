@@ -5,8 +5,6 @@ import {renderRoutes} from "react-router-config";
 import {BrowserRouter,HashRouter,Switch} from "react-router-dom"
 import { Provider } from "react-redux";
 
-import Header from "./componnets/header";
-import SplitLine from "./componnets/utils/split-line";
 import {routes} from './routes/index.js'
 import store from "./store";
 

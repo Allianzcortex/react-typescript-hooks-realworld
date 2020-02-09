@@ -1,7 +1,8 @@
 import React, {useEffect, Fragment} from "react";
 import {PostWrapper} from "./style";
-import SplitLine from "../utils/split-line";
+import SplitLine from "../utils/splitLine";
 import PropTypes from "prop-types"
+import {Link} from "react-router-dom";
 import {renderRoutes} from "react-router-config";
 
 function AbbreviatedPost(props) {
@@ -14,7 +15,7 @@ function AbbreviatedPost(props) {
                     <span className="initials">{author}</span>
                 </div>
                 <div className="post-initial-content">
-                    <h4>{title}</h4>
+                    <h4><Link to='/post'>{title}</Link></h4>
                     <div className="post-meta">
                         aa . bb . cc . dd .
                     </div>

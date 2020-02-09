@@ -1,9 +1,6 @@
 import React,{Fragment} from "react";
 import { renderRoutes } from "react-router-config";
-import Header from '../componnets/header'
-import {Link} from "react-router-dom";
-import About from "../componnets/utils/about";
-import {MainContentWrapper,LeftBarWrapper,RightBarWrapper} from "./index";
+import {Header} from '../componnets/utils'
 
 // import route from '../routes/index'
 

@@ -1,7 +1,7 @@
 import React, {useEffect, Fragment} from "react";
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import SplitLine from "../utils/split-line";
+import SplitLine from "../utils/splitLine";
 import PropTypes from "prop-types"
 
 const PostDetailWrapper = styled.div`
@@ -78,17 +78,17 @@ PostDetail.prototype={
 
 PostDetail.defaultProps={
     topic: "Java",
-    title: "sklearn 混合特征工程如何进行训练呢？",
+    title: "how to train sklearn machine learning model？",
     author: "SlipStupig",
     editedTime: "10h 1m ago",
     commentCount: 302,
-    postContent:"想用 sklearn 做个多特征的分类器，特征分别是\n" +
-        "            用户 ID\n" +
-        "            发帖正文\n" +
-        "            发帖时间\n" +
-        "            点赞数\n" +
-        "            我现在做的时候使用TF-IDF，做分类，单其\n" +
-        "            它特征就没有用上，有什么办法能把所有特征用上呢？",
+    postContent:"I want to use sklearn as a multi-feature classifier. The features are\n" +
+        "            user ID\n" +
+        "            post content\n" +
+        "            post time\n" +
+        "            thumb count\n" +
+        "            Im using tf-idf to make the classification\n" +
+        "            how to make full use of  other features？",
 }
 
 export default PostDetail

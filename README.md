@@ -3,6 +3,14 @@
 
 `LaraForum` is a full-stack forum with Spring Boot as skeleton and Spring Data JPA as ORM to provide restful api in controller.
 
+Frontend is built with `React + Hooks + Redux + Redux-thunk + React-router + styled-component + material UI`
+
+![HomePage](assets/HomePage.png)
+
+![PostPage](assets/PostPage.png)
+
+![LoginPage](assets/LoginPage.png)
+
 If you just want to a MVP(Minimal Valuable Product) to learn Spring , I will recommend you to my [class-project](https://github.com/Allianzcortex/code_collection/tree/master/Spring-Boot-Based-Database-TeamProject) which is simplier and implemented all CRUD functions(and pure HTML && CSS as frontend).
 
 ---

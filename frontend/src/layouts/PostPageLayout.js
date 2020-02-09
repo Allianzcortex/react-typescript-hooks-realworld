@@ -1,13 +1,9 @@
 import React, {Fragment} from "react";
-import TopicBar from "../componnets/topicBar";
-import PostList from "../componnets/post/postList";
-import SplitLine from "../componnets/utils/split-line";
-import TagList from "../componnets/utils/tagList";
-import Pagination from "../componnets/utils/pagination";
-import Header from '../componnets/header'
-import PostDetail from "../componnets/post/postDetail";
-import CommentList from "../componnets/comment/commentList";
-import {MainContentWrapper, LeftBarWrapper, RightBarWrapper} from "./index";
+
+import {SplitLine} from "../componnets/utils";
+import {PostDetail} from "../componnets/post";
+import {CommentList} from "../componnets/comment";
+import {MainContentWrapper, LeftBarWrapper} from "./style";
 
 function PostPageLayout(props) {
     return (

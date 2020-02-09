@@ -1,11 +1,7 @@
-import React,{Fragment} from "react";
-import TopicBar from "../componnets/topicBar";
-import PostList from "../componnets/post/postList";
-import SplitLine from "../componnets/utils/split-line";
-import TagList from "../componnets/utils/tagList";
-import Pagination from "../componnets/utils/pagination";
-import Header from '../componnets/header'
-import {MainContentWrapper,LeftBarWrapper,RightBarWrapper} from "./index";
+import React, {Fragment} from "react";
+import {TopicBar, SplitLine, TagList, Pagination} from "../componnets/utils";
+import {PostList} from "../componnets/post"
+import {MainContentWrapper, LeftBarWrapper, RightBarWrapper} from "./style";
 
 function MainPageLayout(props) {
     return (

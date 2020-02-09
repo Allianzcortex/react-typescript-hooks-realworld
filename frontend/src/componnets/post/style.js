@@ -35,6 +35,10 @@ h4 {
    margin-left:0;
    margin-top: 5px;
    margin-bottom:5px;
+   
+   a{
+   color:gray;
+   }
 }
 
 .post-meta {
