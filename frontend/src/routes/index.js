@@ -6,6 +6,10 @@ import {About} from "../componnets/utils"
 import {CreatePost} from "../componnets/post";
 
 import {HomeLayout,MainPageLayout,PostPageLayout} from '../layouts'
+import signin from "../componnets/test/signin";
+import Header from "../componnets/test/header";
+import admin from "../componnets/test/admin";
+import newadmin from "../componnets/test/newadmin";
 
 const defaultLayout = ({route}) => (
     <div>
@@ -47,6 +51,26 @@ const routes = [
                 path: '/login',
                 exact: true,
                 component: Login,
+            },
+            {
+                path:'/signin',
+                exact:true,
+                component:signin,
+            },
+            {
+              path:'/head',
+              exact:true,
+              component:Header,
+            },
+            {
+              path:'/admin',
+              exact:true,
+              component:admin,
+            },
+            {
+                path:'/newadmin',
+                exact:true,
+                component:newadmin,
             },
             {
                 path: '/register',
