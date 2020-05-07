@@ -3,17 +3,17 @@ import {Chip, Grid, Paper} from "@material-ui/core";
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
- function newadmin() {
+ export default function newadmin() {
 
-    const [formats, setFormats] = useState([]);
+    // const [formats, setFormats] = useState([]);
 
-    const handleFormat = (event) => {
-        setFormats(event.target.value);
-    };
+    // const handleFormat = (event) => {
+    //     setFormats(event.target.value);
+    // };
 
     return (
         <Fragment>
-            <Paper item>
+            {/* <Paper item>
                new admin
 
                 <div>
@@ -32,10 +32,8 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
                         </ToggleButton>
                     </ToggleButtonGroup>
                 </div>
-            </Paper>
+            </Paper> */}
         </Fragment>
         )
 
 }
-
-export default newadmin()

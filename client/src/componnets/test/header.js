@@ -51,6 +51,12 @@ const HeaderBar = styled.div`
 `
 
 const MainContentBar = styled.div`
+
+h4 {
+    margin-bottom: 12 px;
+    border: 1px solid;
+}
+
  .MuiPaper-root {
       margin:16px;
  }

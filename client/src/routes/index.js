@@ -67,11 +67,11 @@ const routes = [
               exact:true,
               component:admin,
             },
-            {
-                path:'/newadmin',
-                exact:true,
-                component:newadmin,
-            },
+            // {
+            //     path:'/newadmin',
+            //     exact:true,
+            //     component:newadmin,
+            // },
             {
                 path: '/register',
                 exact: true,
