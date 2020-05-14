@@ -9,7 +9,7 @@ addons:
       - mysql-server
 
 before_install:
-  - cd backend/
+  - cd server/
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('root') where user='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - sudo mysql_upgrade -u root -proot
   - sudo service mysql restart
