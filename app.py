@@ -11,10 +11,47 @@ app = Flask(__name__, static_folder='/static')
 cors = CORS(app)
 
 
-@app.route('/api/v1/register',methods=['POST','GET'])
+@app.route('/api/login',methods=['POST','GET'])
 @cross_origin()
-def register():
-   return '12345' # fake token
+def login():
+   # return jsonify({'data':'testUser'})
+   return 'testUser'
+
+
+
+@app.route('/api/category',methods=['POST','GET'])
+@cross_origin()
+def get_category():
+   s={
+   "code":0,
+   "msg":None,
+   "data":[
+      {
+         "id":2,
+         "name":"123",
+         "postInfos":[
+
+         ]
+      },
+      {
+         "id":5,
+         "name":"456",
+         "postInfos":[
+
+         ]
+      },
+      {
+         "id":7,
+         "name":"789",
+         "postInfos":[
+
+         ]
+      }
+            ],
+   "success":True
+      }
+   return jsonify(s)
+
 
 @app.route('/recommendList',methods=['POST','GET'])
 @cross_origin()

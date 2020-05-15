@@ -30,8 +30,11 @@ mvnw.cmd
 /.nb-gradle/
 /build/i
 
-# Lucene index file
+# Lucene index File
 com.laraforum.model.Article/
 
 # FrontEnd File
 frontend/node_modules/
+
+# Python/Fake Backend File
+__pycache__/

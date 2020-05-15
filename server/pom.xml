@@ -74,15 +74,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- for search with lucene -->
-        <!-- must check the official website to make sure the version
-        between search-core and search-orm are corresponding -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-orm</artifactId>
-            <version>5.10.5.Final</version>
-        </dependency>
-
         <!-- AOP Programming -->
         <dependency>
             <groupId>org.aspectj</groupId>
