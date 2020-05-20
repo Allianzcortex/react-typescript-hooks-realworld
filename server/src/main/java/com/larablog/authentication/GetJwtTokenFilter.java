@@ -1,6 +1,5 @@
 package com.larablog.authentication;
 
-import com.larablog.exception.UnAuthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.*;

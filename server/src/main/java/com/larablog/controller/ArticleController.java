@@ -1,7 +1,6 @@
 package com.larablog.controller;
 
 
-import com.larablog.exception.UnAuthorizedException;
 import com.larablog.model.*;
 import com.larablog.model.dto.ArticleWhenCreated;
 import com.larablog.repository.ArticleRepository;

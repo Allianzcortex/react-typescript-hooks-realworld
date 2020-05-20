@@ -2,14 +2,11 @@ package com.larablog.controller;
 
 import com.larablog.authorization.RequirePermissions;
 import com.larablog.authorization.RequireRoles;
-import com.larablog.exception.UnAuthorizedException;
-import com.larablog.model.Article;
 import com.larablog.model.Notification;
 import com.larablog.model.User;
 import com.larablog.repository.NotificationRepository;
 import com.larablog.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 

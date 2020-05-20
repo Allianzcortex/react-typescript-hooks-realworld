@@ -5,7 +5,6 @@ import com.larablog.model.User;
 import com.larablog.repository.PermissionRepository;
 import com.larablog.repository.RoleRepository;
 import com.larablog.repository.UserRepository;
-import com.larablog.service.impl.RoleServiceImpl;
 import com.larablog.service.impl.UserServiceImpl;
 import org.junit.Before;
 import org.junit.Test;

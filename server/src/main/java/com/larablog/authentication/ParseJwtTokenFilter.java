@@ -1,6 +1,5 @@
 package com.larablog.authentication;
 
-import com.larablog.exception.UnAuthorizedException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.web.filter.OncePerRequestFilter;
 

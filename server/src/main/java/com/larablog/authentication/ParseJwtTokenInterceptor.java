@@ -1,6 +1,5 @@
 package com.larablog.authentication;
 
-import com.larablog.exception.UnAuthorizedException;
 import com.larablog.service.impl.UserServiceImpl;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
