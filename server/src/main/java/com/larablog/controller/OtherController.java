@@ -39,9 +39,6 @@ public class OtherController {
     @Autowired
     private NotificationServiceImpl notificationService;
 
-    // TODO add remove role function
-
-    @RequireRoles("admin")
     @Transactional
     @PostMapping("role/add/{userName}/{rNumber}")
     public void addUserRole(@PathVariable String userName, @PathVariable Integer rNumber) {
@@ -56,7 +53,6 @@ public class OtherController {
     }
 
 
-    @RequirePermissions("create_post")
     @Transactional
     @PostMapping("permission/add/{userName}/{pNumber}")
     public void addUserPermission(@PathVariable String userName, @PathVariable Integer pNumber) {
