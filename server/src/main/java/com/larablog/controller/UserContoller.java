@@ -29,8 +29,6 @@ public class UserContoller {
     @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
-    private RoleServiceImpl roleService;
 
 
     /**
@@ -49,11 +47,7 @@ public class UserContoller {
         String userName = user.getUserName();
         // basic authorization
         // bwlow line is for test
-        roleService.findByRowNumber(1);
-        System.err.println("roleService 是：" + roleService
-                + " | " + roleService.findByRowNumber(1)
-        );
-        // also for test
+
 
         user.setRoles(user.getRoles() + "1");
         user.getPermissions().add(1);
@@ -102,12 +96,5 @@ public class UserContoller {
         System.out.println("user name is " + userName);
 
     }
-
-    // TODO
-//    @GetMapping("get/favorite")
-//    public List<Article> findArticlesFavoritedByUser(HttpServletRequest httpServletRequest) {
-//        String userName = (String) httpServletRequest.getAttribute("AuthUser");
-//
-//    }
 
 }

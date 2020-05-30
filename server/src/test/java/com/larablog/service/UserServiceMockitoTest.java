@@ -34,8 +34,6 @@ public class UserServiceMockitoTest {
     @Mock
     private PermissionRepository permissionRepositoryMock;
 
-    @InjectMocks
-    private RoleServiceImpl roleServiceMock;
 
     @InjectMocks
     private UserServiceImpl userServiceMock;

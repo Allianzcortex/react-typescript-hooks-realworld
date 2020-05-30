@@ -21,8 +21,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private RoleServiceImpl roleService;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -53,7 +51,7 @@ public class UserServiceImpl implements UserService {
         for (String f : ff) {
             xx.add(Integer.parseInt(f));
         }
-        System.out.println("目标是：" + roleService.findRoleNameByRoleNumber(xx));
+
         return roleRepository.findRoleNameByRoleNumber(xx);
     }
 

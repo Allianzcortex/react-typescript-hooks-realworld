@@ -39,9 +39,6 @@ public class UserControllerMockitoTest {
 
     @Mock
     private JwtProvider jwtProviderMock;
-
-    @Mock
-    private RoleServiceImpl roleServiceMock;
     
 
     @Mock
@@ -70,7 +67,6 @@ public class UserControllerMockitoTest {
         System.err.println(roleRepositoryMock);
         System.err.println(jwtProviderMock);
         System.err.println(userContoller);
-        System.err.println(roleServiceMock);
 
 
         User user = User.builder().passWord("12")
