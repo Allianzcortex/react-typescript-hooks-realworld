@@ -17,4 +17,4 @@ before_install:
   - mysqladmin -uroot -proot create lara_test
 language: Java
 script:
-  - bash ../build.sh
+  # - bash ../build.sh

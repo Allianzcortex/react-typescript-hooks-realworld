@@ -1,7 +1,6 @@
 package com.larablog.controller;
 
-import com.larablog.authorization.RequirePermissions;
-import com.larablog.authorization.RequireRoles;
+
 import com.larablog.model.Notification;
 import com.larablog.model.User;
 import com.larablog.repository.NotificationRepository;
