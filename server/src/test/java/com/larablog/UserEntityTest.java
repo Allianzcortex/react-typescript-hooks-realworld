@@ -1,7 +1,6 @@
 package com.larablog;
 
 
-import com.larablog.configuration.MySqlRepositoryConfigure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

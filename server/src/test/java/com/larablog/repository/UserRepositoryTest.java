@@ -1,6 +1,5 @@
 package com.larablog.repository;
 
-import com.larablog.configuration.MySqlRepositoryConfigure;
 import com.larablog.model.User;
 import org.junit.Before;
 import org.junit.Test;
