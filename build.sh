@@ -1,3 +1,3 @@
 #!/bin/sh
 echo '------command is executed--------------------'
-mvn test -B
+# mvn test -B

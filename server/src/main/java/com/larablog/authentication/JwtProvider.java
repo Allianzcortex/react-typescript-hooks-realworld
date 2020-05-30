@@ -27,9 +27,7 @@ public class JwtProvider {
 
     @PostConstruct
     private void init() {
-        // TODO
-        // how to deal with secret key ? directly or base64 encode ?
-        // base64-encoded secret key cannot be null or empty ?
+
          key = "yourkey";
     }
 
@@ -39,10 +37,6 @@ public class JwtProvider {
 
     public String createToken(String userName) {
         Claims claims = Jwts.claims().setSubject(userName);
-        // TODO check whether convert list to arrayList
-//        claims.put("auth",String.join(" ",(ArrayList) roles));
-
-        // add date
         Date now = new Date();
         Date validity = new Date(now.getTime() + validateMillseconds);
 
