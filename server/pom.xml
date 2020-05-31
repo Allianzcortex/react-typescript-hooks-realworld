@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <flexmark.version>0.34.58</flexmark.version>
     </properties>
 
     <dependencies>
@@ -61,14 +62,35 @@
         </dependency>
 
         <!-- add jwt suport -->
+<!--        <dependency>-->
+<!--            &lt;!&ndash; JSON Web Token Support &ndash;&gt;-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt</artifactId>-->
+<!--            <version>0.7.0</version>-->
+<!--        </dependency>-->
+
+         <!-- add suport for markdown resolve -->
         <dependency>
-            <!-- JSON Web Token Support -->
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.7.0</version>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-all</artifactId>
+            <version>${flexmark.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vladsch.flexmark</groupId>
+                    <artifactId>flexmark-pdf-converter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.vladsch.flexmark</groupId>
+                    <artifactId>flexmark-youtrack-converter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.vladsch.flexmark</groupId>
+                    <artifactId>flexmark-jira-converter</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-        <!-- for web ? -->
+        <!-- for web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

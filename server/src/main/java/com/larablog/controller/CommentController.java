@@ -30,9 +30,6 @@ public class CommentController {
     @Autowired
     private ArticleCommentServiceImpl articleCommentService;
 
-    @Autowired
-    private NotificationServiceImpl notificationService;
-
     @Transactional
     @PostMapping("create/{slug}")
     public Comment createComment(HttpServletRequest httpServletRequest, @PathVariable String slug, @RequestBody HashMap<String, HashMap<String, String>> comment) {
@@ -61,8 +58,6 @@ public class CommentController {
         ArticleComment articleComment = new ArticleComment(articleID, comment1Id);
         articleCommentService.save(articleComment);
 
-        // create notification
-        notificationService.createNotification(userID, receiveId, articleID);
 
         return comment1;
     }

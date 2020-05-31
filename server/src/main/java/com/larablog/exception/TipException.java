@@ -2,13 +2,13 @@ package com.larablog.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class SnackException extends CustomException {
+public class TipException extends CustomException {
 
-    public SnackException(String message){
+    public TipException(String message){
         super(message, HttpStatus.BAD_REQUEST);
     }
 
-    public SnackException(Throwable cause) {
+    public TipException(Throwable cause) {
         super(cause);
     }
 }

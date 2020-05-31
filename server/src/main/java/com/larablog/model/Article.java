@@ -2,6 +2,7 @@ package com.larablog.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.larablog.model.enums.ArticleStatus;
 import lombok.*;
 
 
@@ -16,67 +17,48 @@ import java.util.*;
 
 @Data
 @Entity
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name="article")
-public class Article {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING, columnDefinition = "VARCHAR(45)")
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Table(name = "article")
+public class Article extends BaseEntity {
 
-    @NonNull
-    private String slug;
-
-    @NonNull
+    @Column(name = "title", columnDefinition = "VARCHAR(255) NOT NULL")
     private String title;
 
-    @NonNull
-    private String description;
+    @Column(name = "content", columnDefinition = "MEDIUMTEXT")
+    private String content;
 
-    @NonNull
-    private String body;
+    @Column(name = "author_id", columnDefinition = "INT")
+    private Integer authorId;
 
-    // TODO
-    // https://stackoverflow.com/questions/2302802/object-references-an-unsaved-transient-instance-save-the-transient-instance-be/2302814
-    // About manytomany and manytoone , still a lot to watch
-    @NonNull
-    @JsonManagedReference
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "article_tag",
-            joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
-    // refer: https://projectlombok.org/features/Builder
-    private Set<Tag> tagList = new HashSet<>();
+    @Column(name = "hits", columnDefinition = "INT DEFAULT 0 NOT NULL")
+    private Integer hits;
 
-    @Override public int hashCode() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", columnDefinition = "VARCHAR(32")
+    private ArticleStatus status;
 
-    @NonNull
-    // refer : https://www.baeldung.com/jackson-jsonformat
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss.SSSZ")
-    private Date createdAt;
+    @Column(name = "priority", columnDefinition = "INT DEFAULT 0 NOT NULL")
+    private Integer priority;
 
-    @NonNull
-    private Date updatedAt;
+    @Column(name = "allow_comment", columnDefinition = "BOOLEAN DEFAULT TRUE NOT NULL")
+    private Boolean allowComment;
 
-    // TODO Do we need to use final ?
-    @Builder.Default
-    private final boolean favorited = false;
-
-    @Builder.Default
-    private final int favoritesCount = 0;
-
-    @NonNull
-    private int userId;
+    @Column(name = "comment_count", columnDefinition = "INT DEFAULT 0 NOT NULL")
+    private Integer commentCount;
 
     @Override
-    public String toString() {
-        return title + description + "unique";
-
+    public void prePersist() {
+        super.prePersist();
+        if (hits == null)
+            hits = 0;
+        if (priority == null)
+            priority = 0;
+        if (allowComment == null)
+            allowComment = true;
+        if (commentCount == null)
+            commentCount = 0;
     }
 
 }
