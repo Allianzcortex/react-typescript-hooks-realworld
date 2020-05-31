@@ -1,7 +1,6 @@
 package com.larablog.controller;
 
 
-import com.larablog.model.ArticleComment;
 import com.larablog.model.Comment;
 import com.larablog.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
