@@ -1,31 +1,34 @@
 package com.larablog.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Table(name="comment")
+public class Comment extends BaseEntity{
 
-    private Date createdAt;
+    /**
+     *  The id of article that owns the comment
+     */
+    @Column(name="article_id",columnDefinition = "INT NOT NULL")
+    private Integer articleId;
 
-    private Date updatedAt;
+    @Column(name="parent_id",columnDefinition = "INT")
+    private Integer parentId;
 
-    private String body;
+    @Column(name="content",columnDefinition = "TEXT NOT NULL")
+    private String content;
 
-    private int userId;
+    @Column(name="name",columnDefinition = "VARCHAR(255)")
+    private String name;
+
+    @Column(name="email",columnDefinition = "VARCHAR(255)")
+    private String email;
+
+
 }

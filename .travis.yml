@@ -15,6 +15,6 @@ before_install:
   - sudo service mysql restart
   - mysqladmin -uroot -proot create lara
   - mysqladmin -uroot -proot create lara_test
-language: Java
+language: python
 script:
   - bash ../build.sh

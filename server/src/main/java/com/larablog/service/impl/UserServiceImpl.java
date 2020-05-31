@@ -1,8 +1,6 @@
 package com.larablog.service.impl;
 
 import com.larablog.model.User;
-import com.larablog.repository.PermissionRepository;
-import com.larablog.repository.RoleRepository;
 import com.larablog.repository.UserRepository;
 import com.larablog.service.UserService;
 import lombok.AllArgsConstructor;
@@ -22,11 +20,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
 
-    @Autowired
-    private RoleRepository roleRepository;
 
-    @Autowired
-    private PermissionRepository permissionRepository;
 
     public void save(User user) {
         userRepository.save(user);
@@ -52,12 +46,11 @@ public class UserServiceImpl implements UserService {
             xx.add(Integer.parseInt(f));
         }
 
-        return roleRepository.findRoleNameByRoleNumber(xx);
+//        return roleRepository.findRoleNameByRoleNumber(xx);
+        return new ArrayList<>();
     }
 
-    public List<String> gerUserPermissions(String userName) {
-        return permissionRepository.findPermissionsByUserName(userName);
-    }
+
 
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName);

@@ -46,28 +46,26 @@ public class ArticleController {
         return articleService.createArticle(user, article.get("article"));
     }
 
-    @GetMapping("getBy/{tagName}")
-    public Article findByTag(@PathVariable String tagName) {
-        System.out.println("要求的 tag 是 " + tagName);
+//    @GetMapping("getBy/{tagName}")
+//    public Article findByTag(@PathVariable String tagName) {
+
         // why not ...
         // Tag tag = new Tag(tagName);
-        Optional<List<Article>> articles = articleRepository.findByTag(tagName);
-        if (!articles.isPresent()) {
-            throw new UnAuthorizedException("NotAuthorized");
-        }
-
-        System.out.println(articles.get().size());
+//        Optional<List<Article>> articles = articleRepository.findByTag(tagName);
+//        if (!articles.isPresent()) {
+//            throw new UnAuthorizedException("NotAuthorized");
+//        }
 //        return new ResponseEntity<Article>(articles.get().get(0), HttpStatus.OK);
-        for (Article article : articles.get()) {
-            System.out.println(article.getTagList());
-        }
-        return articles.get().get(0);
-    }
+//        for (Article article : articles.get()) {
+//            System.out.println(article.getTagList());
+//        }
+//        return articles.get().get(0);
+//    }
 
-    @GetMapping("get/single/{slug}")
-    public Article findBySlug(@PathVariable String slug) {
-        return articleRepository.findBySlug(slug);
-    }
+//    @GetMapping("get/single/{slug}")
+//    public Article findBySlug(@PathVariable String slug) {
+//        return articleRepository.findBySlug(slug);
+//    }
 
 
     @PostMapping("{slug}/favorite")

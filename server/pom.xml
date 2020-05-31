@@ -62,12 +62,12 @@
         </dependency>
 
         <!-- add jwt suport -->
-<!--        <dependency>-->
-<!--            &lt;!&ndash; JSON Web Token Support &ndash;&gt;-->
-<!--            <groupId>io.jsonwebtoken</groupId>-->
-<!--            <artifactId>jjwt</artifactId>-->
-<!--            <version>0.7.0</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <!-- JSON Web Token Support -->
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
 
          <!-- add suport for markdown resolve -->
         <dependency>

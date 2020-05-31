@@ -51,43 +51,47 @@ public class ArticleServiceImpl implements ArticleService {
 
         // TODO 检测文章 title 是否已存在，
         // 如果存在的话返回文章早已存在异常
-        Date now = new Date();
-
-        List<String> originalTagList = article.getTagList();
-        Set<Tag> outputTagList = new HashSet<Tag>();
-        System.out.println("original is " + originalTagList);
-
-        for (String or : originalTagList) {
-            outputTagList.add(new Tag(or));
-        }
-
-        Article article1 = Article.builder()
-                .slug(ArticleUtils.convertTitleToSlug(article.getTitle()))
-                .title(article.getTitle())
-                .description(article.getDescription())
-                .body(article.getBody())
-                .createdAt(now)
-                .updatedAt(now)
-                .userId(user.getId())
-                .tagList(outputTagList)
-                .build();
-        System.out.println(article1.getTagList());
-        articleRepository.save(article1);
-        return article1;
+//        Date now = new Date();
+//
+//        List<String> originalTagList = article.getTagList();
+//        Set<Tag> outputTagList = new HashSet<Tag>();
+//        System.out.println("original is " + originalTagList);
+//
+//        for (String or : originalTagList) {
+//            outputTagList.add(new Tag(or));
+//        }
+//
+//        Article article1 = Article.builder()
+//                .slug(ArticleUtils.convertTitleToSlug(article.getTitle()))
+//                .title(article.getTitle())
+//                .description(article.getDescription())
+//                .body(article.getBody())
+//                .createdAt(now)
+//                .updatedAt(now)
+//                .userId(user.getId())
+//                .tagList(outputTagList)
+//                .build();
+//
+//        articleRepository.save(article1);
+        Article a = new Article();
+        return a;
     }
 
     @Override
     public Article findBySlug(String slug) {
-        return articleRepository.findBySlug(slug);
+//        return articleRepository.findBySlug(slug);
+        return null;
     }
 
     @Override
     public Optional<List<Article>> findByTagAnduAndUserNameAndFavorite(String tag, int authorId, int favorited) {
-        return articleRepository.findByTagAnduAndUserNameAndFavorite(tag, authorId, favorited);
+//        return articleRepository.findByTagAnduAndUserNameAndFavorite(tag, authorId, favorited);
+        return null;
     }
 
     public List<Article> findByKeyWord(String keyWord) {
-        return articleRepository.findByKeyWord(keyWord);
+//        return articleRepository.findByKeyWord(keyWord);
+        return null;
     }
 
 }

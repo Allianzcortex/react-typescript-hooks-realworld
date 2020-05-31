@@ -17,7 +17,6 @@ import java.util.*;
 
 @Data
 @Entity
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING, columnDefinition = "VARCHAR(45)")
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "article")
