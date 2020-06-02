@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 // TODO refactor it with lombok or idea-auto-generated method
+// TODO use responseEntity to display the result
+// https://www.baeldung.com/spring-response-entity
 public class RestResponse<T> {
     private int code;
     private String msg;

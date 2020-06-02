@@ -5,20 +5,10 @@ import com.larablog.model.User;
 
 public interface UserService {
 
-    /**
-     * register function
-     *
-     * @param user
-     */
-    void save(User user);
+    User login(String username,String password);
 
-    /**
-     *
-     */
-    // user LoginWithUserName(String userName, String passWord);
-    // TODO later implement feature
-    User LoginWithUserEmail(String email, String passWord);
+    boolean resetPassword(String username,String oldPassword,String newPassword);
 
-    User findByUserName(String userName);
+    boolean resetUser(String oldNickname,String newNickname,String email);
 
 }
