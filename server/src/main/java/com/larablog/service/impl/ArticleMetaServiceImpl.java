@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
+//@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ArticleMetaServiceImpl implements ArticleMetaService {
 
     private final ArticleMetaRepository articleMetaRepository;
@@ -28,9 +28,23 @@ public class ArticleMetaServiceImpl implements ArticleMetaService {
         List<ArticleMeta> middles = articleMetaRepository.findAll();
         return middles.stream().collect(Collectors.groupingBy(ArticleMeta::getMetaId));
 
-    );
-
-//    Set<Integer> getMetaIdsByArticleId(Integer articleId);
-//
-//    Set<Integer> getArticleIdsByMetaId(Integer metaId);
     }
+
+    @Override
+    public Set<Integer> getMetaIdsByArticleId(Integer articleId) {
+        return articleMetaRepository.findAllByArticleId(articleId)
+                .stream()
+                .map(ArticleMeta::getMetaId)
+                .collect(Collectors.toSet());
+    }
+
+    //
+    @Override
+    public Set<Integer> getArticleIdsByMetaId(Integer metaId) {
+        return articleMetaRepository.findAllByArticleId(metaId)
+                .stream()
+                .map(ArticleMeta::getArticleId)
+                .collect(Collectors.toSet());
+    }
+}
+

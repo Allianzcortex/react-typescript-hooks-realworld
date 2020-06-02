@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface MetaRepository<META extends Meta> extends JpaRepository<Meta,Integer> {
+public interface MetaRepository<META extends Meta> extends JpaRepository<META,Integer> {
 
     Optional<META> findByName(String name);
 }

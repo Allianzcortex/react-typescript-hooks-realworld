@@ -4,7 +4,11 @@ import org.springframework.http.HttpStatus;
 
 public class TipException extends CustomException {
 
-    public TipException(String message){
+    public TipException() {
+
+    }
+
+    public TipException(String message) {
         super(message, HttpStatus.BAD_REQUEST);
     }
 

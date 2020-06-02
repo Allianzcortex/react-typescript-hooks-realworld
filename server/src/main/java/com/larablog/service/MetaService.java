@@ -23,4 +23,6 @@ public interface MetaService<META> {
 
     List<MetaInfo> getAdminMetaInfos();
 
+
+
 }
