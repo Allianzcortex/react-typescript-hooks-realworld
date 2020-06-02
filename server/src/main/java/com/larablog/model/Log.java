@@ -1,6 +1,7 @@
 package com.larablog.model;
 
 import com.larablog.model.enums.LogType;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -14,6 +15,7 @@ import javax.persistence.Enumerated;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
 public class Log extends BaseEntity {
     @Column(name = "data", columnDefinition = "TEXT")
     private String data;
