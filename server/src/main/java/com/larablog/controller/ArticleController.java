@@ -2,7 +2,6 @@ package com.larablog.controller;
 
 
 import com.larablog.model.*;
-import com.larablog.model.dto.ArticleWhenCreated;
 import com.larablog.repository.ArticleRepository;
 import com.larablog.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/articles")
