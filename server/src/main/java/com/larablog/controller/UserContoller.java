@@ -2,7 +2,6 @@ package com.larablog.controller;
 
 import com.larablog.authentication.JwtProvider;
 import com.larablog.model.User;
-import com.larablog.model.dto.UserWithEmailAndPassWord;
 import com.larablog.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

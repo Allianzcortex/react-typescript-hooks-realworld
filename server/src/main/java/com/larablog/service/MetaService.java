@@ -23,6 +23,6 @@ public interface MetaService<META> {
 
     List<MetaInfo> getAdminMetaInfos();
 
-
+    List<META> findMetaByArticleId(Integer articleId);
 
 }
