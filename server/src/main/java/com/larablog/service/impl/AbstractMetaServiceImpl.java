@@ -2,8 +2,10 @@ package com.larablog.service.impl;
 
 import com.larablog.exception.NotFoundException;
 import com.larablog.exception.TipException;
+import com.larablog.model.Article;
 import com.larablog.model.ArticleMeta;
 import com.larablog.model.Meta;
+import com.larablog.model.dto.MetaInfo;
 import com.larablog.repository.ArticleMetaRepository;
 import com.larablog.repository.ArticleRepository;
 import com.larablog.repository.MetaRepository;
@@ -15,15 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class AbstractMetaServiceImpl<META extends Meta> implements MetaService<META> {
+
 
     private ArticleMetaRepository articleMetaRepository;
     private MetaRepository<META> metaRepository;
@@ -91,15 +91,35 @@ public class AbstractMetaServiceImpl<META extends Meta> implements MetaService<M
     private void saveMetas(String nameStr, Integer articleId) {
         List<META> metas = findMetaByArticleId(articleId);
         Set<String> metaSet = metas.stream().map(META::getName).collect(Collectors.toSet());
-        String[] nameArr = nameStr.split(",");
-        for (String name : nameArr) {
+        for (String name : nameStr.split(",")) {
             if (StringUtils.isEmpty(name))
                 continue;
             if (!metaSet.contains(name)) {
                 Meta meta = metaRepository.findByName(name)
-                        .orElse(() -> save(name));
+                        .orElseGet(() -> save(name));
+
                 articleMetaRepository.save(new ArticleMeta(articleId, meta.getId()));
             }
         }
+    }
+
+    private List<META> findMetaByArticleId(Integer articleId) {
+        Set<Integer> metaIds = articleMetaService.getMetaIdsByArticleId(articleId);
+        return metaRepository.findAllById(metaIds);
+    }
+
+    @Override
+    public List<MetaInfo> getFrontMetaInfos() {
+
+    }
+
+    @Override
+    public List<MetaInfo> getAdminMetaInfos() {
+
+    }
+
+    private List<MetaInfo> getMetaInfos(List<? extends Meta>, List<Article> articles) {
+        // 1. convert posts to <id:article> map
+        Map<Integer, Article> articleMap = articles.stream().collect(Collectors.toMap(Article::getId, article -> article));
     }
 }
