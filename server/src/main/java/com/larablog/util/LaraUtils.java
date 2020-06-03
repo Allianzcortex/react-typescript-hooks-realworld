@@ -1,9 +1,18 @@
 package com.larablog.util;
 
 import com.larablog.exception.TipException;
+import com.larablog.exception.UserNotLoginException;
+import com.larablog.model.User;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Objects;
+import java.util.Optional;
 
 public class LaraUtils {
 
@@ -25,5 +34,21 @@ public class LaraUtils {
         String base = str + Constants.MD5_SALT;
         return DigestUtils.md5DigestAsHex(base.getBytes());
     }
+
+    public static HttpServletRequest getRequest() {
+        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        return Objects.requireNonNull(attrs).getRequest();
+    }
+
+    public static HttpSession getSession() {
+        return getRequest().getSession();
+    }
+
+    public static User getLoginUser() {
+        HttpSession session = getSession();
+        return (User) Optional.ofNullable(session.getAttribute(Constants.USER_SESSION_KEY))
+                .orElseThrow(UserNotLoginException::new);
+    }
+
 
 }

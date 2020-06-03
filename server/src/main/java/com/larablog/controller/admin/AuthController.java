@@ -1,8 +1,10 @@
 package com.larablog.controller.admin;
 
+import com.larablog.exception.TipException;
 import com.larablog.model.User;
 import com.larablog.model.dto.RestResponse;
 import com.larablog.service.UserService;
+import com.larablog.util.LaraUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +51,26 @@ public class AuthController {
     }
 
     @PostMapping("reset/password")
-    public RestResponse resetPassword()
+    public RestResponse resetPassword(@RequestParam String oldPasword, @RequestParam String newPassword) {
+        User user = LaraUtils.getLoginUser();
+        if (StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(newPassword)) {
+            throw new TipException("Empty input data");
+        }
+
+        boolean result = userService.resetPassword(user.getUsername(), oldPasword, newPassword);
+        this.logout();
+        return RestResponse.ok(result);
+    }
+
+    @PostMapping("reset/user")
+    public RestResponse resetUser(@RequestParam String username, @RequestParam String email) {
+        User user = LaraUtils.getLoginUser();
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(email)) {
+            throw new TipException("Empty input data");
+        }
+        boolean result = userService.resetUser(user.getUsername(), username, email);
+        this.logout();
+        return RestResponse.ok(result);
+    }
 
 }
