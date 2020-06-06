@@ -1,3 +1,7 @@
 export interface RootState {
-    test: null | {type:string,msg:string}
+    test: null | { type: string, msg: string },
+    auth: {
+        loggedIn: Boolean,
+        user: object
+    }
 }

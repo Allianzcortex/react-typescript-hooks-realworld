@@ -13,7 +13,7 @@ export default function (state = initialState, action: any) {
                 msg: action.payload.msg
             }
         case CLEAR_NOTIFICATION:
-            return null
+            return {type:null,msg:null}
         // Should not forget default return state
             // or the whole reducer could not be initialized properly
         default:
