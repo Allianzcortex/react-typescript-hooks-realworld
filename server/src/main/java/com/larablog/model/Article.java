@@ -47,6 +47,12 @@ public class Article extends BaseEntity {
     @Column(name = "comment_count", columnDefinition = "INT DEFAULT 0 NOT NULL")
     private Integer commentCount;
 
+    @Column(name="tags",columnDefinition = "VARCHAR(255)" )
+    private String tags;
+
+    @Column(name="category",columnDefinition = "VARCHAR(255)")
+    private String category;
+
     @Override
     public void prePersist() {
         super.prePersist();

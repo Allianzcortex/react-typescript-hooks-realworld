@@ -12,5 +12,5 @@ public class MetaInfo {
     private String name;
 
     @JsonInclude
-    private List<ArticleInfo> postInfos;
+    private List<ArticleInfo> articleInfos;
 }
