@@ -82,7 +82,7 @@ CREATE TABLE middle
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE media
+CREATE TABLE middle
 (
     id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     created TIMESTAMP NOT NULL DEFAULT current_timestamp,
