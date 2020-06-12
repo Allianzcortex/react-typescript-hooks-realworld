@@ -4,8 +4,11 @@ import com.larablog.exception.TipException;
 import com.larablog.exception.UserNotLoginException;
 import com.larablog.model.User;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -30,6 +33,11 @@ public class LaraUtils {
 //
 //    }
 
+    // Markdown Resolver & Html render
+    private static final Parser PARSER = Parser.builder(MARKDOWN_OPTIONS).build();
+    private static final HtmlRenderer HTML_RENDER = HtmlRenderer.builder(MARKDOWN_OPTIONS).build();
+
+
     public static String getMd5(String str) {
         String base = str + Constants.MD5_SALT;
         return DigestUtils.md5DigestAsHex(base.getBytes());
@@ -50,5 +58,11 @@ public class LaraUtils {
                 .orElseThrow(UserNotLoginException::new);
     }
 
+    public static String convertMD2HTML(String mdContent) {
+        if (mdContent == null || StringUtils.isEmpty(mdContent))
+            return "";
+        Node document = PARSER.parse(mdContent);
+        return HTML_RENDER.render(document);
+    }
 
 }

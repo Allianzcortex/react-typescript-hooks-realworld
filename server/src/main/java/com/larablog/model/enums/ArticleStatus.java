@@ -12,5 +12,5 @@ public enum ArticleStatus {
     /**
      * Soft-Delete : The article will be marked as delte so it will not be displaed in client side
      */
-    DELTE
+    DELETE
 }

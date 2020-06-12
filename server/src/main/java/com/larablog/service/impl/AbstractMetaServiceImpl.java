@@ -134,7 +134,7 @@ public abstract class AbstractMetaServiceImpl<META extends Meta> implements Meta
     public List<MetaInfo> getAdminMetaInfos() {
         // only find undeleted(both published & draft)
         List<META> metas = metaRepository.findAll();
-        List<Article> articles = articleRepository.findAllByStatusNot(ArticleStatus.DELTE, Sort.by(Sort.Direction.DESC, "id"));
+        List<Article> articles = articleRepository.findAllByStatusNot(ArticleStatus.DELETE, Sort.by(Sort.Direction.DESC, "id"));
         return getMetaInfos(metas, articles);
     }
 

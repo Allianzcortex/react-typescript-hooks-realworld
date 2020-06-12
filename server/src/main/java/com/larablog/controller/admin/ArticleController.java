@@ -43,15 +43,15 @@ public class ArticleController {
     }
 
     @GetMapping("count")
-    public RestResponse<Integer> count() {
-        Integer count = articleService.count();
+    public RestResponse<Long> count() {
+        Long count = articleService.count();
         return RestResponse.ok(count);
     }
 
-    @PostMapping
+//    @PostMapping
     // TODO refactor the whole param with form
-    public RestResponse<Integer> save(@RequestParam(value="id",required = false) Integer id,
-                                      @RequestParam(value="title") String title,
-                                      )
+//    public RestResponse<Integer> save(@RequestParam(value="id",required = false) Integer id,
+//                                      @RequestParam(value="title") String title,
+//                                      )
 
 }

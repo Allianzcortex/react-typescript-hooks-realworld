@@ -14,7 +14,7 @@ public interface ArticleService {
     // get article by id, mainly in blog frontend
     Article getFrontArticle(Integer id);
 
-    Page<Article> pageAdminArticle(Integer page, Integer limint, ArticleQuery query);
+    Page<Article> pageAdminArticle(Integer page, Integer limit, ArticleQuery query);
 
     // get article by id, for backend
     Article getAdminArticle(Integer id);
@@ -23,5 +23,5 @@ public interface ArticleService {
 
     void delete(Integer id);
 
-    Integer count();
+    long count();
 }
