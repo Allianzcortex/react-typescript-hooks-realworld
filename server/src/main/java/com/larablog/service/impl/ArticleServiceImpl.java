@@ -1,26 +1,26 @@
 package com.larablog.service.impl;
 
+import com.larablog.model.Article;
+import com.larablog.model.query.ArticleQuery;
 import com.larablog.repository.ArticleRepository;
 import com.larablog.service.ArticleService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-//import com.larablog.model.Article;
-//import com.larablog.model.User;
-//import com.larablog.repository.ArticleRepository;
-//import com.larablog.service.ArticleService;
-//import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
+import java.util.List;
+
 //
-//import javax.transaction.Transactional;
-//import java.util.*;
-//
-//@Slf4j
+@Slf4j
 @Service
 //@RequiredArgsConstructor(onConstructor = @Autowired)
-public class ArticleServiceImpl  {
+public class ArticleServiceImpl implements ArticleService {
 
     public static final String ARTICLE_CACHE_NAME="articles";
 
@@ -29,6 +29,43 @@ public class ArticleServiceImpl  {
     @Autowired
     private ArticleRepository articleRepository;
 
+
+    @Override
+    @Cacheable(value = ARTICLE_CACHE_NAME, key = "'font_articles['+#page+':'+#limit+':'+#sort+']'")
+    public Page<Article> pageFrontArticle(Integer page, Integer limit, List<String> sort) {
+        Pageable pageable = PageRequest.of(page,limit,new Sort(Sort.Direction.DESC,sort));
+
+    }
+
+    @Override
+    public Article getFrontArticle(Integer id) {
+        return null;
+    }
+
+    @Override
+    public Page<Article> pageAdminArticle(Integer page, Integer limint, ArticleQuery query) {
+        return null;
+    }
+
+    @Override
+    public Article getAdminArticle(Integer id) {
+        return null;
+    }
+
+    @Override
+    public Integer save(Article article) {
+        return null;
+    }
+
+    @Override
+    public void delete(Integer id) {
+
+    }
+
+    @Override
+    public Integer count() {
+        return null;
+    }
 
 
 //
