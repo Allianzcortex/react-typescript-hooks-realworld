@@ -10,10 +10,29 @@ services:
       TZ: America/Halifax
 
     Lara-backend:
-    environment:
-      TZ: America/Halifax
+      container_name: Lara-backend
+      build:
+        context: ./
+        dockerfile: ./docker/server-docker/server-Dockerfile
+      working_dir: /app
+      environment:
+        TZ: America/Halifax
+      volumes:
+
+      expose:
+        - "8080"
+      command: mvn spring-boot:run -Dmaven.test.skip=true
+      depends_on:
+        - Lara-mysql
+      restart: always
 
     Lara-frontend:
-    environment:
-      TZ: America/Halifax
+      container_name: Lara-frontend
+      build:
+        context: ./
+        dockerfile: ./docker/client-docker/client-Dockerfile
+      environment:
+        TZ: America/Halifax
+      expose:
+        - "3000"
 
