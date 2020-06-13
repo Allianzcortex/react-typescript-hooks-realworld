@@ -5,3 +5,8 @@ export interface RootState {
         user: object
     }
 }
+
+export interface Category {
+    id: null | Number,
+    name: string
+}

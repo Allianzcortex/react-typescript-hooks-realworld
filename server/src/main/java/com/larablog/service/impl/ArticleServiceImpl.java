@@ -3,6 +3,7 @@ package com.larablog.service.impl;
 import com.larablog.exception.NotFoundException;
 import com.larablog.exception.TipException;
 import com.larablog.model.Article;
+import com.larablog.model.dto.Archive;
 import com.larablog.model.enums.ArticleStatus;
 import com.larablog.model.query.ArticleQuery;
 import com.larablog.repository.ArticleRepository;
@@ -27,6 +28,7 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -157,6 +159,20 @@ public class ArticleServiceImpl implements ArticleService {
     public long count() {
         return articleRepository.countByStatusNot(ArticleStatus.DELETE);
     }
+
+    @Cacheable(value = ARTICLE_CACHE_NAME, key = "'font_archives'")
+    @Override
+    public List<Archive> getArchives() {
+        List<Article> articles = articleRepository.findAllByStatus(ArticleStatus.PUBLISH, Sort.by(Sort.Direction.DESC, "id"));
+        List<Archive> archives = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        for (Article article : articles) {
+            calendar.setTime(article.getCreated());
+
+        }
+        return null;
+    }
+
 
 //        Date now = new Date();
 //

@@ -19,7 +19,7 @@ export const EditPost: FC<{}> = () => {
             {/*    // onChange={handleEditorChange}*/}
             {/*/>*/}
             <Form>
-            <TextArea rows={14} onChange={}>
+            <TextArea rows={14}>
                 {input_}
             </TextArea>
             </Form>

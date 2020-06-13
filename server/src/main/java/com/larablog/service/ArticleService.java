@@ -1,6 +1,7 @@
 package com.larablog.service;
 
 import com.larablog.model.Article;
+import com.larablog.model.dto.Archive;
 import com.larablog.model.query.ArticleQuery;
 import org.springframework.data.domain.Page;
 
@@ -24,4 +25,6 @@ public interface ArticleService {
     void delete(Integer id);
 
     long count();
+
+    List<Archive> getArchives();
 }

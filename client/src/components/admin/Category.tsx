@@ -2,17 +2,19 @@ import React, {FC, useState, Fragment, useEffect, useRef} from 'react';
 import {Button, Card, Input, Label} from "semantic-ui-react";
 import {setNotification} from "../../store/actions/test.action";
 import {useDispatch} from "react-redux";
+// @ts-ignore
+import {Category as CategoryInterface} from "../../types/interfaces";
 import {categoryService} from "../../service/category.service";
 
 export const Category: FC<{}> = () => {
 
     // const categoryList = ['12', '34', '56']
-    const [categoryList, setCategoryList] = useState([])
+    const [categoryList, setCategoryList] = useState<any[]>([]);
     const retrieveAllCategories = () => {
         categoryService.getAllCategories().then(
             res => {
                 console.log(res)
-                setCategoryList(res.data.data.map((item: any) => (item.name)))
+                setCategoryList(res.data.data)
             }
         ).catch(
             error => console.log(error)
@@ -20,10 +22,10 @@ export const Category: FC<{}> = () => {
     }
     useEffect(retrieveAllCategories, [])
     const dispatch = useDispatch()
-    const [currentCat, setCurrentCat] = useState("");
+    const [currentCat, setCurrentCat] = useState<CategoryInterface>();
     let categoryInput = useRef<any>();
 
-    const editCategory = (category: string) => {
+    const editCategory = (category: CategoryInterface) => {
         console.log(category);
         setCurrentCat(category);
         categoryInput?.current?.focus();
@@ -31,7 +33,18 @@ export const Category: FC<{}> = () => {
 
     const setNewCategory = (e: any) => {
         console.log(e.target.value)
-        setCurrentCat(e.target.value)
+        setCurrentCat({id: null, name: e.target.value})
+    }
+
+    const saveCategory = async () => {
+        console.log(currentCat?.name);
+        await categoryService.saveCategory(currentCat?.name!);
+        retrieveAllCategories();
+    }
+
+    const deleteCategory = async (category: CategoryInterface) => {
+        await categoryService.deleteCategory(category?.name!);
+        retrieveAllCategories();
     }
 
     return (
@@ -40,16 +53,16 @@ export const Category: FC<{}> = () => {
                 <Card.Content header='Edit Category'/>
                 <Card.Content>
                     {categoryList.map(category => (
-                        <div style={{
+                        <div key={1} style={{
                             display: "flex", justifyContent: "space-between",
                             marginBottom: "5px"
                         }}>
                             <Label color='purple'>
-                                {category}
+                                {category.name}
                             </Label>
                             <div>
                                 <Button onClick={() => editCategory(category)} color="yellow">Edit</Button>
-                                <Button color="red">Delete</Button>
+                                <Button onClick={() => deleteCategory(category)} color="red">Delete</Button>
                             </div>
                         </div>
                     ))}
@@ -57,9 +70,9 @@ export const Category: FC<{}> = () => {
                 </Card.Content>
                 <Card.Content extra>
                     <div style={{display: "flex", justifyContent: "space-between"}}>
-                        <Input value={currentCat} ref={categoryInput} onChange={setNewCategory}/>
+                        <Input value={currentCat?.name} ref={categoryInput} onChange={setNewCategory}/>
 
-                        <Button color="green">Save</Button>
+                        <Button color="green" onClick={saveCategory}>Save</Button>
                     </div>
 
                 </Card.Content>
