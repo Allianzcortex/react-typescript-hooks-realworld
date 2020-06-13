@@ -1,6 +1,7 @@
 package com.larablog.service.impl;
 
 import com.larablog.exception.NotFoundException;
+import com.larablog.exception.TipException;
 import com.larablog.model.Article;
 import com.larablog.model.enums.ArticleStatus;
 import com.larablog.model.query.ArticleQuery;
@@ -11,6 +12,7 @@ import com.larablog.service.TagService;
 import com.larablog.util.LaraUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -27,7 +29,7 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-//
+
 @Slf4j
 @Service
 //@RequiredArgsConstructor(onConstructor = @Autowired)
@@ -108,11 +110,46 @@ public class ArticleServiceImpl implements ArticleService {
     @CacheEvict(value = ARTICLE_CACHE_NAME, allEntries = true, beforeInvocation = true)
     @Override
     public Integer save(Article article) {
-        return null;
+        if (article == null) {
+            throw new TipException("The article should not be empty");
+        }
+        // TODO we may want to apply same validation logic to article content
+        // but it will be simpler if we put the logic into controller
+        // and the validation for length should also be still in service
+        if (StringUtils.isEmpty(article.getTitle())) {
+            throw new TipException("The article title should not be empty");
+        }
+
+        // update the article
+        if (article.getId() != null) {
+            Article oldArticle = articleRepository.findById(article.getId())
+                    .orElseThrow(() -> new NotFoundException(Article.class));
+            BeanUtils.copyProperties(article, oldArticle);
+            articleRepository.saveAndFlush(oldArticle);
+        } else {
+            // create the article
+            articleRepository.saveAndFlush(article);
+            log.info("[Article created],id: " + article.getId());
+        }
+
+        Integer id = article.getId();
+        categoryService.saveOrRemoveMetas(article.getCategory(), id);
+        tagService.saveOrRemoveMetas(article.getTags(), id);
+        return id;
     }
 
+    @Transactional(rollbackFor = Throwable.class)
+    @CacheEvict(value = ARTICLE_CACHE_NAME, allEntries = true, beforeInvocation = true)
     @Override
     public void delete(Integer id) {
+        Article article = articleRepository.findById(id).orElseThrow(
+                () -> new NotFoundException(Article.class)
+        );
+        article.setStatus(ArticleStatus.DELETE);
+        articleRepository.save(article);
+
+        categoryService.saveOrRemoveMetas("", id);
+        tagService.saveOrRemoveMetas("", id);
 
     }
 

@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.MutableDataSet;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -63,6 +64,10 @@ public class LaraUtils {
             return "";
         Node document = PARSER.parse(mdContent);
         return HTML_RENDER.render(document);
+    }
+
+    public static void copyPropertiesIgnoreNull(Object source,Object target) {
+        BeanUtils.copyProperties(source,target);
     }
 
 }
