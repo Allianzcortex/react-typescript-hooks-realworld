@@ -2,10 +2,23 @@ version: '2.1'
 
 services:
     Lara-nginx:
-    environment:
-      TZ: America/Halifax
+      container_name: Lara-nginx
+      build:
+        context: ./
+        dockerfile: ./docker/nginx-docker/nginx-Dockerfile
+      environment:
+        TZ: America/Halifax
+      ports:
+        - "80:80"
+      volumes:
+        - ~/.lara/logs/nginx:/var/log/nginx
+      depends_on:
+        - Lara-backend
+        - Lara-frontend
+
 
     Lara-mysql:
+      container_name: Lara-mysql
     environment:
       TZ: America/Halifax
 

@@ -82,17 +82,6 @@ CREATE TABLE middle
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-CREATE TABLE middle
-(
-    id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    created TIMESTAMP NOT NULL DEFAULT current_timestamp,
-    modified TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp,
-    name VARCHAR(255) NOT NULL,
-    url VARCHAR(1023) NOT NULL,
-    thumb_url VARCHAR(1023),
-    suffix VARCHAR(255) NOT NULL
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
 
 CREATE TABLE log
 (
