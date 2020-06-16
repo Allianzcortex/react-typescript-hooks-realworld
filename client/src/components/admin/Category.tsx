@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 // @ts-ignore
 import {Category as CategoryInterface} from "../../types/interfaces";
 import {categoryService} from "../../service/category.service";
+import {toast} from 'react-toastify';
 
 export const Category: FC<{}> = () => {
 
@@ -37,6 +38,7 @@ export const Category: FC<{}> = () => {
     }
 
     const saveCategory = async () => {
+        toast.success('Category updated successfully')
         console.log(currentCat?.name);
         await categoryService.saveCategory(currentCat?.name!);
         retrieveAllCategories();

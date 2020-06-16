@@ -10,7 +10,8 @@ import {render} from "react-dom";
 import {LoginModal} from "./components/auth/LoginModal";
 import {Dashboard} from "./components/admin/Dashboard";
 import {Notification} from "./components/utils/Notification";
-
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     let linkUrl = window.location.pathname.split('/')[-1];
@@ -44,6 +45,14 @@ function App() {
                     </Menu>
                 </Segment>
                 <Notification/>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={1500}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                />
                 <Switch>
                     <Route path="/Admin">
                         <Dashboard />
