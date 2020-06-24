@@ -19,6 +19,9 @@ services:
 
     Lara-mysql:
       container_name: Lara-mysql
+      build:
+        context: ./
+        dockerfile: 
     environment:
       TZ: America/Halifax
 
