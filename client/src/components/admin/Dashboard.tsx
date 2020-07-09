@@ -11,9 +11,9 @@ import {EditPost} from "./page/EditPost";
 export const Dashboard: FC<{}> = () => {
 
     const isAuthenticated = useSelector((state: RootState) => state.auth.loggedIn)
-    if (!isAuthenticated) {
-        return (<LoginModal/>)
-    }
+    // if (!isAuthenticated) {
+    //     return (<LoginModal/>)
+    // }
 
     return (
         <Fragment>

@@ -5,11 +5,9 @@
 
 Frontend is built with `React + Hooks + Redux + Redux-thunk + React-router + styled-component + material UI`
 
-![HomePage](assets/HomePage.png)
+A simple demo 
 
-![PostPage](assets/PostPage.png)
-
-![LoginPage](assets/LoginPage.png)
+![HomePage](client/public/1KcNDtM0CK.gif)
 
 If you just want to a MVP(Minimal Valuable Product) to learn Spring , I will recommend you to my [class-project](https://github.com/Allianzcortex/code_collection/tree/master/Spring-Boot-Based-Database-TeamProject) which is simplier and implemented all CRUD functions(and pure HTML && CSS as frontend).
 

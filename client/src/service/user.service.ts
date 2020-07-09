@@ -4,7 +4,7 @@ export const userService = {login,logout,register}
 
 function login(email: string, password: string) {
     console.log("request is sent");
-    return axios.post('api/login', JSON.stringify({email, password})
+    return axios.post('api/admin/login', JSON.stringify({email, password})
     )
 }
 

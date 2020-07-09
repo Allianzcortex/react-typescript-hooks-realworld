@@ -45,6 +45,7 @@ export const Category: FC<{}> = () => {
     }
 
     const deleteCategory = async (category: CategoryInterface) => {
+        toast.success('Delete Category successfully');
         await categoryService.deleteCategory(category?.name!);
         retrieveAllCategories();
     }
