@@ -1,8 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+
+  const useConstructor = (callBack: () => void) => {
+    const [hasBeenCalled, setHasBeenCalled] = useState(false);
+    if (hasBeenCalled) return;
+    callBack();
+    setHasBeenCalled(true);
+  };
+
+  useConstructor(()=>{
+    console.log("aa");
+  })
+
   return (
     <div className="App">
       <header className="App-header">
