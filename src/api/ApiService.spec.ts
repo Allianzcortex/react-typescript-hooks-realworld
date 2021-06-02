@@ -5,7 +5,7 @@ describe("ApiService", () => {
   let apiService: ApiService;
 
   beforeEach(() => {
-    apiService = new ApiService(window.fetch);
+    apiService = new ApiService();
   });
 
   describe("get", () => {

@@ -1,24 +1,26 @@
 import { Header, Type, Method, Status } from "./http";
+import axios from "axios";
 
-// Fetch type define : https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/node-fetch/index.d.ts#L214
-type Fetch = (url: RequestInfo, init?: RequestInit) => Promise<Response>;
+// axios.defaults.baseURL = "https://conduit.productionready.io/api/";
+
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    // TODO add handler
+  }
+);
 
 export class ApiService {
-  private fetch: Fetch;
-
-  constructor(fetch: Fetch) {
-    this.fetch = fetch;
-  }
-
   public async get(path: string, body?: object | FormData): Promise<Response> {}
 
   public async send(
     method: Method,
-    path: string,
-    body?: object | FormData
+    url: string,
+    body?: object | FormData,
   ): Promise<any> {
     const headers = new Headers();
-
     let requestBody;
     if (body) {
       if (body instanceof FormData) {
@@ -29,22 +31,23 @@ export class ApiService {
       }
     }
 
-    const init:RequestInit = {
-      method:method,
-      headers:headers,
-      body:requestBody,
-    }
+    console.log(method)
+    console.log(url)
 
-    let res:Promise<Response>
-
-    try {
-      await this.fetch(path,init).then(
-        response=>{return response.json()}
-      )
-      
-    } catch(exception) {
-      // TODO handle exception later
-    }
+    const options = {
+      method: 'get',
+      url: 'http://webcode.me'
+    };
+    let res = await axios(options)
+    console.log(res)
+    console.log(res.data)
+    // await axios(options)
+    //   .then((response) => {
+    //     console.log(response)
+    //     console.log("---receive successfully")
+    //     return response;
+    //   })
+    //   .catch((error) => {});
 
     // TODO continue, handle error response and redirect
   }
