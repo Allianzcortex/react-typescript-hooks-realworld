@@ -10,17 +10,42 @@ export class ApiService {
     this.fetch = fetch;
   }
 
-  public async get(path: string, params?: object): Promise<Response> {}
+  public async get(path: string, body?: object | FormData): Promise<Response> {}
 
-  public async send(method:Method,path: string, params?:object):Promise<Response> {
-     const headers = new Headers();
+  public async send(
+    method: Method,
+    path: string,
+    body?: object | FormData
+  ): Promise<any> {
+    const headers = new Headers();
 
-     let requestBody;
-     if(params) {
-         headers.set(Header.ContentType,Type.JSON);
-         requestBody = JSON.stringify(params);
-     }
-     
-     // TODO continue, handle error response and redirect
-  };
+    let requestBody;
+    if (body) {
+      if (body instanceof FormData) {
+        requestBody = body;
+      } else {
+        headers.set(Header.ContentType, Type.JSON);
+        requestBody = JSON.stringify(body);
+      }
+    }
+
+    const init:RequestInit = {
+      method:method,
+      headers:headers,
+      body:requestBody,
+    }
+
+    let res:Promise<Response>
+
+    try {
+      await this.fetch(path,init).then(
+        response=>{return response.json()}
+      )
+      
+    } catch(exception) {
+      // TODO handle exception later
+    }
+
+    // TODO continue, handle error response and redirect
+  }
 }
