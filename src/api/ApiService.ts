@@ -13,7 +13,7 @@ axios.interceptors.response.use(
 );
 
 export class ApiService {
-  public async get(path: string, body?: object | FormData): Promise<Response> {}
+  // public async get(path: string, body?: object | FormData): Promise<Response> {}
 
   public async send(
     method: Method,
