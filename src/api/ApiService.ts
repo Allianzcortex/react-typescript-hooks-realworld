@@ -31,24 +31,17 @@ export class ApiService {
       }
     }
 
-    console.log(method)
-    console.log(url)
-
     const options = {
-      method: 'get',
-      url: 'http://webcode.me'
+      method: method,
+      // data: requestBody,
+      url: url,
     };
-    let res = await axios(options)
-    console.log(res)
-    console.log(res.data)
-    // await axios(options)
-    //   .then((response) => {
-    //     console.log(response)
-    //     console.log("---receive successfully")
-    //     return response;
-    //   })
-    //   .catch((error) => {});
-
+    // let res = await axios(options)
+    let res
+    await axios(options).then((response)=>{
+      res = response
+    }).catch((error)=>{})
+    return res
     // TODO continue, handle error response and redirect
   }
 }
