@@ -12,13 +12,21 @@ axios.interceptors.response.use(
   }
 );
 
-export class ApiService {
-  // public async get(path: string, body?: object | FormData): Promise<Response> {}
+export class ApiService<T> {
+  public async get(url:string,body?: object | FormData): Promise<any> {
+    return this.send(Method.Get, url,body);
+  }
+  public async post(url:string,body?: object | FormData): Promise<any> {
+    return this.send(Method.Post, url,body);
+  }
+  public async delete(url:string,body?: object | FormData): Promise<any> {
+    return this.send(Method.Delete, url,body);
+  }
 
   public async send(
     method: Method,
     url: string,
-    body?: object | FormData,
+    body?: object | FormData
   ): Promise<any> {
     const headers = new Headers();
     let requestBody;
@@ -37,11 +45,13 @@ export class ApiService {
       url: url,
     };
     // let res = await axios(options)
-    let res
-    await axios(options).then((response)=>{
-      res = response
-    }).catch((error)=>{})
-    return res
+    let res;
+    await axios(options)
+      .then((response) => {
+        res = response;
+      })
+      .catch((error) => {});
+    return res;
     // TODO continue, handle error response and redirect
   }
 }

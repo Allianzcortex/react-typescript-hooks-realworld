@@ -2,7 +2,7 @@ import { ApiService } from "./ApiService";
 import { Method, Status } from "./http";
 
 describe("ApiService", () => {
-  let apiService: ApiService;
+  let apiService: ApiService<any>;
 
   beforeEach(() => {
     apiService = new ApiService();
