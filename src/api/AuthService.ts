@@ -3,6 +3,7 @@ import { setLocalStorage } from "../utils";
 import { ApiService } from "./ApiService";
 
 export class AuthService {
+ 
   api: ApiService<User>;
 
   constructor() {
