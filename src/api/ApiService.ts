@@ -34,20 +34,21 @@ export class ApiService<T> {
       if (body instanceof FormData) {
         requestBody = body;
       } else {
-        headers.set(Header.ContentType, Type.JSON);
-        requestBody = JSON.stringify(body);
+        // axios will stringfy json automaticaly so no need for it
+        // headers.set(Header.ContentType, Type.JSON);
+        // requestBody = JSON.stringify(body);
       }
     }
 
     const options = {
       method: method,
-      data: requestBody,
+      data: body,
       url: url,
       headers:headers,
     };
 
     let res;
-
+    console.log(options)
     await axios(options)
       .then((response) => {
         res = response;

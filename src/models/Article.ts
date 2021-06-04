@@ -1,13 +1,15 @@
 // build basic model
 
-interface Author {
+import { updateCommaList } from "typescript";
+
+interface IAuthor {
   username: string;
   bio: string;
   image: string;
   following: boolean;
 }
 
-interface Article {
+export interface Article {
   slug: string;
   title: string;
   description: string;
@@ -17,5 +19,5 @@ interface Article {
   updatedAt: string;
   favorited: boolean;
   favoritesCount: number;
-  author: Author;
+  author: IAuthor;
 }
