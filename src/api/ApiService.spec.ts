@@ -9,11 +9,10 @@ describe("ApiService", () => {
   });
 
   describe("get", () => {
-    it("can resolve get request suuccessfully",  async () => {
-        let res =  await apiService
-        .send(Method.Get, "https://conduit.productionready.io/api/tags")
-      expect(res.status).toBe(Status.Ok)
-      
+    it("can resolve get request suuccessfully", async () => {
+      let res = await apiService.send(Method.Get, "tags");
+      expect(res.status).toBe(Status.Ok);
+      expect(2).toBe(2);
     });
   });
 });

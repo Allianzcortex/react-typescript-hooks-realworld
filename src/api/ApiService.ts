@@ -1,16 +1,16 @@
 import { Header, Type, Method, Status } from "./http";
 import axios from "axios";
 
-// axios.defaults.baseURL = "https://conduit.productionready.io/api/";
+axios.defaults.baseURL = "https://conduit.productionready.io/api/";
 
-axios.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    // TODO add handler
-  }
-);
+// axios.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     // TODO add handler
+//   }
+// );
 
 export class ApiService<T> {
   public async get(url:string,body?: object | FormData): Promise<any> {
@@ -41,16 +41,20 @@ export class ApiService<T> {
 
     const options = {
       method: method,
-      // data: requestBody,
+      data: requestBody,
       url: url,
+      headers:headers,
     };
-    // let res = await axios(options)
+
     let res;
+
     await axios(options)
       .then((response) => {
         res = response;
       })
-      .catch((error) => {});
+      .catch((error) => {
+        res = error.response
+      });
     return res;
     // TODO continue, handle error response and redirect
   }

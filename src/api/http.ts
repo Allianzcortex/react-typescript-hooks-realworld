@@ -35,4 +35,5 @@ export enum Type {
      Unauthorized = 401,
      NotFound = 404,
      InternalServerError = 500,
+     UnprocessEntity = 422,
  }
