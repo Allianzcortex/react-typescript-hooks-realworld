@@ -47,7 +47,7 @@ export default function Login() {
       //     draft.push(`There should be no empty value.`);
       //   })
       // );
-      setErrors(oldError=>[...oldError,`There should be no empty value.`])
+      // setErrors(oldError=>[...oldError,`There should be no empty value.`])
     }
     // 2. custom errors check : return by backend
     const res =await authService.login("aa","aa")

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AuthService } from "./api/AuthService";
 import { ServicesContext } from "./models/Services";
 
@@ -9,4 +9,13 @@ export function useAuthService(): AuthService {
   }
 
   return services.authService;
+}
+
+export function useConstructor(callBack=()=>{}) {
+  const hasBeenCalled = useRef(false)
+  if(hasBeenCalled.current) {
+    return
+  }
+  callBack();
+  hasBeenCalled.current = true
 }

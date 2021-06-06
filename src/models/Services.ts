@@ -6,3 +6,9 @@ export interface IServices {
 }
 
 export const ServicesContext = createContext<IServices>({})
+
+export function initServices() {
+  return {
+    authService: new AuthService()
+  }
+}
