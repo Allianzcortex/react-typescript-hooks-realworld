@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Provider as ReducProvider} from "react-redux";
 import Login from "./components/Auth/Login";
 import { useConstructor } from "./hooks";
 import { initServices,IServices, ServicesContext } from "./models/Services";
+import { store } from "./redux/store/store";
 
 function App() {
   
@@ -12,6 +14,7 @@ function App() {
   })
 
   return (
+    <ReducProvider store={store}>
     <ServicesContext.Provider value={services!}>
     <div className="App">
       <header className="App-header">
@@ -19,6 +22,7 @@ function App() {
       </header>
     </div>
     </ServicesContext.Provider>
+    </Provider>
   );
 }
 
