@@ -1,4 +1,4 @@
-import { Article } from "../models/Article";
+import { Article } from "../models/types";
 import { ApiService } from "./ApiService";
 
 export class ArticleService {

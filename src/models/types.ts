@@ -1,5 +1,7 @@
 export type IError = string[]
 
+export type messageType = 'success' | 'error' | 'warning' | 'info' | null
+
 export interface IUser {
     email:string;
     token:string;
@@ -8,7 +10,7 @@ export interface IUser {
     image:string;
 }
 
-export interface IUser {
+export interface Iuser {
     username: string;
     bio: string;
     image: string;
@@ -25,6 +27,6 @@ export interface IUser {
     updatedAt: string;
     favorited: boolean;
     favoritesCount: number;
-    author: IUser;
+    author: Iuser;
   }
   

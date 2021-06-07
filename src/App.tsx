@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Provider as ReducProvider} from "react-redux";
+import React, { Fragment, useState } from "react";
+import { Provider as ReduxProvider} from "react-redux";
 import Login from "./components/Auth/Login";
+import {Notification} from './components/Home/Notification'
 import { useConstructor } from "./hooks";
 import { initServices,IServices, ServicesContext } from "./models/Services";
 import { store } from "./redux/store/store";
@@ -14,15 +15,18 @@ function App() {
   })
 
   return (
-    <ReducProvider store={store}>
+    <ReduxProvider store={store} >
     <ServicesContext.Provider value={services!}>
+      <Fragment>
+        <Notification type_='error' content='fuck' />
     <div className="App">
       <header className="App-header">
         <Login/>
       </header>
     </div>
+    </Fragment>
     </ServicesContext.Provider>
-    </Provider>
+    </ReduxProvider>
   );
 }
 

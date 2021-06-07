@@ -1,4 +1,4 @@
-import { User } from "../models/User";
+import { User } from "../models/types";
 import { ApiService } from "./ApiService";
 import { AuthService } from "./AuthService";
 import { Method, Status } from "./http";

@@ -1,13 +1,13 @@
-import { User } from "../models/User";
+import { IUser } from "../models/types";
 import { setLocalStorage } from "../utils";
 import { ApiService } from "./ApiService";
 
 export class AuthService {
  
-  api: ApiService<User>;
+  api: ApiService<IUser>;
 
   constructor() {
-    this.api = new ApiService<User>();
+    this.api = new ApiService<IUser>();
   }
 
   //   type

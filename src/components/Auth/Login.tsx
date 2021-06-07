@@ -11,7 +11,7 @@ import React, { Fragment, useState } from "react";
 import CreateIcon from "@material-ui/icons/Create";
 import SettingsIcon from "@material-ui/icons/Settings";
 import "./Login.css";
-import { IError } from "../../models/Errors";
+import { IError } from "../../models/types";
 import produce from "immer";
 import { AuthService } from "../../api/AuthService";
 import { useAuthService } from "../../hooks";
@@ -50,8 +50,11 @@ export default function Login() {
       // setErrors(oldError=>[...oldError,`There should be no empty value.`])
     }
     // 2. custom errors check : return by backend
-    const res =await authService.login("aa","aa")
-    console.log(res)
+    try{
+      const res = await authService.login("aa","aa")
+    } catch (error) {
+      console.log(error.data)
+    }
   };
 
   return (

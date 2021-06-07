@@ -48,15 +48,14 @@ export class ApiService<T> {
     };
 
     let res;
-    console.log(options)
     await axios(options)
       .then((response) => {
         res = response;
       })
       .catch((error) => {
-        res = error.response
+        // TODO continue, handle error response and redirect
+        res = Promise.reject(error.response);
       });
     return res;
-    // TODO continue, handle error response and redirect
   }
 }
