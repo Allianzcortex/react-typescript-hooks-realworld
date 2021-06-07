@@ -7,7 +7,7 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import React, { Fragment, useState } from "react";
+import React, { Dispatch, Fragment, useState } from "react";
 import CreateIcon from "@material-ui/icons/Create";
 import SettingsIcon from "@material-ui/icons/Settings";
 import "./Login.css";
@@ -15,6 +15,8 @@ import { IError } from "../../models/types";
 import produce from "immer";
 import { AuthService } from "../../api/AuthService";
 import { useAuthService } from "../../hooks";
+import { useDispatch } from "react-redux";
+import { ErrorAction } from "../../redux/reducers/ErrorReducer";
 
 export default function Login() {
   // handle email/password/loading/conditions
@@ -24,6 +26,7 @@ export default function Login() {
   const [errors, setErrors] = useState<IError>([]);
 
   const authService = useAuthService()
+  const errorDiapatch = useDispatch<Dispatch<ErrorAction>>()
 
   // use redux
   // if we find user existing, then redirect to home page
@@ -53,7 +56,14 @@ export default function Login() {
     try{
       const res = await authService.login("aa","aa")
     } catch (error) {
+      console.log("error her is----")
+      errorDiapatch({
+        type:"SET_ERROR",
+        messageType:"error",
+        messageContent:"error",
+      })
       console.log(error.data)
+
     }
   };
 

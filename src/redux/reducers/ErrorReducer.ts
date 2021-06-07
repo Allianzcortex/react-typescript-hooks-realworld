@@ -17,7 +17,7 @@ export interface ErrorState {
 }
 
 const initialState: ErrorState = {
-  messageType: null,
+  messageType: 'error',
   messageContent: "",
 };
 
