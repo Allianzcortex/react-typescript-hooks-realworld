@@ -1,10 +1,8 @@
-import { Snackbar } from "@material-ui/core";
-import Alert, { Color } from "@material-ui/lab/Alert";
 import React, { Dispatch, Fragment, FunctionComponent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { messageType } from "../../models/types";
 import { ErrorAction } from "../../redux/reducers/ErrorReducer";
-import { AppState } from "../../redux/store/store";
+import { AppState } from "../../redux/store";
 
 interface IProps {
   type_: messageType;
@@ -36,7 +34,7 @@ export const Notification: FunctionComponent<IProps> = () => {
 
   return (
     <Fragment>
-      <Snackbar
+      {/* <Snackbar
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={true}
@@ -45,7 +43,7 @@ export const Notification: FunctionComponent<IProps> = () => {
         <Alert severity={messageType as Color} variant="filled">
           {messageContent}
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
     </Fragment>
   );
 };

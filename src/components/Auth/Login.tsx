@@ -1,15 +1,5 @@
-import {
-  AppBar,
-  Button,
-  Icon,
-  IconButton,
-  TextField,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
 import React, { Dispatch, Fragment, useState } from "react";
-import CreateIcon from "@material-ui/icons/Create";
-import SettingsIcon from "@material-ui/icons/Settings";
+import { Menu, Segment } from "semantic-ui-react";
 import "./Login.css";
 import { IError } from "../../models/types";
 import produce from "immer";
@@ -25,13 +15,13 @@ export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<IError>([]);
 
-  const authService = useAuthService()
-  const errorDiapatch = useDispatch<Dispatch<ErrorAction>>()
+  const authService = useAuthService();
+  const errorDiapatch = useDispatch<Dispatch<ErrorAction>>();
 
   // use redux
   // if we find user existing, then redirect to home page
 
-  const handleLogin = async() =>  {
+  const handleLogin = async () => {
     // clear all errors
     // 1. empty check
 
@@ -53,69 +43,21 @@ export default function Login() {
       // setErrors(oldError=>[...oldError,`There should be no empty value.`])
     }
     // 2. custom errors check : return by backend
-    try{
-      const res = await authService.login("aa","aa")
+    try {
+      const res = await authService.login("aa", "aa");
     } catch (error) {
-      console.log("error her is----")
       errorDiapatch({
-        type:"SET_ERROR",
-        messageType:"error",
-        messageContent:"error",
-      })
-      console.log(error.data)
-
+        type: "SET_ERROR",
+        messageType: "error",
+        messageContent: "error",
+      });
+      console.log(error.data);
     }
   };
 
   return (
     <Fragment>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className="title">
-            Conduit
-          </Typography>
-          <Button color="inherit">Home</Button>
-          <Button color="inherit">
-            <CreateIcon />
-            New Article
-          </Button>
-          <Button color="inherit">
-            <SettingsIcon />
-            Settings
-          </Button>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-
-      <div className="border">
-        <form className="login-form">
-          {errors
-            ? errors.map((item, index) => <div key={index}>{item}</div>)
-            : ""}
-
-          <TextField
-            required
-            error={errors.length !== 0 && email === ""}
-            id="email-required"
-            label="Email"
-          />
-          <TextField
-            required
-            error={errors.length !== 0 && password === ""}
-            id="password-required"
-            label="Password"
-          />
-          <Button
-            className="login-button"
-            variant="contained"
-            size="small"
-            color="primary"
-            onClick={handleLogin}
-          >
-            Login
-          </Button>
-        </form>
-      </div>
+      <div>login</div>
     </Fragment>
   );
 }
