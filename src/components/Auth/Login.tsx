@@ -1,5 +1,5 @@
-import React, { Dispatch, Fragment, useState } from "react";
-import { Menu, Segment } from "semantic-ui-react";
+import React, { ChangeEvent, Dispatch, Fragment, SyntheticEvent, useState } from "react";
+import { Button, Form, Menu, Segment } from "semantic-ui-react";
 import "./Login.css";
 import { IError } from "../../models/types";
 import produce from "immer";
@@ -18,46 +18,51 @@ export default function Login() {
   const authService = useAuthService();
   const errorDiapatch = useDispatch<Dispatch<ErrorAction>>();
 
-  // use redux
-  // if we find user existing, then redirect to home page
-
-  const handleLogin = async () => {
-    // clear all errors
-    // 1. empty check
-
-    setErrors([]);
-    // setErrors(
-    //   produce(errors, (draft) => {
-    //     draft.splice(0, draft.length);
-    //   })
-    // );
-
-    // const values = {"email":email,"password":password};
-    // Object.entries(values).forEach(([item,value]) => {
-    if (email === "" || password === "") {
-      // setErrors(
-      //   produce(errors, (draft) => {
-      //     draft.push(`There should be no empty value.`);
-      //   })
-      // );
-      // setErrors(oldError=>[...oldError,`There should be no empty value.`])
+  const handleUpdateField=(event:ChangeEvent<HTMLInputElement>)=>{
+    const {name,value} = event.target
+    switch(name) {
+      case 'Email':
+        setEmail(value);
+        break;
+      case 'Passowrd':
+        setPassword(password)
+        break;
     }
-    // 2. custom errors check : return by backend
+  }
+  
+  const handleSubmit = async (event:any) => {
+    event.preventDefault()
+
     try {
-      const res = await authService.login("aa", "aa");
+      const res = await authService.login(email,password);
     } catch (error) {
       errorDiapatch({
         type: "SET_ERROR",
         messageType: "error",
-        messageContent: "error",
+        messageContent: error.data.errors,
       });
-      console.log(error.data);
+      
     }
   };
 
   return (
     <Fragment>
-      <div>login</div>
+      <div className="login-container">
+      <Form>
+    <Form.Field>
+      <label>Email</label>
+      <input name="Email" placeholder='Email' onChange={handleUpdateField} required />
+    </Form.Field>
+    <Form.Field>
+      <label>Password</label>
+      <input name="Password" placeholder='Password' onChange={handleUpdateField} required />
+    </Form.Field>
+    {/* <Form.Field>
+      <Checkbox label='I agree to the Terms and Conditions' />
+    </Form.Field> */}
+    <Button attached='right' color='green' onClick={handleSubmit} >Submit</Button>
+  </Form>
+  </div>
     </Fragment>
   );
 }

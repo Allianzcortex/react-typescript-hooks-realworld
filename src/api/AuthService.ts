@@ -38,9 +38,9 @@ export class AuthService {
       },
     };
     return this.api.post("users/login", data)
-    // .then((user) => {
-    //   handleUserResponse(user.data);
-    // });
+    .then((user) => {
+      handleUserResponse(user.data);
+    });
   }
 
   public getCurrrent() {

@@ -9,6 +9,8 @@ import { store } from "./redux/store";
 import "semantic-ui-css/semantic.min.css";
 import { Header } from "./components/Home/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import SnackbarProvider from "react-simple-snackbar";
+// import SnackbarProvider from
 
 function App() {
   let services: IServices;
@@ -20,6 +22,7 @@ function App() {
   return (
     <Router>
       <ReduxProvider store={store}>
+      <SnackbarProvider>
         <ServicesContext.Provider value={services!}>
           <Fragment>
             <Notification type_="error" content="fuck" />
@@ -35,6 +38,7 @@ function App() {
             </div>
           </Fragment>
         </ServicesContext.Provider>
+        </SnackbarProvider>
       </ReduxProvider>
     </Router>
   );
