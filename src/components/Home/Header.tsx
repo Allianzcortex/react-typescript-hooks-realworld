@@ -80,6 +80,7 @@ export const Header = () => {
                 </Menu.Item>
 
                 <Menu.Item
+                disabled
                   name="User"
                   className="item-icon"
                   active={activeItem === "User"}

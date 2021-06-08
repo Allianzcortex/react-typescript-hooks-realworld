@@ -10,7 +10,7 @@ export interface IUser {
     image:string;
 }
 
-export interface Iuser {
+export interface IProfile {
     username: string;
     bio: string;
     image: string;
@@ -23,10 +23,10 @@ export interface Iuser {
     description: string;
     body: string;
     tagList: string[];
-    createdAt: string; // TODO or should we use typescript timestamp ?
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     favorited: boolean;
     favoritesCount: number;
-    author: Iuser;
+    author: IProfile;
   }
   
