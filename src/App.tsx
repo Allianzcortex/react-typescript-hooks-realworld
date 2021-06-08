@@ -10,6 +10,7 @@ import "semantic-ui-css/semantic.min.css";
 import { Header } from "./components/Home/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SnackbarProvider from "react-simple-snackbar";
+import { Footer } from "./components/Home/Footer";
 // import SnackbarProvider from
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
                   </Route>
                 </Switch>
               </header>
+              <Footer/>
             </div>
           </Fragment>
         </ServicesContext.Provider>
