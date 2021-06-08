@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { messageType } from "../../models/types";
-import { ErrorAction } from "../../redux/reducers/ErrorReducer";
+import { NotificationAction } from "../../redux/reducers/NotifyReducer";
 import { AppState } from "../../redux/store";
 import { useSnackbar } from "react-simple-snackbar";
 
@@ -20,10 +20,10 @@ export const Notification: FunctionComponent<IProps> = () => {
   const { messageType, messageContent } = useSelector(
     (state: AppState) => state.error
   );
-  const errorDiapatch = useDispatch<Dispatch<ErrorAction>>();
+  const errorDiapatch = useDispatch<Dispatch<NotificationAction>>();
   const [openSnackbar, closeSnackbar] = useSnackbar();
 
-  const handleContent = (content: any) => {
+  const handleContent = (content: object | string) => {
     let res = "";
     if (typeof content === "object") {
       Object.entries(content).map(([key, value]) => {
@@ -34,11 +34,11 @@ export const Notification: FunctionComponent<IProps> = () => {
     return res;
   };
 
-  const handleClose = () => {
-    errorDiapatch({
-      type: "CLEAR_ERROR",
-    });
-  };
+  // const handleClose = () => {
+  //   errorDiapatch({
+  //     type: "CLEAR_ERROR",
+  //   });
+  // };
   useEffect(() => {
     console.log("message is---");
     console.log(messageContent);

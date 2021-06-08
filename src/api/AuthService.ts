@@ -11,11 +11,12 @@ export class AuthService {
   }
 
   //   type
+  // 
 
-//   private handleUserResponse({ user: { token, ...user } }) {
-//     setLocalStorage("token", <string>token);
-    
-//   }
+  private handleUserResponse(user:IUser) {
+    setLocalStorage("token", user.token);
+
+  }
 
   // TODO define return type
   public register(username: string, email: string, password: string) {
@@ -38,8 +39,9 @@ export class AuthService {
       },
     };
     return this.api.post("users/login", data)
-    .then((user) => {
-      handleUserResponse(user.data);
+    .then((res) => {
+      this.handleUserResponse(res.data.user);
+      return res.data.user;
     });
   }
 

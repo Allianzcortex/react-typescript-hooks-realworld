@@ -32,6 +32,7 @@ export const authReducer = produce((draft: AuthState, action: AuthAction) => {
       draft.isAuthenticated = false;
       break;
     case "LOAD_USER":
+      draft.isAuthenticated = true;
       draft.user = action.user;
       break;
   }
