@@ -14,6 +14,8 @@ import { Footer } from "./components/Home/Footer";
 import { ArticleList } from "./components/Article/ArticleList";
 import { MainView } from "./components/MainView";
 import { ArticleView } from "./components/Article/ArticleView";
+import { ArticleEditor } from "./components/Article/ArticleEditor";
+import { SettingEditor } from "./components/Home/SettingEditor";
 // import SnackbarProvider from
 
 function App() {
@@ -40,8 +42,14 @@ function App() {
                     <Route path="/login">
                       <Login />
                     </Route>
-                    <Route path="/article/:slug">
+                    <Route path="/article/edit/:slug?" exact>
+                      <ArticleEditor />
+                    </Route>
+                    <Route path="/article/:slug" exact>
                       <ArticleView/>
+                    </Route>
+                    <Route path="/setting" exact>
+                      <SettingEditor />
                     </Route>
                   </Switch>
                 </header>

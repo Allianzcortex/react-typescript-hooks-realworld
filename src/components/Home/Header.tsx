@@ -39,6 +39,12 @@ export const Header = () => {
       case "Sign up":
         history.push("/register");
         break;
+      case 'Edit':
+        history.push("/article/edit");
+        break;
+      case 'Setting':
+        history.push("/setting");
+        break;
     }
   };
 

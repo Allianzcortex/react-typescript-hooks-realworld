@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react";
 import { ArticleService } from "./api/ArticleService";
 import { AuthService } from "./api/AuthService";
+import { CommentService } from "./api/CommentService";
 import { ProfileService } from "./api/ProfileService";
 import { ServicesContext } from "./models/Services";
 
@@ -11,6 +12,15 @@ export function useAuthService(): AuthService {
   }
 
   return services.authService;
+}
+
+export function useCommentService(): CommentService {
+  const services = useContext(ServicesContext);
+  if (!services.commentService) {
+    throw new Error("Auth Service is not initialized.");
+  }
+
+  return services.commentService;
 }
 
 export function useArticleService(): ArticleService {

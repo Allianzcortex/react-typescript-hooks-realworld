@@ -12,3 +12,8 @@ more user-friendly
 
 5. figure it out why tagList is rendering 2 times(seems not related to strict mode) and
 why useCallBack() cannot work here
+
+6. It seems current auth system is broken(it should be based on whether token
+is stored in local). and need to add `privateRouter` to enable permission check
+
+7. add utils to check whether JWT token is valid

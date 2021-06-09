@@ -5,6 +5,7 @@ import { useArticleService, useProfileService } from "../../hooks";
 import { IArticle } from "../../models/types";
 import { FavoriteButton } from "../Home/FavoriteButton";
 import { FollowButton } from "../Home/FollowButton";
+import {Comment} from "./Comment"
 
 import "./style.css";
 
@@ -22,10 +23,7 @@ export const ArticleView = () => {
 
   const [username, setUsername] = useState<string>();
 
-  const handleSubmitComment = () => {
-      console.log("comment")
-  };
-
+ 
   useEffect(() => {
     const retrieveSingleArticle = async () => {
       setLoading(false);
@@ -60,13 +58,8 @@ export const ArticleView = () => {
       ) : (
         ""
       )}
-      <Form className="comment-container">
-        <TextArea placeholder="leave your comment here" />
-
-        <Button size='tiny' attached="right" color="green" onClick={handleSubmitComment}>
-          Post Comment
-        </Button>
-      </Form>
+      
+      <Comment slug={slug} />
     </div>
   );
 };
