@@ -31,6 +31,7 @@ export const Header = () => {
       // TODO may use a map to connect tabName and router so no need for
       // many cases
       case "Home":
+      case "Conduit":
         history.push("/");
         break;
       case "Sign in":
@@ -54,7 +55,7 @@ export const Header = () => {
         <Menu inverted pointing secondary>
           <Menu.Item
             name="Conduit"
-            active={activeItem === "home"}
+            active={activeItem === "Conduit"}
             onClick={handleItemClick}
           />
           <Menu.Menu position="right">

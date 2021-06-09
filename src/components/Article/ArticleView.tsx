@@ -1,11 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Button, Form, TextArea } from "semantic-ui-react";
+import { useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { Button, Form, Popup, TextArea } from "semantic-ui-react";
 import { useArticleService, useProfileService } from "../../hooks";
 import { IArticle } from "../../models/types";
+import { AppState } from "../../redux/store";
 import { FavoriteButton } from "../Home/FavoriteButton";
 import { FollowButton } from "../Home/FollowButton";
-import {Comment} from "./Comment"
+import { Comment } from "./Comment";
 
 import "./style.css";
 
@@ -16,14 +19,16 @@ interface routeProps {
 export const ArticleView = () => {
   let { slug } = useParams<routeProps>();
   const articleService = useArticleService();
-
+  const history = useHistory();
   const [loading, setLoading] = useState<boolean>(false);
   const [singleArticle, setSingleArticle] = useState<IArticle>();
   const [following, setFollowing] = useState<boolean>();
-
   const [username, setUsername] = useState<string>();
 
- 
+  const { isAuthenticated, user } = useSelector(
+    (state: AppState) => state.auth
+  );
+
   useEffect(() => {
     const retrieveSingleArticle = async () => {
       setLoading(false);
@@ -37,6 +42,15 @@ export const ArticleView = () => {
     };
     retrieveSingleArticle();
   }, []);
+
+  const handleDeleteArticle = async () => {
+    try {
+      await articleService.deleteArticle(slug);
+      // TODO dispatch delete successful info
+      history.push("/");
+    } catch (error) {}
+    
+  };
 
   return (
     <div>
@@ -58,7 +72,23 @@ export const ArticleView = () => {
       ) : (
         ""
       )}
-      
+      <Link to={`/article/edit/${slug}`}>
+        <Popup
+          content="edit article"
+          trigger={<Button size="tiny" color={"green"} icon="pencil" />}
+        />
+      </Link>
+      <Popup
+        content="delete article"
+        trigger={
+          <Button
+            size="tiny"
+            color={"grey"}
+            icon="trash"
+            onClick={handleDeleteArticle}
+          />
+        }
+      />
       <Comment slug={slug} />
     </div>
   );

@@ -1,11 +1,5 @@
 import produce from "immer";
-import React, {
-  ChangeEvent,
-  Fragment,
-  SyntheticEvent,
-  useEffect,
-  useState,
-} from "react";
+import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { Button, Form, TextArea } from "semantic-ui-react";
 import _ from "lodash";
 import { IArticleMeta } from "../../models/types";
@@ -13,9 +7,8 @@ import { useArticleService } from "../../hooks";
 import { useHistory } from "react-router";
 
 export const ArticleEditor = () => {
-  const articleMeta = {};
   const articleService = useArticleService();
-  const history = useHistory()
+  const history = useHistory();
   const [article, setArticle] = useState<IArticleMeta>({
     title: "",
     description: "",
@@ -23,10 +16,10 @@ export const ArticleEditor = () => {
     tags: [],
   });
 
-  const handleCreateArticle = async() => {
+  const handleCreateArticle = async () => {
     try {
       const res = await articleService.createArticle(article);
-      history.push(`/article/${res.data.article.slug}`)
+      history.push(`/article/${res.data.article.slug}`);
     } catch (error) {}
   };
 
