@@ -1,6 +1,5 @@
 import React, { Dispatch, Fragment, SetStateAction, SyntheticEvent, useEffect, useState } from "react";
 import { Label, SemanticCOLORS } from "semantic-ui-react";
-import _ from "underscore"
 import './style.css'
 
 interface IProps {

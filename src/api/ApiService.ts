@@ -25,6 +25,9 @@ export class ApiService<T> {
   public async delete(url:string,body?: object | FormData): Promise<any> {
     return this.send(Method.Delete, url,body);
   }
+  public async put(url:string,body?: object | FormData): Promise<any> {
+    return this.send(Method.Put, url,body);
+  }
 
   public async send(
     method: Method,

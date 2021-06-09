@@ -30,6 +30,13 @@ export interface IArticle {
   author: IProfile;
 }
 
+export interface IArticleMeta {
+  title: string;
+  description: string;
+  body: string;
+  tags: string[];
+}
+
 export interface IComment {
   id: number;
   createdAt: Date;

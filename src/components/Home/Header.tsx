@@ -28,7 +28,7 @@ export const Header = () => {
     setActiveItem(tabName);
 
     switch (tabName) {
-      // TODO may use a map to connect tabName and router so no need for 
+      // TODO may use a map to connect tabName and router so no need for
       // many cases
       case "Home":
         history.push("/");
@@ -39,10 +39,10 @@ export const Header = () => {
       case "Sign up":
         history.push("/register");
         break;
-      case 'Edit':
+      case "Edit":
         history.push("/article/edit");
         break;
-      case 'Setting':
+      case "Setting":
         history.push("/setting");
         break;
     }
@@ -86,7 +86,7 @@ export const Header = () => {
                 </Menu.Item>
 
                 <Menu.Item
-                disabled
+                  disabled
                   name="User"
                   className="item-icon"
                   active={activeItem === "User"}
