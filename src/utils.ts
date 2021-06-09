@@ -1,3 +1,6 @@
+import { IArticleMeta } from "./models/types";
+import _ from "lodash";
+
 export const setLocalStorage = (key: string, token: string) => {
   localStorage.setItem(key, JSON.stringify(token));
 };
@@ -29,4 +32,15 @@ export const PER_PAGE_COUNT = 10;
  */
 export const pageParameter = (limitCount: number, page: number) => {
   return `limit=${limitCount}&offset=${PER_PAGE_COUNT * (page - 1)}`;
+};
+
+export const objectDiff = (a1: IArticleMeta, a2: IArticleMeta) => {
+  let s = {};
+  Object.entries(a1).map(([key, value]) => {
+    if (_.get(a2, key) != value) {
+      _.set(s, key, value);
+    }
+  });
+
+  return s;
 };
