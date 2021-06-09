@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, SyntheticEvent } from "react";
 import { Icon, Pagination as SemanticPagination } from "semantic-ui-react";
 import { PER_PAGE_COUNT } from "../../utils";
+import './style.css'
 
 interface IProps {
   count: number; // all count

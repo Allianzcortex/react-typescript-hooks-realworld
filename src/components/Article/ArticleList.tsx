@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useArticleService } from "../../hooks";
 import { IArticle } from "../../models/types";
 import { ArticleCard } from "./ArticleCard";
-import { Pagination } from "./Pagination";
+import { Pagination } from "../Home/Pagination";
 
-export const ArticleList = () => {
+interface IProps{
+  articleList:IArticle[],
+  count:number,
+  currentPage:number,
+  setCurrentPage:Dispatch<SetStateAction<number>>,
+}
+
+export const ArticleList = ({
+  articleList,count,currentPage,setCurrentPage
+}:IProps) => {
   // what should be props then ?
-
-  const articleService = useArticleService();
-  const [articleList, setArticleList] = useState<IArticle[]>([]);
-  const [count, setCount] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-
-  useEffect(() => {
-    const retrieve = async () => {
-      const res = await articleService.getArticles(1);
-      console.log(res);
-      setArticleList(res.data.articles);
-      setCount(res.data.articlesCount)
-    };
-    retrieve();
-  }, []);
-
-//   useEffect(()=>{
-//       console.log(currentPage)
-//   },[currentPage])
 
   return (
     <div>

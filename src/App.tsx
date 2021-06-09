@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SnackbarProvider from "react-simple-snackbar";
 import { Footer } from "./components/Home/Footer";
 import { ArticleList } from "./components/Article/ArticleList";
+import { MainView } from "./components/MainView";
 // import SnackbarProvider from
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
                 <Header />
                 <Switch>
                   <Route path="/">
-                    <ArticleList/>
+                    <MainView/>
                   </Route>
                   <Route path="/login">
                     <Login />

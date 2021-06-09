@@ -9,10 +9,23 @@ export class ArticleService {
     this.api = new ApiService<IArticle>();
   }
 
-  public getArticles(page: number) {
-    return this.api.get(`articles?${pageParameter(PER_PAGE_COUNT, page)}`);
+  public getArticles(page: number, tag?: string, favorited?: string) {
+    let parameter = "";
+    
+    if ( tag !== undefined) {
+      parameter += `tag=${tag}`;
+    }
+    if (favorited !== undefined) {
+      parameter += `&favorited=${favorited}`;
+    }
+    return this.api.get(
+      `articles?${parameter}&${pageParameter(PER_PAGE_COUNT, page)}`
+    );
   }
 
+  public getTags() {
+    return this.api.get('tags')
+  }
 
 
 }
