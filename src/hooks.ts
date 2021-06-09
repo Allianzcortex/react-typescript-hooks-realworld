@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react";
 import { ArticleService } from "./api/ArticleService";
 import { AuthService } from "./api/AuthService";
+import { ProfileService } from "./api/ProfileService";
 import { ServicesContext } from "./models/Services";
 
 export function useAuthService(): AuthService {
@@ -19,6 +20,15 @@ export function useArticleService(): ArticleService {
   }
 
   return services.articleService;
+}
+
+export function useProfileService(): ProfileService {
+  const services = useContext(ServicesContext);
+  if (!services.profileService) {
+    throw new Error("Profile Service is not initialized.");
+  }
+
+  return services.profileService;
 }
 
 export function useConstructor(callBack=()=>{}) {

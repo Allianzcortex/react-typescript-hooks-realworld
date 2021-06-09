@@ -11,8 +11,8 @@ export class ArticleService {
 
   public getArticles(page: number, tag?: string, favorited?: string) {
     let parameter = "";
-    
-    if ( tag !== undefined) {
+
+    if (tag !== undefined) {
       parameter += `tag=${tag}`;
     }
     if (favorited !== undefined) {
@@ -23,9 +23,15 @@ export class ArticleService {
     );
   }
 
-  public getTags() {
-    return this.api.get('tags')
+  public getSingleArticle(slug:string) {
+    return this.api.get(`articles/${slug}`)
   }
 
+  public favoriteArticle(slug:string) {
+    return this.api.post(``)
+  }
 
+  public getTags() {
+    return this.api.get("tags");
+  }
 }

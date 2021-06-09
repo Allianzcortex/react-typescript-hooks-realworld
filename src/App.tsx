@@ -13,6 +13,7 @@ import SnackbarProvider from "react-simple-snackbar";
 import { Footer } from "./components/Home/Footer";
 import { ArticleList } from "./components/Article/ArticleList";
 import { MainView } from "./components/MainView";
+import { ArticleView } from "./components/Article/ArticleView";
 // import SnackbarProvider from
 
 function App() {
@@ -25,26 +26,29 @@ function App() {
   return (
     <Router>
       <ReduxProvider store={store}>
-      <SnackbarProvider>
-        <ServicesContext.Provider value={services!}>
-          <Fragment>
-            <Notification type_="error" content="fuck" />
-            <div className="App">
-              <header className="App-header">
-                <Header />
-                <Switch>
-                  <Route path="/">
-                    <MainView/>
-                  </Route>
-                  <Route path="/login">
-                    <Login />
-                  </Route>
-                </Switch>
-              </header>
-              <Footer/>
-            </div>
-          </Fragment>
-        </ServicesContext.Provider>
+        <SnackbarProvider>
+          <ServicesContext.Provider value={services!}>
+            <Fragment>
+              <Notification type_="error" content="fuck" />
+              <div className="App">
+                <header className="App-header">
+                  <Header />
+                  <Switch>
+                    <Route path="/" exact>
+                      <MainView />
+                    </Route>
+                    <Route path="/login">
+                      <Login />
+                    </Route>
+                    <Route path="/article/:slug">
+                      <ArticleView/>
+                    </Route>
+                  </Switch>
+                </header>
+                <Footer />
+              </div>
+            </Fragment>
+          </ServicesContext.Provider>
         </SnackbarProvider>
       </ReduxProvider>
     </Router>

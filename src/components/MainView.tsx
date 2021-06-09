@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useCallback, useEffect, useState } from "react";
 import { ArticleList } from "./Article/ArticleList";
 import { TagList } from "./Home/TagList";
 
@@ -21,6 +21,11 @@ export const MainView = () => {
     };
     retrieveTag();
   }, []);
+
+  const memorizedSetTag = useCallback((event: SyntheticEvent, data: object) => {
+      console.log((data as any).children)
+    setCurrentTag((data as any).children);
+  }, [tagList]);
 
   useEffect(() => {
     const retrieveArticle = async () => {
@@ -46,7 +51,7 @@ export const MainView = () => {
       </div>
 
       <div className="tag-container">
-        <TagList tags={tagList} setCurretTag={setCurrentTag} />
+        <TagList tags={tagList} setCurretTag={memorizedSetTag} />
       </div>
     </div>
   );

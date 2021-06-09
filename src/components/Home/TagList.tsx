@@ -1,24 +1,26 @@
 import React, { Dispatch, Fragment, SetStateAction, SyntheticEvent, useEffect, useState } from "react";
-import { Label } from "semantic-ui-react";
+import { Label, SemanticCOLORS } from "semantic-ui-react";
+import _ from "underscore"
 import './style.css'
 
 interface IProps {
   tags: string[];
-  setCurretTag:Dispatch<SetStateAction<string | undefined>>
+  setCurretTag: (event:any,data:any)=>void
 }
 
 export const TagList = ({ tags,setCurretTag }: IProps) => {
 
-  const handleTagClick=(event: SyntheticEvent, data: object)=>{
-    console.log(data)
-    setCurretTag((data as any).children)
-  }
+  const colors = [
+    "red","orange","yellow","olive",
+    "green","blue","purplepink","brown","grey"
+  ]
 
   return (
     <Fragment>
       {
         tags.map(tag=>{
-          return (<Label as="a" color="red" horizontal onClick={handleTagClick}>
+          return (<Label key={tag} as="a" color={'grey'} horizontal 
+          onClick={setCurretTag}>
           {tag}
         </Label>)
         })

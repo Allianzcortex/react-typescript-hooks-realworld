@@ -12,6 +12,9 @@ axios.defaults.baseURL = "https://conduit.productionready.io/api/";
 //   }
 // );
 
+const token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg0MzE5ODZ9.ZggNIOLlQlMy5MCjOvF0VPIuwMWkF_q_RsAKcOMIS3Q"
+axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+
 export class ApiService<T> {
   public async get(url:string,body?: object | FormData): Promise<any> {
     return this.send(Method.Get, url,body);
@@ -28,7 +31,6 @@ export class ApiService<T> {
     url: string,
     body?: object | FormData
   ): Promise<any> {
-    const headers = new Headers();
     let requestBody;
     if (body) {
       if (body instanceof FormData) {
@@ -44,7 +46,7 @@ export class ApiService<T> {
       method: method,
       data: body,
       url: url,
-      headers:headers,
+      // headers:headers,
     };
 
     let res;
