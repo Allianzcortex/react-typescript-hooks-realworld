@@ -17,7 +17,7 @@ export interface IProfile {
     following: boolean;
   }
   
-  export interface Article {
+  export interface IArticle {
     slug: string;
     title: string;
     description: string;

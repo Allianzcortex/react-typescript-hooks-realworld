@@ -43,9 +43,7 @@ export default function Login() {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     try {
-      console.log("111")
       const res = await authService.login(email, password);
-      console.log("222")
       authDispatch(loadUser(res));
       history.push("/");
       notifyDiapatch(setSuccess("Login Successfully."));
