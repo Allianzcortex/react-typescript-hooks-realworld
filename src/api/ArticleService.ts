@@ -28,7 +28,11 @@ export class ArticleService {
   }
 
   public favoriteArticle(slug:string) {
-    return this.api.post(``)
+    return this.api.post(`articles/${slug}/favorite`)
+  }
+
+  public unfavoriteArticle(slug:string) {
+    return this.api.delete(`articles/${slug}/favorite`)
   }
 
   public getTags() {

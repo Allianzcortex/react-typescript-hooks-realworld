@@ -1,25 +1,45 @@
-import { SetState } from "immer/dist/internal";
-import React, { Dispatch, Fragment, SetStateAction, SyntheticEvent } from "react";
+import produce from "immer";
+import React, { Fragment, useState } from "react";
 import { Button, Icon } from "semantic-ui-react";
+import { useArticleService } from "../../hooks";
+import { IArticle } from "../../models/types";
 
 interface IProps {
-    favorite:boolean
-    favoriteCount:number
-    setFavorite:Dispatch<SetStateAction<boolean>>,
+  iarticle: IArticle;
 }
 
-export const FavoriteButton=({favorite,favoriteCount,setFavorite}:IProps)=>{
+export const FavoriteButton = ({ iarticle }: IProps) => {
+  const articleService = useArticleService();
+  const [article, setArticle] = useState<IArticle>(iarticle);
+  const { favorited, favoritesCount, slug } = article;
 
-    const handleFavorite=(event: SyntheticEvent, data: object)=>{
-        
-    }
-
-    return (
-        <Fragment>
-          <Button size="tiny" icon >
-            <Icon name={favorite?'heart outline':'heart'} />
-            {favorite ? "Unfavorite" : "Favorite"}&nbsp; {favoriteCount}
-          </Button>
-        </Fragment>
+  const handleFavorite = async () => {
+    // TODO use anothe way to handle any
+    // it's a little annoying here
+    let res: any;
+    try {
+      if (favorited) {
+        res = await articleService.unfavoriteArticle(slug);
+      } else {
+        res = await articleService.favoriteArticle(slug);
+      }
+      setArticle(
+        produce(article, (draft) => {
+          draft.favorited = res.data.article.favorited;
+          draft.favoritesCount = res.data.article.favoritesCount;
+        })
       );
-}
+    } catch (error) {
+      // TODO handle error diapatch
+    }
+  };
+
+  return (
+    <Fragment>
+      <Button size="tiny" icon onClick={handleFavorite}>
+        <Icon name={favorited ? "heart outline" : "heart"} />
+        {favorited ? "Unfavorite" : "Favorite"}&nbsp; ({favoritesCount})
+      </Button>
+    </Fragment>
+  );
+};
