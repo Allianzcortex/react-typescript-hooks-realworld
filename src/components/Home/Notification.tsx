@@ -27,8 +27,10 @@ export const Notification: FunctionComponent<IProps> = () => {
     let res = "";
     if (typeof content === "object") {
       Object.entries(content).map(([key, value]) => {
-        res += key;
-        res += (value as string[])[0];
+        res += key + " ";
+        (value as string[]).forEach((msg) => {
+          res += msg;
+        });
       });
     }
     return res;
@@ -40,9 +42,9 @@ export const Notification: FunctionComponent<IProps> = () => {
   //   });
   // };
   useEffect(() => {
-    console.log("message is---");
-    console.log(messageContent);
-    openSnackbar(handleContent(messageContent));
+    if (messageContent) {
+      openSnackbar(handleContent(messageContent));
+    }
   }, [messageType, messageContent]);
 
   // TODO: https://stackoverflow.com/questions/38524972/how-to-cast-a-string-variable-to-a-string-literal-type-in-typescript

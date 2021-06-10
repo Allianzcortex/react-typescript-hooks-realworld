@@ -37,10 +37,3 @@ export const authReducer = produce((draft: AuthState, action: AuthAction) => {
       break;
   }
 }, initialState);
-
-// export function authReducer(state:AuthState,action:AuthAction):AuthState {
-//     switch (action.type) {
-//         case 'LOGIN':
-
-//     }
-// }

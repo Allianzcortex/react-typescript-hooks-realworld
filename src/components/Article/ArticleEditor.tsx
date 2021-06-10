@@ -1,10 +1,10 @@
 import produce from "immer";
 import React, { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { Button, Form, TextArea } from "semantic-ui-react";
-import _ from "lodash";
 import { IArticleMeta } from "../../models/types";
 import { useArticleService } from "../../hooks";
 import { useHistory } from "react-router";
+import _ from "lodash";
 
 export const ArticleEditor = () => {
   const articleService = useArticleService();
@@ -35,6 +35,8 @@ export const ArticleEditor = () => {
       default:
         setArticle(
           produce(article, (draft) => {
+            // immer doesn't support variable as key name
+            // so we use loadash to set it dynamically
             _.set(draft, name, value);
           })
         );

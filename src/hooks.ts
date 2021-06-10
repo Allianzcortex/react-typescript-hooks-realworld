@@ -28,7 +28,7 @@ export function useArticleService(): ArticleService {
   if (!services.articleService) {
     throw new Error("Article Service is not initialized.");
   }
-
+  console.log("--get article service here---")
   return services.articleService;
 }
 

@@ -15,7 +15,7 @@ test("object diff", () => {
     tags: [],
   };
 
-  // sicne a1.title === a2.title so we don't want field that are never changed appear
+  // since a1.title === a2.title so we don't want field that are never changed appear
   expect(objectDiff(a1, a2)).toEqual({
     description: "description1",
     body: "body1",

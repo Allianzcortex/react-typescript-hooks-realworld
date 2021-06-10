@@ -3,17 +3,8 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://conduit.productionready.io/api/";
 
-// axios.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     // TODO add handler
-//   }
-// );
-
-const token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg0MzE5ODZ9.ZggNIOLlQlMy5MCjOvF0VPIuwMWkF_q_RsAKcOMIS3Q"
-axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+// const token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg0MzE5ODZ9.ZggNIOLlQlMy5MCjOvF0VPIuwMWkF_q_RsAKcOMIS3Q"
+// axios.defaults.headers.common['Authorization'] = `Token ${token}`;
 
 export class ApiService<T> {
   public async get(url:string,body?: object | FormData): Promise<any> {
@@ -29,7 +20,7 @@ export class ApiService<T> {
     return this.send(Method.Put, url,body);
   }
 
-  public async send(
+  private async send(
     method: Method,
     url: string,
     body?: object | FormData
@@ -48,11 +39,16 @@ export class ApiService<T> {
     const options = {
       method: method,
       data: body,
-      url: url,
+      // url: url,
+      url:"https://conduit.productionready.io/api/tags",
       // headers:headers,
     };
 
     let res;
+    console.log("--here--")
+    console.log(options)
+    // const ers = await axios.get('http://localhost:5000/api/login')
+  
     await axios(options)
       .then((response) => {
         res = response;
@@ -60,7 +56,7 @@ export class ApiService<T> {
       .catch((error) => {
         // TODO continue, handle error response and redirect
         res = Promise.reject(error.response);
-      });
+      })
     return res;
   }
 }

@@ -1,10 +1,12 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { Dispatch, Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Button, Form, Popup, TextArea } from "semantic-ui-react";
 import { useArticleService, useProfileService } from "../../hooks";
 import { IArticle } from "../../models/types";
+import { NotificationAction } from "../../redux/reducers/NotifyReducer";
+import { setError, setSuccess } from "../../redux/actions";
 import { AppState } from "../../redux/store";
 import { FavoriteButton } from "../Home/FavoriteButton";
 import { FollowButton } from "../Home/FollowButton";
@@ -20,6 +22,7 @@ export const ArticleView = () => {
   let { slug } = useParams<routeProps>();
   const articleService = useArticleService();
   const history = useHistory();
+  const notifyDiapatch = useDispatch<Dispatch<NotificationAction>>();
   const [loading, setLoading] = useState<boolean>(false);
   const [singleArticle, setSingleArticle] = useState<IArticle>();
   const [following, setFollowing] = useState<boolean>();
@@ -46,10 +49,11 @@ export const ArticleView = () => {
   const handleDeleteArticle = async () => {
     try {
       await articleService.deleteArticle(slug);
-      // TODO dispatch delete successful info
+      notifyDiapatch(setSuccess("Delete Article Successfully."));
       history.push("/");
-    } catch (error) {}
-    
+    } catch (error) {
+      notifyDiapatch(setError(error.data.errors));
+    }
   };
 
   return (
