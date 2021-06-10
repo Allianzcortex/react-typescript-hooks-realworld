@@ -20,3 +20,7 @@ is stored in local). and need to add `privateRouter` to enable permission check
 
 8. add codecov support && generate badge(along with build-passing)
 
+9. enable eslint check. ref : https://testing-library.com/docs/guide-disappearance/#nottobeinthedocument
+
+10. 
+
