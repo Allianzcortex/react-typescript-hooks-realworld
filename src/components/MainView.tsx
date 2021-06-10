@@ -36,7 +36,7 @@ export const MainView = () => {
       setArticleList(articleRes.data.articles);
       setCount(articleRes.data.articlesCount);
     };
-    // retrieveArticle();
+    retrieveArticle();
   }, [currentPage, currentTag]);
 
   return (

@@ -39,16 +39,11 @@ export class ApiService<T> {
     const options = {
       method: method,
       data: body,
-      // url: url,
-      url:"https://conduit.productionready.io/api/tags",
+      url: url,
       // headers:headers,
     };
 
-    let res;
-    console.log("--here--")
-    console.log(options)
-    // const ers = await axios.get('http://localhost:5000/api/login')
-  
+    let res;  
     await axios(options)
       .then((response) => {
         res = response;

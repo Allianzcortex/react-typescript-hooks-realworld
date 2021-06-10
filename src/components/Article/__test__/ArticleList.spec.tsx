@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { render, RenderResult, screen, waitFor } from "@testing-library/react";
-import { MainView } from "../../MainView";
 import nock from "nock";
 import {
   initServices,
@@ -8,7 +7,8 @@ import {
   ServicesContext,
 } from "../../../models/Services";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { fakeTags, mainViewServer } from "../../../mock";
+import { MainView } from "../../MainView";
+import { fakeArticles, mainViewServer } from "../../../mock";
 
 describe("test", () => {
   let services: IServices;
@@ -33,18 +33,14 @@ describe("test", () => {
     );
   };
 
-  it("render tagList successfully", async () => {
-
-    const scope = mainViewServer
-
+  it("render Article List successfully", async () => {
+    const scope = mainViewServer;
     const { container, getByText } = renderResult();
     await waitFor(() => {
-      fakeTags.forEach((tag)=>{
-        expect(getByText(tag)).toBeInTheDocument;
-      })
+      fakeArticles.forEach((article) => {
+        expect(getByText(article.title)).toBeInTheDocument;
+      });
       console.log(container.innerHTML);
     });
-    // apparently only using getByText() without waitFor cannot work
-    // await getByText("a")
   });
 });

@@ -16,7 +16,6 @@ export const TagList = ({ tags,setCurretTag }: IProps) => {
 
   return (
     <Fragment>
-      taggg
       {
         tags.map(tag=>{
           return (<Label key={tag} as="a" color={'grey'} horizontal 

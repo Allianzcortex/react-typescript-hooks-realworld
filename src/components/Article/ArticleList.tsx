@@ -4,22 +4,25 @@ import { IArticle } from "../../models/types";
 import { ArticleCard } from "./ArticleCard";
 import { Pagination } from "../Home/Pagination";
 
-interface IProps{
-  articleList:IArticle[],
-  count:number,
-  currentPage:number,
-  setCurrentPage:Dispatch<SetStateAction<number>>,
+interface IProps {
+  articleList: IArticle[];
+  count: number;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 export const ArticleList = ({
-  articleList,count,currentPage,setCurrentPage
-}:IProps) => {
+  articleList,
+  count,
+  currentPage,
+  setCurrentPage,
+}: IProps) => {
   // what should be props then ?
 
   return (
     <div>
-      {articleList.map((x) => {
-        return <ArticleCard article={x} />;
+      {articleList.map((article) => {
+        return <ArticleCard key={article.slug} article={article} />;
       })}
       <Pagination
         count={count}
