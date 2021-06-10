@@ -1,5 +1,6 @@
 import { IUser } from "../models/types";
 import { AuthAction } from "./reducers/AuthReducer";
+import { LoaderAction } from "./reducers/LoaderReducer";
 import { NotificationAction } from "./reducers/NotifyReducer";
 
 // -----------------------------------------------
@@ -48,5 +49,21 @@ export const setSuccess: (data: object | string) => NotificationAction = (
 export const clear: () => NotificationAction = () => {
   return {
     type: "CLEAR",
+  };
+};
+
+// -----------------------------------------------
+// Loader part
+
+export const setLoading: (data: string) => LoaderAction = (data: string) => {
+  return {
+    type: "SET_LOADING",
+    messageContent: data,
+  };
+};
+
+export const clearLoading: () => LoaderAction = () => {
+  return {
+    type: "CLEAR_LOADING",
   };
 };

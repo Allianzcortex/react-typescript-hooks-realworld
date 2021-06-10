@@ -1,6 +1,6 @@
 export type IError = string[];
 
-export type messageType = "success" | "error" | "warning" | "info" | null;
+export type messageType = "success" | "error" | "warning" | "info" | "" | null;
 
 export interface IUser {
   email: string;

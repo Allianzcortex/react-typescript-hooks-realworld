@@ -6,13 +6,19 @@ import { Button, Form, Popup, TextArea } from "semantic-ui-react";
 import { useArticleService, useProfileService } from "../../hooks";
 import { IArticle } from "../../models/types";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
-import { setError, setSuccess } from "../../redux/actions";
+import {
+  clearLoading,
+  setError,
+  setLoading,
+  setSuccess,
+} from "../../redux/actions";
 import { AppState } from "../../redux/store";
 import { FavoriteButton } from "../Home/FavoriteButton";
 import { FollowButton } from "../Home/FollowButton";
 import { Comment } from "./Comment";
 
 import "./style.css";
+import { LoaderAction } from "../../redux/reducers/LoaderReducer";
 
 interface routeProps {
   slug: string;
@@ -22,8 +28,11 @@ export const ArticleView = () => {
   let { slug } = useParams<routeProps>();
   const articleService = useArticleService();
   const history = useHistory();
+  const { isLoading, messageContent } = useSelector(
+    (state: AppState) => state.loader
+  );
+  const loaderDiapatch = useDispatch<Dispatch<LoaderAction>>();
   const notifyDiapatch = useDispatch<Dispatch<NotificationAction>>();
-  const [loading, setLoading] = useState<boolean>(false);
   const [singleArticle, setSingleArticle] = useState<IArticle>();
   const [following, setFollowing] = useState<boolean>();
   const [username, setUsername] = useState<string>();
@@ -34,14 +43,16 @@ export const ArticleView = () => {
 
   useEffect(() => {
     const retrieveSingleArticle = async () => {
-      setLoading(false);
+      loaderDiapatch(setLoading("fetch article and comment"));
+
       const singleArticleRes = await articleService.getSingleArticle(slug);
       const article = singleArticleRes.data.article;
+      console.log(article);
       setSingleArticle(article);
       setUsername(article.author.username);
       setFollowing(article.author.following);
-      console.log(article);
-      setLoading(true);
+
+      loaderDiapatch(clearLoading());
     };
     retrieveSingleArticle();
   }, []);
@@ -59,7 +70,9 @@ export const ArticleView = () => {
   return (
     <div>
       single article {slug}
-      {loading ? (
+      {!isLoading || singleArticle === undefined ? (
+        ""
+      ) : (
         <Fragment>
           {" "}
           <br />
@@ -73,8 +86,6 @@ export const ArticleView = () => {
           />
           <FavoriteButton iarticle={singleArticle!} />
         </Fragment>
-      ) : (
-        ""
       )}
       <Link to={`/article/edit/${slug}`}>
         <Popup

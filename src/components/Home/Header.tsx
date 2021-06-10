@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { Icon, Menu, Segment } from "semantic-ui-react";
+import { Dimmer, Icon, Loader, Menu, Segment } from "semantic-ui-react";
 import { AppState } from "../../redux/store";
 import "./style.css";
 
@@ -114,6 +114,7 @@ export const Header = () => {
           </Menu.Menu>
         </Menu>
       </Segment>
+     
     </Fragment>
   );
 };

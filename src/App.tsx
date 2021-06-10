@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import Login from "./components/Auth/Login";
 import { Notification } from "./components/Home/Notification";
@@ -11,11 +11,11 @@ import { Header } from "./components/Home/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import SnackbarProvider from "react-simple-snackbar";
 import { Footer } from "./components/Home/Footer";
-import { ArticleList } from "./components/Article/ArticleList";
 import { MainView } from "./components/MainView";
 import { ArticleView } from "./components/Article/ArticleView";
 import { ArticleEditor } from "./components/Article/ArticleEditor";
 import { SettingEditor } from "./components/Home/SettingEditor";
+import { Loader } from "./components/Home/Loader";
 
 function App() {
   let services: IServices;
@@ -34,6 +34,7 @@ function App() {
               <div className="App">
                 <header className="App-header">
                   <Header />
+                  <Loader/>
                   <Switch>
                     <Route path="/" exact>
                       <MainView />
