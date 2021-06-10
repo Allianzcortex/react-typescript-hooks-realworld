@@ -17,3 +17,6 @@ why useCallBack() cannot work here
 is stored in local). and need to add `privateRouter` to enable permission check
 
 7. add utils to check whether JWT token is valid
+
+8. add codecov support && generate badge(along with build-passing)
+

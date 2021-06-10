@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { render, RenderResult, screen, waitFor } from "@testing-library/react";
-import nock from "nock";
 import {
   initServices,
   IServices,
@@ -8,7 +7,7 @@ import {
 } from "../../../models/Services";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { MainView } from "../../MainView";
-import { fakeArticles, mainViewServer } from "../../../mock";
+import { fakeArticles, mockArticleServer } from "../../../mock";
 
 describe("test", () => {
   let services: IServices;
@@ -34,7 +33,7 @@ describe("test", () => {
   };
 
   it("render Article List successfully", async () => {
-    const scope = mainViewServer;
+    const scope = mockArticleServer;
     const { container, getByText } = renderResult();
     await waitFor(() => {
       fakeArticles.forEach((article) => {

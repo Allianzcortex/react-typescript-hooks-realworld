@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import { render, RenderResult, screen, waitFor } from "@testing-library/react";
 import { MainView } from "../../MainView";
-import nock from "nock";
+import '@testing-library/jest-dom/extend-expect'
 import {
   initServices,
   IServices,
   ServicesContext,
 } from "../../../models/Services";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { fakeTags, mainViewServer } from "../../../mock";
+import { fakeTags, mockArticleServer } from "../../../mock";
 
 describe("test", () => {
   let services: IServices;
@@ -35,7 +35,7 @@ describe("test", () => {
 
   it("render tagList successfully", async () => {
 
-    const scope = mainViewServer
+    const scope = mockArticleServer
 
     const { container, getByText } = renderResult();
     await waitFor(() => {
