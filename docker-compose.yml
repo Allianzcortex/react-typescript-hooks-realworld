@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  react-typescript-hooks-realworld:
+    container_name: react-typescript-hooks-realworld
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 3001:3000
