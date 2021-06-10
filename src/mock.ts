@@ -1,27 +1,38 @@
 import nock from "nock";
 import { BASE_URL, Header, Status } from "./api/http";
+import { IArticle } from "./models/types";
 
 export const fakeTags = ["aa", "bb", "cc"];
 
-export const fakeArticles = [
-  {
-    title: "Test",
-    slug: "test-xjula7",
-    body: "Sth",
-    createdAt: "2021-06-10T15:03:47.018Z",
-    author: {
-      username: "Emily Papadourou",
-      bio: null,
-      image: "",
-      following: false,
-    },
-    description: "Test 1",
-    favorited: false,
-    favoritesCount: 1,
-    tagList: [],
-    updatedAt: "2021-06-10T15:03:47.018Z",
+export const fakeSingleArticle: IArticle = {
+  title: "Test",
+  slug: "test-xjula7",
+  body: "Sth",
+  createdAt: "2021-06-10T15:03:47.018Z",
+  author: {
+    username: "Emily Papadourou",
+    bio: "",
+    image: "",
+    following: false,
   },
-];
+  description: "Test 1",
+  favorited: false,
+  favoritesCount: 1,
+  tagList: ["aa"],
+  updatedAt: "2021-06-10T15:03:47.018Z",
+};
+
+export const fakeArticles = [fakeSingleArticle];
+
+const handleFavorite = (article: IArticle) => {
+  const favorited = !article.favorited;
+  const count = article.favoritesCount;
+  const favoritesCount = article.favorited ? count - 1 : count + 1;
+  return Object.assign({}, article, {
+    favorited: favorited,
+    favoritesCount: favoritesCount,
+  });
+};
 
 export const mockArticleServer = nock(BASE_URL)
   .defaultReplyHeaders({ [Header.CORS]: "*" })
@@ -29,4 +40,8 @@ export const mockArticleServer = nock(BASE_URL)
   .get("/articles?&limit=10&offset=0")
   .reply(Status.Ok, { articles: fakeArticles, count: fakeArticles.length })
   .get("/tags")
-  .reply(Status.Ok, { tags: fakeTags });
+  .reply(Status.Ok, { tags: fakeTags })
+  .post(`/articles/${fakeSingleArticle.slug}/favorite`)
+  .reply(Status.Ok, { article: handleFavorite(fakeSingleArticle) })
+  .delete(`/articles/${fakeSingleArticle.slug}/favorite`)
+  .reply(Status.Ok, { article: handleFavorite(fakeSingleArticle) });

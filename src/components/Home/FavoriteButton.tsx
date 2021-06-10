@@ -23,6 +23,7 @@ export const FavoriteButton = ({ iarticle }: IProps) => {
       } else {
         res = await articleService.favoriteArticle(slug);
       }
+      console.log(res.data)
       setArticle(
         produce(article, (draft) => {
           draft.favorited = res.data.article.favorited;
