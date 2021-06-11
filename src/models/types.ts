@@ -2,6 +2,11 @@ export type IError = string[];
 
 export type messageType = "success" | "error" | "warning" | "info" | "" | null;
 
+export enum Mode {
+  Create = "CREATE",
+  Edit = "EDIT",
+}
+
 export interface IUser {
   email: string;
   token: string;

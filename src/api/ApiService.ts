@@ -3,8 +3,8 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://conduit.productionready.io/api/";
 
-// const token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg0MzE5ODZ9.ZggNIOLlQlMy5MCjOvF0VPIuwMWkF_q_RsAKcOMIS3Q"
-// axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+const token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg1NTQ1NjN9.q-x_CDleFeSYuJfiaXChAc9DXodKjpQmg8uZt5YpTxg"
+axios.defaults.headers.common['Authorization'] = `Token ${token}`;
 
 export class ApiService<T> {
   public async get(url:string,body?: object | FormData): Promise<any> {

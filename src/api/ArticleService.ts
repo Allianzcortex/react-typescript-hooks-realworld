@@ -1,7 +1,7 @@
 import { IArticle, IArticleMeta } from "../models/types";
 import { pageParameter, PER_PAGE_COUNT } from "../utils";
 import { ApiService } from "./ApiService";
-import _ from "lodash"
+import _ from "lodash";
 
 export class ArticleService {
   api: ApiService<IArticle>;
@@ -12,22 +12,21 @@ export class ArticleService {
 
   public createArticle(article: IArticleMeta) {
     return this.api.post(`articles`, {
-      "article": {
-        "title": article.title,
-        "description": article.description,
-        "body": article.body,
-        "tagList": article.tags,
+      article: {
+        title: article.title,
+        description: article.description,
+        body: article.body,
+        tagList: article.tags,
       },
     });
   }
 
-  public updateArticle(slug:string,article:IArticleMeta) {
-    return this.api.put(`articles/${slug}`,_.pickBy(article))
-
+  public updateArticle(slug: string, article: object) {
+    return this.api.put(`articles/${slug}`, article);
   }
 
-  public deleteArticle(slug:string) {
-    return this.api.delete(`articles/${slug}`)
+  public deleteArticle(slug: string) {
+    return this.api.delete(`articles/${slug}`);
   }
 
   public getArticles(page: number, tag?: string, favorited?: string) {

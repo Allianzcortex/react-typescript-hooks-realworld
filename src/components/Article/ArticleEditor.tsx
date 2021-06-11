@@ -5,8 +5,15 @@ import { IArticleMeta } from "../../models/types";
 import { useArticleService } from "../../hooks";
 import { useHistory } from "react-router";
 import _ from "lodash";
+import { useParams } from "react-router-dom";
+import { objectDiff } from "../../utils";
+
+interface routeProps {
+  slug: string;
+}
 
 export const ArticleEditor = () => {
+  const { slug } = useParams<routeProps>();
   const articleService = useArticleService();
   const history = useHistory();
   const [article, setArticle] = useState<IArticleMeta>({
@@ -15,10 +22,23 @@ export const ArticleEditor = () => {
     body: "",
     tags: [],
   });
+  const [oldArticle, setOldArticle] = useState<IArticleMeta>();
 
   const handleCreateArticle = async () => {
     try {
-      const res = await articleService.createArticle(article);
+      let res;
+      if (slug === undefined) {
+        res = await articleService.createArticle(article);
+      } else {
+        // based on api we will only update with changed value, the tricky part here is
+        // users may change the value back and forth, value remains unchanged finally. That's
+        // why we use `objectDiff` method to find the difference, in real(?) practice we
+        // choose to put with the whole body
+        res = await articleService.updateArticle(
+          slug,
+          objectDiff(article, oldArticle!)
+        );
+      }
       history.push(`/article/${res.data.article.slug}`);
     } catch (error) {}
   };
@@ -48,6 +68,18 @@ export const ArticleEditor = () => {
     console.log(article);
   }, [article]);
 
+  useEffect(() => {
+    const retrieveSingleArticle = async () => {
+      const res = await articleService.getSingleArticle(slug);
+      setOldArticle(res.data.article);
+      setArticle(res.data.article);
+    };
+
+    if (slug !== undefined) {
+      retrieveSingleArticle();
+    }
+  }, []);
+
   return (
     <Fragment>
       <Form>
@@ -57,6 +89,7 @@ export const ArticleEditor = () => {
             name="title"
             placeholder="Article Title"
             onChange={handleUpdateField}
+            value={article.title}
             required
           />
         </Form.Field>
@@ -67,17 +100,19 @@ export const ArticleEditor = () => {
             name="description"
             placeholder="What's this article about?"
             onChange={handleUpdateField}
+            value={article.description}
             required
           />
         </Form.Field>
         <Form.Field>
-          <label>
-            <TextArea
-              name="body"
-              placeholder="Article Body"
-              onChange={handleUpdateField}
-            />
-          </label>
+          <label>Body</label>
+          <TextArea
+            name="body"
+            placeholder="Article Body"
+            onChange={handleUpdateField}
+            style={{ minHeight: 280 }}
+            value={article.body}
+          />
         </Form.Field>
         <Button attached="right" color="green" onClick={handleCreateArticle}>
           Create Article
