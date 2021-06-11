@@ -64,7 +64,7 @@ export const Header = () => {
               active={activeItem === "Home"}
               onClick={handleItemClick}
             />
-            {!isAuthenticated ? (
+            {isAuthenticated ? (
               <Fragment>
                 <Menu.Item
                   name="Edit"

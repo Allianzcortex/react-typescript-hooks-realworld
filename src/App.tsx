@@ -17,6 +17,7 @@ import { ArticleEditor } from "./components/Article/ArticleEditor";
 import { SettingEditor } from "./components/Home/SettingEditor";
 import { Loader } from "./components/Home/Loader";
 import { ToastProvider, useToasts } from 'react-toast-notifications';
+import { Register } from "./components/Auth/Register";
 
 function App() {
   let services: IServices;
@@ -29,7 +30,7 @@ function App() {
     <Router>
       <ReduxProvider store={store}>
         {/* <SnackbarProvider> */}
-        <ToastProvider autoDismiss={true} autoDismissTimeout={1800}
+        <ToastProvider autoDismiss={true} autoDismissTimeout={100000}
         placement={'top-center'}>
           <ServicesContext.Provider value={services!}>
             <Fragment>
@@ -44,6 +45,9 @@ function App() {
                     </Route>
                     <Route path="/login">
                       <Login />
+                    </Route>
+                    <Route path="/register">
+                      <Register/>
                     </Route>
                     <Route path="/article/edit/:slug?" exact>
                       <ArticleEditor />

@@ -24,7 +24,7 @@ export const Notification = () => {
       Object.entries(content).map(([key, value]) => {
         res += key + " ";
         (value as string[]).forEach((msg) => {
-          res += msg;
+          res += (msg+"\n");
         });
       });
     } else {
