@@ -2,12 +2,13 @@ import produce from "immer";
 import { IError, messageType } from "../../models/types";
 
 export type NotificationAction =
-  | {
-      type: "SET_LOADING";
-      messageContent: string;
+   {
+      type: "SET_ERROR";
+      messageType: messageType;
+      messageContent: object | string;
     }
   | {
-      type: "SET_ERROR";
+      type: "SET_WARNING";
       messageType: messageType;
       messageContent: object | string;
     }
@@ -45,9 +46,10 @@ export const errorReducer = produce(
         draft.messageType = "success";
         draft.messageContent = action.messageContent;
         break;
-      case "SET_LOADING":
-        draft.messageType = null;
-        draft.messageContent = action.messageContent
+      case "SET_WARNING":
+        draft.messageType = "warning";
+        draft.messageContent = action.messageContent;
+        break;
     }
   },
   initialState

@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../redux/store";
 import { LoaderAction } from "../redux/reducers/LoaderReducer";
 import { clearLoading, setLoading } from "../redux/actions";
+import { Tabs } from "./Home/Tabs";
 
 export const MainView = () => {
   const articleService = useArticleService();
@@ -27,6 +28,11 @@ export const MainView = () => {
     (state: AppState) => state.loader
   );
   const loaderDiapatch = useDispatch<Dispatch<LoaderAction>>();
+  const TABS = {
+    "global-feed": "Global Feed",
+    feed: "Your Feed",
+  };
+  const [currentTab, setCurrentTab] = useState<string>("global-feed");
 
   useEffect(() => {
     const retrieveTag = async () => {
@@ -41,9 +47,14 @@ export const MainView = () => {
   }, []);
 
   const memorizedSetTag = useCallback(
-    (event: SyntheticEvent, data: object) => {
-      console.log((data as any).children);
-      setCurrentTag((data as any).children);
+    (_: SyntheticEvent, data: object) => {
+      const newTag = "";
+      if (newTag === currentTag) {
+        // disable
+        setCurrentTag(undefined);
+      } else {
+        setCurrentTag(newTag);
+      }
     },
     [tagList]
   );
@@ -51,22 +62,32 @@ export const MainView = () => {
   useEffect(() => {
     const retrieveArticle = async () => {
       loaderDiapatch(setLoading("fetch articles , generating pagination"));
+      let articleRes;
+      switch (currentTab) {
+        case "global-feed":
+          articleRes = await articleService.getArticles(
+            currentPage,
+            currentTag
+          );
+          break;
+        case "feed":
+          articleRes = await articleService.getFeed(currentPage);
+          break;
+      }
 
-      const articleRes = await articleService.getArticles(
-        currentPage,
-        currentTag
-      );
       setArticleList(articleRes.data.articles);
       setCount(articleRes.data.articlesCount);
 
       loaderDiapatch(clearLoading());
     };
+    console.log(currentTab);
     retrieveArticle();
-  }, [currentPage, currentTag]);
+  }, [currentPage, currentTag, currentTab]);
 
   return (
     <div className="main-container">
       <div className="article-container">
+        <Tabs tabs={TABS} setCurrentTab={setCurrentTab} />
         <ArticleList
           articleList={articleList}
           count={count}
@@ -79,7 +100,8 @@ export const MainView = () => {
         <TagList
           currentTag={currentTag}
           tags={tagList}
-          setCurretTag={memorizedSetTag}
+          tab={currentTab}
+          setCurrentTag={setCurrentTag}
         />
       </div>
     </div>

@@ -1,0 +1,67 @@
+import React, {
+  Dispatch,
+  Fragment,
+  SetStateAction,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from "react";
+import { Tab } from "semantic-ui-react";
+import _ from "lodash";
+import "./style.css";
+
+interface IProps {
+  tabs: object;
+  setCurrentTab: Dispatch<SetStateAction<string>>;
+}
+
+interface ITabChangeEvent {
+  activeIndex: string;
+  [key: string]: string;
+}
+
+export const Tabs = ({ tabs, setCurrentTab }: IProps) => {
+  const handleTabChange = (event: SyntheticEvent, data: object) => {
+      // TODO destruct activeIndex in data directly
+    const { activeIndex } = data as ITabChangeEvent;
+    setCurrentTab(Object.keys(tabs)[Number(activeIndex)]);
+  };
+
+  const pan1 = Object.entries(tabs).map(([key, value]) => {
+    return {
+      menuItem: key,
+      render: () => <Tab.Pane attached={false}></Tab.Pane>,
+    };
+  });
+  const panes = [
+    {
+      menuItem: "Tab 1",
+      render: () => <Tab.Pane attached={false}></Tab.Pane>,
+    },
+    {
+      menuItem: "Tab 2",
+      render: () => <Tab.Pane attached={false}></Tab.Pane>,
+    },
+    {
+      menuItem: "Tab 3",
+      render: () => <Tab.Pane attached={false}></Tab.Pane>,
+    },
+  ];
+
+  //   const handleTabClick=()
+
+  return (
+    <Fragment>
+      <div className="tab-container">
+        {/* {Object.entries(TABS).map(([key, value]) => {
+          return <div onClick={handleTabClick} key={key}>{value}</div>;
+        })} */}
+        <Tab
+          onTabChange={handleTabChange}
+          menu={{ secondary: true, pointing: true }}
+          panes={pan1}
+        />
+      </div>
+    </Fragment>
+  );
+};

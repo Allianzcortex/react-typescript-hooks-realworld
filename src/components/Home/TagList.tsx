@@ -3,19 +3,21 @@ import React, {
   Fragment,
   SetStateAction,
   SyntheticEvent,
-  useEffect,
-  useState,
 } from "react";
+import { useDispatch } from "react-redux";
 import { Label, SemanticCOLORS } from "semantic-ui-react";
+import { NotificationAction } from "../../redux/reducers/NotifyReducer";
+import { setWarning } from "../../redux/actions";
 import "./style.css";
 
 interface IProps {
   tags: string[];
+  tab: string;
   currentTag: string | undefined;
-  setCurretTag: (event: any, data: any) => void;
+  setCurrentTag: Dispatch<SetStateAction<string | undefined>>;
 }
 
-export const TagList = ({ tags, currentTag, setCurretTag }: IProps) => {
+export const TagList = ({ tags, tab, currentTag, setCurrentTag }: IProps) => {
   const colors = [
     "red",
     "orange",
@@ -28,10 +30,24 @@ export const TagList = ({ tags, currentTag, setCurretTag }: IProps) => {
     "grey",
   ];
 
-  // const getBackgroundColor = (tag: string) => {
-  //   console.log(tag+" : "+currentTag)
-  //   return tag == currentTag ? "black" : "";
-  // };
+  const notifyDispatch = useDispatch<Dispatch<NotificationAction>>();
+
+  const handleTagClick = (event: SyntheticEvent, data: object) => {
+    const newTag = (data as any).children;
+    if (tab === "feed") {
+      // not support yet
+      notifyDispatch(
+        setWarning("tag select only works for global feed currently.")
+      );
+      return;
+    }
+    if (newTag === currentTag) {
+      // disable current tag ansd set it to undefined
+      setCurrentTag(undefined);
+    } else {
+      setCurrentTag(newTag);
+    }
+  };
 
   return (
     <Fragment>
@@ -42,7 +58,7 @@ export const TagList = ({ tags, currentTag, setCurretTag }: IProps) => {
             as="a"
             color={tag === currentTag ? "black" : "grey"}
             horizontal
-            onClick={setCurretTag}
+            onClick={handleTagClick}
           >
             {tag}
           </Label>

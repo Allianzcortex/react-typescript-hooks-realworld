@@ -43,6 +43,10 @@ export class ArticleService {
     );
   }
 
+  public getFeed(page:number) {
+    return this.api.get(`articles/feed?${pageParameter(PER_PAGE_COUNT, page)}`)
+  }
+
   public getSingleArticle(slug: string) {
     return this.api.get(`articles/${slug}`);
   }

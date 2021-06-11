@@ -46,6 +46,16 @@ export const setSuccess: (data: object | string) => NotificationAction = (
   };
 };
 
+export const setWarning: (data: object | string) => NotificationAction = (
+  data: object | string
+) => {
+  return {
+    type: "SET_WARNING",
+    messageType: "warning",
+    messageContent: data,
+  };
+};
+
 export const clear: () => NotificationAction = () => {
   return {
     type: "CLEAR",

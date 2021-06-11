@@ -24,3 +24,11 @@
 /* background-color:black !important; */
 margin-top:4px !important;
 }
+
+.tab-container {
+  display: flex;
+}
+
+.ui.tab.active, .ui.tab.open {
+  display:None !important;
+}
