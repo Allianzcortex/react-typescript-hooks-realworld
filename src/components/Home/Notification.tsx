@@ -3,13 +3,13 @@ import React, {
   Fragment,
   FunctionComponent,
   useEffect,
-  useState,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { messageType } from "../../models/types";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
 import { AppState } from "../../redux/store";
 import { useSnackbar } from "react-simple-snackbar";
+import { clear } from "../../redux/actions";
 
 interface IProps {
   type_: messageType;
@@ -20,7 +20,7 @@ export const Notification: FunctionComponent<IProps> = () => {
   const { messageType, messageContent } = useSelector(
     (state: AppState) => state.error
   );
-  const errorDiapatch = useDispatch<Dispatch<NotificationAction>>();
+  const notifyDispatch = useDispatch<Dispatch<NotificationAction>>();
   const [openSnackbar, closeSnackbar] = useSnackbar();
 
   const handleContent = (content: object | string) => {
@@ -32,6 +32,8 @@ export const Notification: FunctionComponent<IProps> = () => {
           res += msg;
         });
       });
+    } else {
+      res = content
     }
     return res;
   };
@@ -44,6 +46,7 @@ export const Notification: FunctionComponent<IProps> = () => {
   useEffect(() => {
     if (messageContent) {
       openSnackbar(handleContent(messageContent));
+      notifyDispatch(clear())
     }
   }, [messageType, messageContent]);
 

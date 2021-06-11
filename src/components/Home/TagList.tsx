@@ -36,6 +36,7 @@ export const TagList = ({ tags, tab, currentTag, setCurrentTag }: IProps) => {
     const newTag = (data as any).children;
     if (tab === "feed") {
       // not support yet
+      // we may not want to handle tab part is tag, logic will be complex
       notifyDispatch(
         setWarning("tag select only works for global feed currently.")
       );

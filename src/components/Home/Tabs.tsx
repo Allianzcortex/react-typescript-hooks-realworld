@@ -3,8 +3,6 @@ import React, {
   Fragment,
   SetStateAction,
   SyntheticEvent,
-  useEffect,
-  useState,
 } from "react";
 import { Tab } from "semantic-ui-react";
 import _ from "lodash";
@@ -33,22 +31,6 @@ export const Tabs = ({ tabs, setCurrentTab }: IProps) => {
       render: () => <Tab.Pane attached={false}></Tab.Pane>,
     };
   });
-  const panes = [
-    {
-      menuItem: "Tab 1",
-      render: () => <Tab.Pane attached={false}></Tab.Pane>,
-    },
-    {
-      menuItem: "Tab 2",
-      render: () => <Tab.Pane attached={false}></Tab.Pane>,
-    },
-    {
-      menuItem: "Tab 3",
-      render: () => <Tab.Pane attached={false}></Tab.Pane>,
-    },
-  ];
-
-  //   const handleTabClick=()
 
   return (
     <Fragment>
