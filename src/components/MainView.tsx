@@ -80,7 +80,6 @@ export const MainView = () => {
 
       loaderDiapatch(clearLoading());
     };
-    console.log(currentTab);
     retrieveArticle();
   }, [currentPage, currentTag, currentTab]);
 

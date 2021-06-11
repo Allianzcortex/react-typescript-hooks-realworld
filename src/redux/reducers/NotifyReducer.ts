@@ -2,7 +2,7 @@ import produce from "immer";
 import { IError, messageType } from "../../models/types";
 
 export type NotificationAction =
-   {
+  | {
       type: "SET_ERROR";
       messageType: messageType;
       messageContent: object | string;

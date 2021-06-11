@@ -24,4 +24,6 @@ TODO:
 
 - [ ] add tests for more components to improve coverage rate
 
+- [ ] add snackbar style support for different message types
+
 - [ ] use [class-transformer](https://github.com/typestack/class-transformer) or [serializr](https://github.com/mobxjs/serializr) to deserialize JSON to object instead of `JSON.parse()`

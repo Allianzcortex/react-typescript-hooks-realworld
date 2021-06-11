@@ -27,7 +27,7 @@ export const Tabs = ({ tabs, setCurrentTab }: IProps) => {
 
   const pan1 = Object.entries(tabs).map(([key, value]) => {
     return {
-      menuItem: key,
+      menuItem: value,
       render: () => <Tab.Pane attached={false}></Tab.Pane>,
     };
   });
@@ -35,9 +35,6 @@ export const Tabs = ({ tabs, setCurrentTab }: IProps) => {
   return (
     <Fragment>
       <div className="tab-container">
-        {/* {Object.entries(TABS).map(([key, value]) => {
-          return <div onClick={handleTabClick} key={key}>{value}</div>;
-        })} */}
         <Tab
           onTabChange={handleTabChange}
           menu={{ secondary: true, pointing: true }}

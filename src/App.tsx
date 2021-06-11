@@ -16,6 +16,7 @@ import { ArticleView } from "./components/Article/ArticleView";
 import { ArticleEditor } from "./components/Article/ArticleEditor";
 import { SettingEditor } from "./components/Home/SettingEditor";
 import { Loader } from "./components/Home/Loader";
+import { ToastProvider, useToasts } from 'react-toast-notifications';
 
 function App() {
   let services: IServices;
@@ -27,10 +28,12 @@ function App() {
   return (
     <Router>
       <ReduxProvider store={store}>
-        <SnackbarProvider>
+        {/* <SnackbarProvider> */}
+        <ToastProvider autoDismiss={true} autoDismissTimeout={1800}
+        placement={'top-center'}>
           <ServicesContext.Provider value={services!}>
             <Fragment>
-              <Notification type_="error" content="fuck" />
+              <Notification />
               <div className="App">
                 <header className="App-header">
                   <Header />
@@ -57,7 +60,8 @@ function App() {
               </div>
             </Fragment>
           </ServicesContext.Provider>
-        </SnackbarProvider>
+          </ToastProvider>
+        {/* </SnackbarProvider> */}
       </ReduxProvider>
     </Router>
   );
