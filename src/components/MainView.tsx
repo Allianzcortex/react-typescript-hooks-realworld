@@ -1,4 +1,10 @@
-import React, { Dispatch, SyntheticEvent, useCallback, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { ArticleList } from "./Article/ArticleList";
 import { TagList } from "./Home/TagList";
 
@@ -28,20 +34,22 @@ export const MainView = () => {
 
       const tagRes = await articleService.getTags();
       setTagList(tagRes.data.tags);
-      
+
       loaderDiapatch(clearLoading());
     };
     retrieveTag();
   }, []);
 
-  const memorizedSetTag = useCallback((event: SyntheticEvent, data: object) => {
-      console.log((data as any).children)
-    setCurrentTag((data as any).children);
-  }, [tagList]);
+  const memorizedSetTag = useCallback(
+    (event: SyntheticEvent, data: object) => {
+      console.log((data as any).children);
+      setCurrentTag((data as any).children);
+    },
+    [tagList]
+  );
 
   useEffect(() => {
     const retrieveArticle = async () => {
-
       loaderDiapatch(setLoading("fetch articles , generating pagination"));
 
       const articleRes = await articleService.getArticles(
@@ -68,7 +76,11 @@ export const MainView = () => {
       </div>
 
       <div className="tag-container">
-        <TagList tags={tagList} setCurretTag={memorizedSetTag} />
+        <TagList
+          currentTag={currentTag}
+          tags={tagList}
+          setCurretTag={memorizedSetTag}
+        />
       </div>
     </div>
   );
