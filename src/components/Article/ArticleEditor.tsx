@@ -71,9 +71,7 @@ export const ArticleEditor = () => {
   useEffect(() => {
     const retrieveSingleArticle = async () => {
       const res = await articleService.getSingleArticle(slug);
-      const article: IArticleMeta = JSON.parse(
-        res.data.article
-      ) as IArticleMeta;
+      const article: IArticleMeta = res.data.article as IArticleMeta;
       setOldArticle(article);
       setArticle(article);
     };

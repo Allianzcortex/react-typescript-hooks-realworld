@@ -21,7 +21,7 @@ export const FollowButton = ({ following, setFollowing, username }: IProps) => {
       } else {
         res = await profileService.followUser(username);
       }
-      const profile = JSON.parse(res.data.profile) as IProfile;
+      const profile = res.data.profile as IProfile;
       setFollowing(profile.following);
     } catch (error) {
       // TODO add error dispatcher to handle error

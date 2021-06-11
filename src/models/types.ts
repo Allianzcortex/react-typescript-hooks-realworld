@@ -21,8 +21,8 @@ export interface ISettingUser extends Omit<IUser, "token"> {
 
 export interface IProfile {
   username: string;
-  bio: string;
-  image: string;
+  bio: string | null;
+  image: string | null;
   following: boolean;
 }
 

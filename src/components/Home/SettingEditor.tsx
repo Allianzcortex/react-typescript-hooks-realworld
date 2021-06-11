@@ -66,7 +66,7 @@ export const SettingEditor = () => {
   }, [user]);
 
   const handleCreateArticle = async () => {
-    // loaderDiapatch(setLoading("update user"));
+    loaderDiapatch(setLoading("update user"));
 
     let payload: object = _.clone(user);
     if (user.password === "") {
@@ -78,7 +78,7 @@ export const SettingEditor = () => {
     //TODO add successful information
     await retrieveCurrentUser();
 
-    // loaderDiapatch(clearLoading());
+    loaderDiapatch(clearLoading());
     history.go(0);
   };
 

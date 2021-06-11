@@ -9,7 +9,7 @@ export const Loader = () => {
     (state: AppState) => state.loader
   );
 
-  if (!isLoading) {
+  if (!isLoading &&  messageContent!=="") {
     return (
       <Dimmer active>
         <SemanticLoader size="medium">

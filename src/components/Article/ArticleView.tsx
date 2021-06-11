@@ -46,7 +46,8 @@ export const ArticleView = () => {
       loaderDiapatch(setLoading("fetch article and comment"));
 
       const singleArticleRes = await articleService.getSingleArticle(slug);
-      const article = JSON.parse(singleArticleRes.data.article) as IArticle;
+      console.log(singleArticleRes.data.article)
+      const article = singleArticleRes.data.article as IArticle
       setSingleArticle(article);
       setUsername(article.author.username);
       setFollowing(article.author.following);
