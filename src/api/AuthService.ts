@@ -10,9 +10,6 @@ export class AuthService {
     this.api = new ApiService<IUser>();
   }
 
-  //   type
-  // 
-
   private handleUserResponse(user:IUser) {
     setLocalStorage("token", user.token);
 
@@ -40,12 +37,18 @@ export class AuthService {
     };
     return this.api.post("users/login", data)
     .then((res) => {
+      // TODO use json.parse() to deserialzie
       this.handleUserResponse(res.data.user);
       return res.data.user;
     });
   }
 
-  public getCurrrent() {
+  public getCurrrentUser() {
     return this.api.get("user");
   }
+
+  public updateUser(user:object) {
+    return this.api.put('user',{"user":user})
+  }
+
 }

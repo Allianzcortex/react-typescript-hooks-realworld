@@ -22,5 +22,5 @@ is stored in local). and need to add `privateRouter` to enable permission check
 
 9. enable eslint check. ref : https://testing-library.com/docs/guide-disappearance/#nottobeinthedocument
 
-10. 
+10. add react-router 404 NOT FOUND page
 

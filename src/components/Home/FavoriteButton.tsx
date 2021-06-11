@@ -2,7 +2,7 @@ import produce from "immer";
 import React, { Fragment, useState } from "react";
 import { Button, Icon } from "semantic-ui-react";
 import { useArticleService } from "../../hooks";
-import { IArticle } from "../../models/types";
+import { IArticle, IUser } from "../../models/types";
 
 interface IProps {
   iarticle: IArticle;
@@ -23,11 +23,12 @@ export const FavoriteButton = ({ iarticle }: IProps) => {
       } else {
         res = await articleService.favoriteArticle(slug);
       }
-      console.log(res.data)
+      console.log(res.data);
+      const article = JSON.parse(res.data.article) as IArticle;
       setArticle(
         produce(article, (draft) => {
-          draft.favorited = res.data.article.favorited;
-          draft.favoritesCount = res.data.article.favoritesCount;
+          draft.favorited = article.favorited;
+          draft.favoritesCount = article.favoritesCount;
         })
       );
     } catch (error) {

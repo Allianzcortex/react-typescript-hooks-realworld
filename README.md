@@ -4,10 +4,9 @@ Tech Stack :
 
 React + Functional Component + Immer + Redux + Hooks + Fetch + Testing Library
 
-
 ---
 
-Build it with 2 ways : 
+Build it with 2 ways :
 
 1. The first way :
 
@@ -19,3 +18,10 @@ a. run `npm install` to install all dependencies
 
 b. run `npm start` to run the app
 
+---
+
+TODO:
+
+- [ ] add tests for more components to improve coverage rate
+
+- [ ] use [class-transformer](https://github.com/typestack/class-transformer) or [serializr](https://github.com/mobxjs/serializr) to deserialize JSON to object instead of `JSON.parse()`

@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Button, Icon } from "semantic-ui-react";
 import { useProfileService } from "../../hooks";
+import { IProfile } from "../../models/types";
 
 interface IProps {
   following: boolean;
@@ -20,9 +21,10 @@ export const FollowButton = ({ following, setFollowing, username }: IProps) => {
       } else {
         res = await profileService.followUser(username);
       }
-      setFollowing(res.data.profile.following);
+      const profile = JSON.parse(res.data.profile) as IProfile;
+      setFollowing(profile.following);
     } catch (error) {
-        // TODO add error dispatcher to handle error
+      // TODO add error dispatcher to handle error
     }
   };
 

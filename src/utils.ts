@@ -17,6 +17,10 @@ export const getLocalStorage = (key: string): string | null => {
   }
 };
 
+export const removeLocalStorage = (key: string) => {
+  localStorage.removeItem(key);
+};
+
 // will show 10 articles in each page
 export const PER_PAGE_COUNT = 10;
 

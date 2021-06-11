@@ -15,6 +15,10 @@ export interface IUser {
   image: string;
 }
 
+export interface ISettingUser extends Omit<IUser, "token"> {
+  password: string;
+}
+
 export interface IProfile {
   username: string;
   bio: string;

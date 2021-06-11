@@ -3,24 +3,25 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://conduit.productionready.io/api/";
 
-const token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg1NTQ1NjN9.q-x_CDleFeSYuJfiaXChAc9DXodKjpQmg8uZt5YpTxg"
-axios.defaults.headers.common['Authorization'] = `Token ${token}`;
+const token =
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg1NTQ1NjN9.q-x_CDleFeSYuJfiaXChAc9DXodKjpQmg8uZt5YpTxg";
+axios.defaults.headers.common["Authorization"] = `Token ${token}`;
 
 export class ApiService<T> {
-  public async get(url:string,body?: object | FormData): Promise<any> {
-    return this.send(Method.Get, url,body);
+  public async get<T>(url: string, body?: object | FormData): Promise<any> {
+    return this.send(Method.Get, url, body);
   }
-  public async post(url:string,body?: object | FormData): Promise<any> {
-    return this.send(Method.Post, url,body);
+  public async post<T>(url: string, body?: object | FormData): Promise<any> {
+    return this.send(Method.Post, url, body);
   }
-  public async delete(url:string,body?: object | FormData): Promise<any> {
-    return this.send(Method.Delete, url,body);
+  public async delete<T>(url: string, body?: object | FormData): Promise<any> {
+    return this.send(Method.Delete, url, body);
   }
-  public async put(url:string,body?: object | FormData): Promise<any> {
-    return this.send(Method.Put, url,body);
+  public async put<T>(url: string, body?: object | FormData): Promise<any> {
+    return this.send(Method.Put, url, body);
   }
 
-  private async send(
+  private async send<T>(
     method: Method,
     url: string,
     body?: object | FormData
@@ -43,7 +44,7 @@ export class ApiService<T> {
       // headers:headers,
     };
 
-    let res;  
+    let res;
     await axios(options)
       .then((response) => {
         res = response;
@@ -51,7 +52,7 @@ export class ApiService<T> {
       .catch((error) => {
         // TODO continue, handle error response and redirect
         res = Promise.reject(error.response);
-      })
+      });
     return res;
   }
 }
