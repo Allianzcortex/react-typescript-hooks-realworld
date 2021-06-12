@@ -33,7 +33,7 @@ function App() {
         {/* <SnackbarProvider> */}
         <ToastProvider
           autoDismiss={true}
-          autoDismissTimeout={1800}
+          autoDismissTimeout={2500}
           placement={"top-center"}
         >
           <ServicesContext.Provider value={services!}>

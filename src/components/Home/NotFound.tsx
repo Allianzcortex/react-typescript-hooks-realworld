@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
 
 import notfound from "../../notfound.jpg";
-import {setWarning } from "../../redux/actions";
+import { setWarning } from "../../redux/actions";
+import { Message } from "semantic-ui-react";
 
 export const NotFound = () => {
   const history = useHistory();
@@ -18,12 +19,14 @@ export const NotFound = () => {
     );
     setTimeout(() => {
       history.push("/");
-    }, 3000);
+    }, 2500);
   }, []);
 
   return (
-    <div>
-      404 NOT FOUND
+    <div className="middle-container">
+      <Message negative>
+        <Message.Header>URL DOES NOT EXIST ┭┮﹏┭┮！！！！</Message.Header>
+      </Message>
       <img src={notfound} />
     </div>
   );
