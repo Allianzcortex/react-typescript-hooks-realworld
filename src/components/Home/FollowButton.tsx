@@ -1,9 +1,12 @@
-import React, { Fragment, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { Dispatch, Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Icon } from "semantic-ui-react";
 import { useProfileService } from "../../hooks";
 import { IProfile } from "../../models/types";
 import { AppState } from "../../redux/store";
+import { NotificationAction } from "../../redux/reducers/NotifyReducer";
+import { setWarning } from "../../redux/actions";
+import { useHistory } from "react-router-dom";
 
 interface IProps {
   profile: IProfile;
@@ -12,11 +15,18 @@ interface IProps {
 export const FollowButton = ({ profile }: IProps) => {
   const profileService = useProfileService();
   const { username } = profile;
+  const history = useHistory();
   const [following, setFollowing] = useState<Boolean>(profile.following);
+  const notifyDispatch = useDispatch<Dispatch<NotificationAction>>();
   const { isAuthenticated, user } = useSelector(
     (state: AppState) => state.auth
   );
   const handleFollowUser = async () => {
+    if (!isAuthenticated) {
+      notifyDispatch(setWarning("You need to login firstly."));
+      history.push("/login");
+      return;
+    }
     let res;
     try {
       if (following) {
@@ -31,17 +41,17 @@ export const FollowButton = ({ profile }: IProps) => {
     }
   };
 
-  if (isAuthenticated && user !== username) {
-    return (
-      <Fragment>
-        {}
-        <Button size="tiny" icon onClick={handleFollowUser}>
-          <Icon name="plus" />
-          {following ? "Unfolloww" : "Follow"}&nbsp; {username}
-        </Button>
-      </Fragment>
-    );
+  if (isAuthenticated && user === username) {
+    // no need to follow userself
+    return <Fragment></Fragment>;
   }
 
-  return <Fragment></Fragment>;
+  return (
+    <Fragment>
+      <Button size="tiny" icon onClick={handleFollowUser}>
+        <Icon name="plus" />
+        {following ? "Unfolloww" : "Follow"}&nbsp; {username}
+      </Button>
+    </Fragment>
+  );
 };

@@ -44,8 +44,8 @@ export default function Login() {
     event.preventDefault();
     try {
       const res = await authService.login(email, password);
-      // need type strickt check to know returned object is whether a string
-      authDispatch(loadUser(res.username));
+      // need type strickt check to know returned object is whether a
+      authDispatch(loadUser(res));
       history.push("/");
       notifyDiapatch(setSuccess("Login Successfully."));
     } catch (error) {

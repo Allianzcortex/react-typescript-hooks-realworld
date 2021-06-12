@@ -24,7 +24,10 @@ export class AuthService {
       },
     };
 
-    return this.api.post("users", data);
+    return this.api.post("users", data).then((res)=>{
+      this.handleUserResponse(res.data.user);
+      return Promise.resolve(res.data.user.username);
+    });
   }
 
   public login(email: string, password: string) {
@@ -37,7 +40,7 @@ export class AuthService {
     return this.api.post("users/login", data)
     .then((res) => {
       this.handleUserResponse(res.data.user);
-      return res.data.user;
+      return Promise.resolve(res.data.user.username);
     });
   }
 

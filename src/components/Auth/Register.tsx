@@ -13,7 +13,8 @@ import { useAuthService } from "../../hooks";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
-import { setError, setSuccess } from "../../redux/actions";
+import { loadUser, setError, setSuccess } from "../../redux/actions";
+import { AuthAction } from "../../redux/reducers/AuthReducer";
 
 export const Register = () => {
   const [user, setUser] = useState<IRegisterUser>({
@@ -24,6 +25,7 @@ export const Register = () => {
   const authService = useAuthService();
   const history = useHistory();
   const notifyDiapatch = useDispatch<Dispatch<NotificationAction>>();
+  const authDispatch = useDispatch<Dispatch<AuthAction>>();
 
   const handleUpdateField = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -41,13 +43,14 @@ export const Register = () => {
   const handleSubmit = () => {
     const registerUser = async () => {
       try {
-        const res = await authService.register(
+          const res = await authService.register(
           user.username,
           user.email,
           user.password
         );
-        notifyDiapatch(setSuccess("User Register successfully."));
+        authDispatch(loadUser(res));
         history.push("/");
+        notifyDiapatch(setSuccess("User Register successfully."));
       } catch (error) {
         notifyDiapatch(setError(error.data.errors));
       }
@@ -84,6 +87,7 @@ export const Register = () => {
             <label>Password</label>
             <input
               name="password"
+              type="password"
               placeholder="Password"
               onChange={handleUpdateField}
               required

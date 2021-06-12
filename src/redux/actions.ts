@@ -2,6 +2,9 @@ import { IUser } from "../models/types";
 import { AuthAction } from "./reducers/AuthReducer";
 import { LoaderAction } from "./reducers/LoaderReducer";
 import { NotificationAction } from "./reducers/NotifyReducer";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
+
 
 // -----------------------------------------------
 // Auth part
@@ -26,6 +29,7 @@ export const loadUser: (user:string) => AuthAction = (user: string) => {
 
 // -----------------------------------------------
 // Notification part
+
 export const setError: (data: object | string) => NotificationAction = (
   data: object | string
 ) => {
