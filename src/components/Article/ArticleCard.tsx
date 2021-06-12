@@ -18,8 +18,9 @@ export const ArticleCard=({article}:IProps)=>{
 
         <Link to={`article/${article.slug}`} 
         >{article.title}</Link> &nbsp;
-
-        {article.author.username}
+        ------------------------------
+        <Link to={`profile/${article.author.username}`} 
+        >{article.author.username}</Link> 
     </div>)
 
 }

@@ -69,6 +69,7 @@ export default function Login() {
             <label>Password</label>
             <input
               name="Password"
+              type="password"
               placeholder="Password"
               onChange={handleUpdateField}
               required

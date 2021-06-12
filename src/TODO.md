@@ -26,3 +26,5 @@ is stored in local). and need to add `privateRouter` to enable permission check
 
 11. - [] use `react-notify` to replace `react-simple-snackbar`
 
+12. - [] figure it out why downloading square image can't work 
+

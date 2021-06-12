@@ -1,18 +1,16 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Button, Icon } from "semantic-ui-react";
 import { useProfileService } from "../../hooks";
 import { IProfile } from "../../models/types";
 
 interface IProps {
-  following: boolean;
-  setFollowing: any;
-  username: string;
-  handleFollowing?: () => {};
+  profile: IProfile;
 }
 
-export const FollowButton = ({ following, setFollowing, username }: IProps) => {
+export const FollowButton = ({ profile }: IProps) => {
   const profileService = useProfileService();
-
+  const {username } = profile;
+  const [following,setFollowing] = useState<Boolean>(profile.following)
   const handleFollowUser = async () => {
     let res;
     try {

@@ -65,10 +65,10 @@ export const MainView = () => {
       let articleRes;
       switch (currentTab) {
         case "global-feed":
-          articleRes = await articleService.getArticles(
-            currentPage,
-            currentTag
-          );
+          articleRes = await articleService.getArticles({
+            page: currentPage,
+            tag: currentTag,
+          });
           break;
         case "feed":
           articleRes = await articleService.getFeed(currentPage);

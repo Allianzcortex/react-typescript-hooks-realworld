@@ -46,8 +46,8 @@ export const ArticleView = () => {
       loaderDiapatch(setLoading("fetch article and comment"));
 
       const singleArticleRes = await articleService.getSingleArticle(slug);
-      console.log(singleArticleRes.data.article)
-      const article = singleArticleRes.data.article as IArticle
+      console.log(singleArticleRes.data.article);
+      const article = singleArticleRes.data.article as IArticle;
       setSingleArticle(article);
       setUsername(article.author.username);
       setFollowing(article.author.following);
@@ -79,11 +79,7 @@ export const ArticleView = () => {
           created by {username}
           <br />
           body : {singleArticle?.body}
-          <FollowButton
-            following={following!}
-            setFollowing={setFollowing}
-            username={username!}
-          />
+          <FollowButton profile={singleArticle?.author} />
           <FavoriteButton iarticle={singleArticle!} />
         </Fragment>
       )}

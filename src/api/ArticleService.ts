@@ -29,17 +29,21 @@ export class ArticleService {
     return this.api.delete(`articles/${slug}`);
   }
 
-  public getArticles(page: number, tag?: string, favorited?: string) {
+  public getArticles(paras:{page: number, tag?: string, 
+    favorited?: string,author?: string}) {
     let parameter = "";
-
-    if (tag !== undefined) {
-      parameter += `tag=${tag}`;
+    
+    if (paras.tag !== undefined) {
+      parameter += `tag=${paras.tag}`;
     }
-    if (favorited !== undefined) {
-      parameter += `&favorited=${favorited}`;
+    if (paras.favorited !== undefined) {
+      parameter += `&favorited=${paras.favorited}`;
+    }
+    if (paras.author !==undefined) {
+      parameter += `&author=${paras.author}`;
     }
     return this.api.get(
-      `articles?${parameter}&${pageParameter(PER_PAGE_COUNT, page)}`
+      `articles?${parameter}&${pageParameter(PER_PAGE_COUNT,paras.page)}`
     );
   }
 

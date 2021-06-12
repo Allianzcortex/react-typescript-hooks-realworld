@@ -16,9 +16,10 @@ import { ArticleView } from "./components/Article/ArticleView";
 import { ArticleEditor } from "./components/Article/ArticleEditor";
 import { SettingEditor } from "./components/Home/SettingEditor";
 import { Loader } from "./components/Home/Loader";
-import { ToastProvider, useToasts } from "react-toast-notifications";
+import { ToastProvider } from "react-toast-notifications";
 import { Register } from "./components/Auth/Register";
 import { NotFound } from "./components/Home/NotFound";
+import { Profile } from "./components/Home/Profile";
 
 function App() {
   let services: IServices;
@@ -60,11 +61,12 @@ function App() {
                       <ArticleView />
                     </Route>
                     <Route
-                      path="/setting"
-                      component={SettingEditor}
+                      path="/profile/:username"
+                      component={Profile}
                       exact
-                    ></Route>
-                    <Route component={NotFound}></Route>
+                    />
+                    <Route path="/setting" component={SettingEditor} exact />
+                    <Route component={NotFound} />
                   </Switch>
                 </header>
                 <Footer />
