@@ -16,8 +16,9 @@ import { ArticleView } from "./components/Article/ArticleView";
 import { ArticleEditor } from "./components/Article/ArticleEditor";
 import { SettingEditor } from "./components/Home/SettingEditor";
 import { Loader } from "./components/Home/Loader";
-import { ToastProvider, useToasts } from 'react-toast-notifications';
+import { ToastProvider, useToasts } from "react-toast-notifications";
 import { Register } from "./components/Auth/Register";
+import { NotFound } from "./components/Home/NotFound";
 
 function App() {
   let services: IServices;
@@ -30,15 +31,18 @@ function App() {
     <Router>
       <ReduxProvider store={store}>
         {/* <SnackbarProvider> */}
-        <ToastProvider autoDismiss={true} autoDismissTimeout={100000}
-        placement={'top-center'}>
+        <ToastProvider
+          autoDismiss={true}
+          autoDismissTimeout={1800}
+          placement={"top-center"}
+        >
           <ServicesContext.Provider value={services!}>
             <Fragment>
               <Notification />
               <div className="App">
                 <header className="App-header">
                   <Header />
-                  <Loader/>
+                  <Loader />
                   <Switch>
                     <Route path="/" exact>
                       <MainView />
@@ -47,24 +51,27 @@ function App() {
                       <Login />
                     </Route>
                     <Route path="/register">
-                      <Register/>
+                      <Register />
                     </Route>
                     <Route path="/article/edit/:slug?" exact>
                       <ArticleEditor />
                     </Route>
                     <Route path="/article/:slug" exact>
-                      <ArticleView/>
+                      <ArticleView />
                     </Route>
-                    <Route path="/setting" exact>
-                      <SettingEditor />
-                    </Route>
+                    <Route
+                      path="/setting"
+                      component={SettingEditor}
+                      exact
+                    ></Route>
+                    <Route component={NotFound}></Route>
                   </Switch>
                 </header>
                 <Footer />
               </div>
             </Fragment>
           </ServicesContext.Provider>
-          </ToastProvider>
+        </ToastProvider>
         {/* </SnackbarProvider> */}
       </ReduxProvider>
     </Router>

@@ -12,7 +12,7 @@ import "./style.css";
 
 interface IProps {
   tags: string[];
-  tab: string;
+  tab?: string;
   currentTag: string | undefined;
   setCurrentTag: Dispatch<SetStateAction<string | undefined>>;
 }
@@ -32,7 +32,7 @@ export const TagList = ({ tags, tab, currentTag, setCurrentTag }: IProps) => {
 
   const notifyDispatch = useDispatch<Dispatch<NotificationAction>>();
 
-  const handleTagClick = (event: SyntheticEvent, data: object) => {
+  const handleTagClick = (_: SyntheticEvent, data: object) => {
     const newTag = (data as any).children;
     if (tab === "feed") {
       // not support yet

@@ -15,6 +15,8 @@ interface IData {
 }
 
 export const Pagination = ({ count, currentPage, setCurrentPage }: IProps) => {
+  // <button></button>
+  type xx=React.ButtonHTMLAttributes<HTMLButtonElement>
   const totalPages =
     count % PER_PAGE_COUNT == 0
       ? Math.floor(count / PER_PAGE_COUNT)

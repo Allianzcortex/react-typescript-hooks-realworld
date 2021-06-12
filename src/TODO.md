@@ -3,7 +3,7 @@
 1. use context(https://reactjs.org/docs/context.html) to pass
 global state (e..g authProvider)
 
-2. set snackbar with a proper color and location
+- [x]set snackbar with a proper color and location
 
 3. when input is invalid, set the color and input box to be auto-focused so 
 more user-friendly
@@ -23,4 +23,6 @@ is stored in local). and need to add `privateRouter` to enable permission check
 9. enable eslint check. ref : https://testing-library.com/docs/guide-disappearance/#nottobeinthedocument
 
 10. add react-router 404 NOT FOUND page
+
+11. - [] use `react-notify` to replace `react-simple-snackbar`
 

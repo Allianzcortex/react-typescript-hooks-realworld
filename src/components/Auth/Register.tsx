@@ -38,10 +38,6 @@ export const Register = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   const handleSubmit = () => {
     const registerUser = async () => {
       try {
