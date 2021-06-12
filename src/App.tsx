@@ -9,7 +9,6 @@ import { store } from "./redux/store";
 import "semantic-ui-css/semantic.min.css";
 import { Header } from "./components/Home/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import SnackbarProvider from "react-simple-snackbar";
 import { Footer } from "./components/Home/Footer";
 import { MainView } from "./components/MainView";
 import { ArticleView } from "./components/Article/ArticleView";
@@ -29,11 +28,9 @@ function App() {
     services = initServices();
   });
 
-
   return (
     <Router>
       <ReduxProvider store={store}>
-        {/* <SnackbarProvider> */}
         <ToastProvider
           autoDismiss={true}
           autoDismissTimeout={2500}
@@ -48,7 +45,7 @@ function App() {
                   <Loader />
                   <Switch>
                     <Route path="/" exact>
-                      <MainView />
+                      <GuardRouter Comp={MainView} />
                     </Route>
                     <Route path="/login">
                       <Login />
@@ -76,7 +73,6 @@ function App() {
             </Fragment>
           </ServicesContext.Provider>
         </ToastProvider>
-        {/* </SnackbarProvider> */}
       </ReduxProvider>
     </Router>
   );

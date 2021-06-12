@@ -1,5 +1,6 @@
-import { IArticleMeta } from "./models/types";
+import { IArticleMeta, IJWTPayload } from "./models/types";
 import _ from "lodash";
+import jwtDecode from "jwt-decode";
 
 export const setLocalStorage = (key: string, token: string) => {
   localStorage.setItem(key, JSON.stringify(token));
@@ -24,7 +25,24 @@ export const removeLocalStorage = (key: string) => {
 // will show 10 articles in each page
 export const PER_PAGE_COUNT = 10;
 
-/**
+const isExpValid = (date: number) => {
+  // timestamp in typescript will be in miliseconds format
+  // epoch
+  return new Date().getTime() / 1000 <= date;
+};
+
+export const getUserFromJWT = (token: string | null) => {
+  if (token === null) {
+    return null;
+  }
+  const decoded = jwtDecode<IJWTPayload>(token); // Returns with the JwtPayload type
+  if (!isExpValid(decoded.exp)) {
+    return null;
+  }
+  return decoded.username;
+};
+
+/** 
  * 
  * @param limitCount 
  * Limit number of articles (default is 20):

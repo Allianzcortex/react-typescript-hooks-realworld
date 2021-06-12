@@ -13,9 +13,15 @@ import produce from "immer";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LoaderAction } from "../../redux/reducers/LoaderReducer";
-import { clearLoading, setLoading, setSuccess } from "../../redux/actions";
+import {
+  clearLoading,
+  logoutUser,
+  setLoading,
+  setSuccess,
+} from "../../redux/actions";
 import { removeLocalStorage } from "../../utils";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
+import { AuthAction } from "../../redux/reducers/AuthReducer";
 
 export const SettingEditor = () => {
   const [user, setUser] = useState<ISettingUser>({
@@ -30,6 +36,7 @@ export const SettingEditor = () => {
   const history = useHistory();
   const loaderDiapatch = useDispatch<Dispatch<LoaderAction>>();
   const notifyDispatch = useDispatch<Dispatch<NotificationAction>>();
+  const authDispatch = useDispatch<Dispatch<AuthAction>>();
 
   const retrieveCurrentUser = async () => {
     const res = await authService.getCurrrentUser();
@@ -87,6 +94,7 @@ export const SettingEditor = () => {
 
   const handleLogout = () => {
     notifyDispatch(setSuccess("You have loged out successfully !"));
+    authDispatch(logoutUser());
     removeLocalStorage("token");
     history.push("/");
   };

@@ -59,3 +59,9 @@ export interface IComment {
   body: string;
   author: IProfile;
 }
+
+export interface IJWTPayload {
+  id:number,
+  exp:number,
+  username:string
+}
