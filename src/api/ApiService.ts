@@ -1,11 +1,12 @@
 import { Header, Type, Method, Status } from "./http";
 import axios from "axios";
+import { getLocalStorage } from "../utils";
 
 axios.defaults.baseURL = "https://conduit.productionready.io/api/";
 
-const token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg1NTQ1NjN9.q-x_CDleFeSYuJfiaXChAc9DXodKjpQmg8uZt5YpTxg";
-axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+// const token =
+//   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg1NTQ1NjN9.q-x_CDleFeSYuJfiaXChAc9DXodKjpQmg8uZt5YpTxg";
+// axios.defaults.headers.common["Authorization"] = `Token ${token}`;
 
 export class ApiService<T> {
   public async get<T>(url: string, body?: object | FormData): Promise<any> {
@@ -44,13 +45,19 @@ export class ApiService<T> {
       // headers:headers,
     };
 
+    const token = getLocalStorage('token')
+    if (token!==null) {
+      axios.defaults.headers.common["Authorization"] = `Token ${getLocalStorage(
+        "token"
+      )}`;
+    }
+  
     let res;
     await axios(options)
       .then((response) => {
         res = response;
       })
       .catch((error) => {
-        // TODO continue, handle error response and redirect
         res = Promise.reject(error.response);
       });
     return res;

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import Login from "./components/Auth/Login";
 import { Notification } from "./components/Home/Notification";
@@ -20,6 +20,7 @@ import { ToastProvider } from "react-toast-notifications";
 import { Register } from "./components/Auth/Register";
 import { NotFound } from "./components/Home/NotFound";
 import { Profile } from "./components/Home/Profile";
+import { GuardRouter } from "./GuardRouter";
 
 function App() {
   let services: IServices;
@@ -27,6 +28,7 @@ function App() {
   useConstructor(() => {
     services = initServices();
   });
+
 
   return (
     <Router>
@@ -42,7 +44,7 @@ function App() {
               <Notification />
               <div className="App">
                 <header className="App-header">
-                  <Header />
+                  <GuardRouter Comp={Header} />
                   <Loader />
                   <Switch>
                     <Route path="/" exact>

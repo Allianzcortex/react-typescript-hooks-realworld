@@ -17,7 +17,7 @@ export const logoutUser: () => AuthAction = () => {
   };
 };
 
-export const loadUser: (user: IUser) => AuthAction = (user: IUser) => {
+export const loadUser: (user:string) => AuthAction = (user: string) => {
   return {
     type: "LOAD_USER",
     user: user,

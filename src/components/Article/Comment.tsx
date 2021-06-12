@@ -1,5 +1,6 @@
 import React, { Fragment, SyntheticEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Button, Form, Icon, TextArea } from "semantic-ui-react";
 import { useCommentService } from "../../hooks";
 import { IComment } from "../../models/types";
@@ -47,7 +48,7 @@ export const Comment = ({ slug }: IProps) => {
   };
 
   useEffect(() => {
-      // TODO : check whether we need async/await here
+    // TODO : check whether we need async/await here
     retrieveComments();
   }, []);
 
@@ -57,7 +58,7 @@ export const Comment = ({ slug }: IProps) => {
         return (
           <div key={comment.id}>
             {comment.body}
-            {!isAuthenticated || user?.username === comment.author.username ? (
+            {isAuthenticated && user === comment.author.username ? (
               //    <Button size='tiny' icon>
               <Icon
                 size="tiny"
@@ -76,15 +77,21 @@ export const Comment = ({ slug }: IProps) => {
           placeholder="leave your comment here"
           onChange={handleCommentChange}
         />
-
-        <Button
-          size="tiny"
-          attached="right"
-          color="green"
-          onClick={handleSubmitComment}
-        >
-          Post Comment
-        </Button>
+        {isAuthenticated ? (
+          <Button
+            size="tiny"
+            attached="right"
+            color="green"
+            onClick={handleSubmitComment}
+          >
+            Post Comment
+          </Button>
+        ) : (
+          <div>
+            {" "}
+            Please <Link to="/login">Login</Link> to add the comment
+          </div>
+        )}
       </Form>
     </Fragment>
   );

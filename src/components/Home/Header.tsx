@@ -46,6 +46,9 @@ export const Header = () => {
       case "Setting":
         history.push("/setting");
         break;
+      case "User":
+        history.push("/profile/Allianzcortex")
+        break;
     }
   };
 
@@ -64,7 +67,7 @@ export const Header = () => {
               active={activeItem === "Home"}
               onClick={handleItemClick}
             />
-            {!isAuthenticated ? (
+            {isAuthenticated ? (
               <Fragment>
                 <Menu.Item
                   name="Edit"
@@ -87,14 +90,13 @@ export const Header = () => {
                 </Menu.Item>
 
                 <Menu.Item
-                  disabled
                   name="User"
                   className="item-icon"
                   active={activeItem === "User"}
                   onClick={handleItemClick}
                 >
                   <Icon name="user" />
-                  User&nbsp;{user?.username}
+                  User&nbsp;{user}
                 </Menu.Item>
               </Fragment>
             ) : (

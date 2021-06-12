@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
 import { Button, Icon } from "semantic-ui-react";
 import { useProfileService } from "../../hooks";
 import { IProfile } from "../../models/types";
+import { AppState } from "../../redux/store";
 
 interface IProps {
   profile: IProfile;
@@ -9,8 +11,11 @@ interface IProps {
 
 export const FollowButton = ({ profile }: IProps) => {
   const profileService = useProfileService();
-  const {username } = profile;
-  const [following,setFollowing] = useState<Boolean>(profile.following)
+  const { username } = profile;
+  const [following, setFollowing] = useState<Boolean>(profile.following);
+  const { isAuthenticated, user } = useSelector(
+    (state: AppState) => state.auth
+  );
   const handleFollowUser = async () => {
     let res;
     try {
@@ -26,12 +31,17 @@ export const FollowButton = ({ profile }: IProps) => {
     }
   };
 
-  return (
-    <Fragment>
-      <Button size="tiny" icon onClick={handleFollowUser}>
-        <Icon name="plus" />
-        {following ? "Unfolloww" : "Follow"}&nbsp; {username}
-      </Button>
-    </Fragment>
-  );
+  if (isAuthenticated && user !== username) {
+    return (
+      <Fragment>
+        {}
+        <Button size="tiny" icon onClick={handleFollowUser}>
+          <Icon name="plus" />
+          {following ? "Unfolloww" : "Follow"}&nbsp; {username}
+        </Button>
+      </Fragment>
+    );
+  }
+
+  return <Fragment></Fragment>;
 };

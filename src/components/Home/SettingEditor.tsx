@@ -13,7 +13,9 @@ import produce from "immer";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LoaderAction } from "../../redux/reducers/LoaderReducer";
-import { clearLoading, setLoading } from "../../redux/actions";
+import { clearLoading, setLoading, setSuccess } from "../../redux/actions";
+import { removeLocalStorage } from "../../utils";
+import { NotificationAction } from "../../redux/reducers/NotifyReducer";
 
 export const SettingEditor = () => {
   const [user, setUser] = useState<ISettingUser>({
@@ -27,6 +29,7 @@ export const SettingEditor = () => {
   const authService = useAuthService();
   const history = useHistory();
   const loaderDiapatch = useDispatch<Dispatch<LoaderAction>>();
+  const notifyDispatch = useDispatch<Dispatch<NotificationAction>>();
 
   const retrieveCurrentUser = async () => {
     const res = await authService.getCurrrentUser();
@@ -65,7 +68,7 @@ export const SettingEditor = () => {
     console.log(user);
   }, [user]);
 
-  const handleCreateArticle = async () => {
+  const handleUpdateSettings = async () => {
     loaderDiapatch(setLoading("update user"));
 
     let payload: object = _.clone(user);
@@ -80,6 +83,12 @@ export const SettingEditor = () => {
 
     loaderDiapatch(clearLoading());
     history.go(0);
+  };
+
+  const handleLogout = () => {
+    notifyDispatch(setSuccess("You have loged out successfully !"));
+    removeLocalStorage("token");
+    history.push("/");
   };
 
   return (
@@ -128,8 +137,12 @@ export const SettingEditor = () => {
           />
         </Form.Field>
 
-        <Button attached="right" color="green" onClick={handleCreateArticle}>
-          Create Article
+        <Button attached="right" color="green" onClick={handleUpdateSettings}>
+          Update Setting
+        </Button>
+
+        <Button attached="right" color="grey" onClick={handleLogout}>
+          Logout
         </Button>
       </Form>
     </Fragment>

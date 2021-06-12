@@ -1,5 +1,4 @@
 import produce from "immer";
-import { IUser } from "../../models/types";
 
 export type AuthAction =
   | {
@@ -10,17 +9,18 @@ export type AuthAction =
     }
   | {
       type: "LOAD_USER";
-      user: IUser;
+      user: string;
     };
 
 export interface AuthState {
   isAuthenticated: boolean;
-  user: IUser | null;
+  // no need to store whole user object , only username is enough
+  user: string | undefined;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  user: null,
+  user: undefined,
 };
 
 export const authReducer = produce((draft: AuthState, action: AuthAction) => {

@@ -12,7 +12,6 @@ export class AuthService {
 
   private handleUserResponse(user:IUser) {
     setLocalStorage("token", user.token);
-
   }
 
   // TODO define return type
@@ -37,7 +36,6 @@ export class AuthService {
     };
     return this.api.post("users/login", data)
     .then((res) => {
-      // TODO use json.parse() to deserialzie
       this.handleUserResponse(res.data.user);
       return res.data.user;
     });
