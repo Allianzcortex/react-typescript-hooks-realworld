@@ -12,7 +12,7 @@ export const Loader = () => {
   if (!isLoading &&  messageContent!=="") {
     return (
       <Dimmer active>
-        <SemanticLoader size="medium">
+        <SemanticLoader size="small">
           trying to {`${messageContent}`} ......
         </SemanticLoader>
       </Dimmer>

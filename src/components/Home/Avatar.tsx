@@ -1,5 +1,6 @@
 import React, { Dispatch, useEffect } from "react";
 import { Image } from "semantic-ui-react";
+import { updateCreppyDefaultImage } from "../../utils";
 
 interface IProps {
   image: string;
@@ -8,14 +9,7 @@ interface IProps {
 
 export const Avatar = ({ image, username }: IProps) => {
 
-  const updateCreppyDefaultImage = (image: string) => {
-
-    // Am I the only one that thinks default avatar is creppy ? 
-    if (image === "https://static.productionready.io/images/smiley-cyrus.jpg") {
-      return 'https://react.semantic-ui.com/images/wireframe/square-image.png';
-    }
-    return image;
-  };
+  
 
   return (
     <div>

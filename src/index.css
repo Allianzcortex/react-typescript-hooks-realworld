@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  margin: 0;
+}
+
+html, body {
+  
 }
 
 code {
@@ -19,7 +25,7 @@ code {
 }
 
 .tag-container {
-  margin-right:100px;
+  margin-right:200px;
   width:200px;
 }
 

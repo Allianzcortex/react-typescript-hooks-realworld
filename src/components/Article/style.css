@@ -1,11 +1,28 @@
-
 .ui.pagination.menu .active.item {
-    background-color:green !important;
+  background-color: green !important;
 }
 
 .comment-container {
-    margin-top:100px !important;
+  margin-top: 100px !important;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ui.card {
+    width:450px;
+}
+
+.ui.card > .content > .header {
+  cursor: pointer;
+}
+
+.ui.card > .content > .description {
+    cursor: pointer;
+  }
+
+.articleview-container {
+    margin-left: 35%;
     width:400px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top:5%;
 }

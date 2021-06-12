@@ -18,7 +18,7 @@ import { clearLoading, setLoading, setWarning } from "../redux/actions";
 import { Tabs } from "./Home/Tabs";
 import { NotificationAction } from "../redux/reducers/NotifyReducer";
 import { useHistory } from "react-router-dom";
-import jwt_decode from "jwt-decode";
+import "./style.css";
 
 export const MainView = () => {
   const articleService = useArticleService();
@@ -68,13 +68,14 @@ export const MainView = () => {
   );
 
   useEffect(() => {
+    console.log(currentPage);
     const retrieveArticle = async () => {
       if (!isAuthenticated && currentTab === "feed") {
         notifyDispatch(setWarning("You need to login firstly"));
         history.push("/login");
         return;
       }
-
+      console.log("dispatch--");
       loaderDiapatch(setLoading("fetch articles , generating pagination"));
       let articleRes;
       switch (currentTab) {
@@ -93,6 +94,7 @@ export const MainView = () => {
       setCount(articleRes.data.articlesCount);
 
       loaderDiapatch(clearLoading());
+      window.scrollTo(0, 0);
     };
     retrieveArticle();
   }, [currentPage, currentTag, currentTab]);

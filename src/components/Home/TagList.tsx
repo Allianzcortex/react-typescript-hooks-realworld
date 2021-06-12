@@ -5,7 +5,7 @@ import React, {
   SyntheticEvent,
 } from "react";
 import { useDispatch } from "react-redux";
-import { Label, SemanticCOLORS } from "semantic-ui-react";
+import { Label, SemanticCOLORS, Statistic } from "semantic-ui-react";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
 import { setWarning } from "../../redux/actions";
 import "./style.css";
@@ -52,6 +52,8 @@ export const TagList = ({ tags, tab, currentTag, setCurrentTag }: IProps) => {
 
   return (
     <Fragment>
+      <Statistic label='Popular Tags' value={tags.length} />
+      <br/>
       {tags.map((tag) => {
         return (
           <Label

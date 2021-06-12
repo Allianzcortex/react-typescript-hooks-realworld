@@ -48,3 +48,13 @@
   max-width: 600px;
   margin-left: 300px;
 }
+
+.ui.dimmer {
+  /* very interesing for dimmer */
+  position:fixed !important;
+}
+
+/* .ui.card .meta,  */
+.card .meta {
+  cursor:pointer;
+}

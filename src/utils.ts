@@ -23,7 +23,7 @@ export const removeLocalStorage = (key: string) => {
 };
 
 // will show 10 articles in each page
-export const PER_PAGE_COUNT = 10;
+export const PER_PAGE_COUNT = 6;
 
 const isExpValid = (date: number) => {
   // timestamp in typescript will be in miliseconds format
@@ -65,4 +65,13 @@ export const objectDiff = (a1: IArticleMeta, a2: IArticleMeta) => {
   });
 
   return s;
+};
+
+export const updateCreppyDefaultImage = (image: string) => {
+
+  // Am I the only one that thinks default avatar is creppy ? 
+  if (image === "https://static.productionready.io/images/smiley-cyrus.jpg") {
+    return 'https://www.minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg';
+  }
+  return image;
 };

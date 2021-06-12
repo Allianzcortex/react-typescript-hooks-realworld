@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { Dimmer, Icon, Loader, Menu, Segment } from "semantic-ui-react";
+import {  Icon, Menu, Segment } from "semantic-ui-react";
 import { AppState } from "../../redux/store";
 import "./style.css";
 
@@ -47,7 +47,7 @@ export const Header = () => {
         history.push("/setting");
         break;
       case "User":
-        history.push("/profile/Allianzcortex")
+        history.push(`/profile/${user}`)
         break;
     }
   };

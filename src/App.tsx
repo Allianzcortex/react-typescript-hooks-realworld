@@ -40,34 +40,30 @@ function App() {
             <Fragment>
               <Notification />
               <div className="App">
-                <header className="App-header">
-                  <GuardRouter Comp={Header} />
-                  <Loader />
-                  <Switch>
-                    <Route path="/" exact>
-                      <GuardRouter Comp={MainView} />
-                    </Route>
-                    <Route path="/login">
-                      <Login />
-                    </Route>
-                    <Route path="/register">
-                      <Register />
-                    </Route>
-                    <Route path="/article/edit/:slug?" exact>
-                      <ArticleEditor />
-                    </Route>
-                    <Route path="/article/:slug" exact>
-                      <ArticleView />
-                    </Route>
-                    <Route
-                      path="/profile/:username"
-                      component={Profile}
-                      exact
-                    />
-                    <Route path="/setting" component={SettingEditor} exact />
-                    <Route component={NotFound} />
-                  </Switch>
-                </header>
+                <Loader />
+                {/* <header className="App-header"> */}
+                <GuardRouter Comp={Header} />
+                <Switch>
+                  <Route path="/" exact>
+                    <GuardRouter Comp={MainView} />
+                  </Route>
+                  <Route path="/login">
+                    <Login />
+                  </Route>
+                  <Route path="/register">
+                    <Register />
+                  </Route>
+                  <Route path="/article/edit/:slug?" exact>
+                    <ArticleEditor />
+                  </Route>
+                  <Route path="/article/:slug" exact>
+                    <ArticleView />
+                  </Route>
+                  <Route path="/profile/:username" component={Profile} exact />
+                  <Route path="/setting" component={SettingEditor} exact />
+                  <Route component={NotFound} />
+                </Switch>
+                {/* </header> */}
                 <Footer />
               </div>
             </Fragment>

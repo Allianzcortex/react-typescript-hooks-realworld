@@ -2,7 +2,7 @@ import React, { Dispatch, Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { Button, Form, Popup, TextArea } from "semantic-ui-react";
+import { Button, Form, Icon, Popup, TextArea } from "semantic-ui-react";
 import { useArticleService, useProfileService } from "../../hooks";
 import { IArticle } from "../../models/types";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
@@ -19,6 +19,7 @@ import { Comment } from "./Comment";
 
 import "./style.css";
 import { LoaderAction } from "../../redux/reducers/LoaderReducer";
+import { Avatar } from "../Home/Avatar";
 
 interface routeProps {
   slug: string;
@@ -34,7 +35,6 @@ export const ArticleView = () => {
   const loaderDiapatch = useDispatch<Dispatch<LoaderAction>>();
   const notifyDiapatch = useDispatch<Dispatch<NotificationAction>>();
   const [singleArticle, setSingleArticle] = useState<IArticle>();
-  const [following, setFollowing] = useState<boolean>();
   const [username, setUsername] = useState<string>();
 
   const { isAuthenticated, user } = useSelector(
@@ -46,11 +46,9 @@ export const ArticleView = () => {
       loaderDiapatch(setLoading("fetch article and comment"));
 
       const singleArticleRes = await articleService.getSingleArticle(slug);
-      console.log(singleArticleRes.data.article);
       const article = singleArticleRes.data.article as IArticle;
       setSingleArticle(article);
       setUsername(article.author.username);
-      setFollowing(article.author.following);
 
       loaderDiapatch(clearLoading());
     };
@@ -67,22 +65,24 @@ export const ArticleView = () => {
     }
   };
 
+  if (!isLoading || singleArticle === undefined) {
+    return <Fragment></Fragment>;
+  }
   return (
-    <div>
-      single article {slug}
-      {!isLoading || singleArticle === undefined ? (
-        ""
-      ) : (
-        <Fragment>
-          {" "}
-          <br />
-          created by {username}
-          <br />
-          body : {singleArticle?.body}
-          <FollowButton profile={singleArticle?.author} />
-          <FavoriteButton iarticle={singleArticle!} />
-        </Fragment>
-      )}
+    <div className="articleview-container">
+      <h2>{singleArticle.title}</h2>
+      <Icon name="write" size="small" />
+      <Avatar
+        image={singleArticle.author.image!}
+        username={singleArticle.author.username}
+      />
+      <hr/>
+      <body>{singleArticle.body}</body>
+      <Fragment>
+        <br />
+        <FollowButton profile={singleArticle?.author} />
+        <FavoriteButton iarticle={singleArticle!} />
+      </Fragment>
       <Link to={`/article/edit/${slug}`}>
         <Popup
           content="edit article"
