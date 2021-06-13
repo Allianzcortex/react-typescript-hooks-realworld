@@ -90,30 +90,32 @@ export const Profile = () => {
   }, [currentTab]);
 
   return (
-    <div className="articleview-container">
-      {!isLoading || profile === undefined ? (
-        ""
-      ) : (
-        <div style={{display:'flex',justifyContent:'space-between'}}>
-          <Avatar image={profile.image!} username={username} />
-          <FollowButton profile={profile!} />
-        </div>
-      )}
-      <Fragment>
-        <div className="tab-container">
-          <Tabs tabs={TABS} setCurrentTab={setCurrentTab} />
-        </div>
-        {articleList.map((article) => {
-        return <ArticleCard key={article.slug} article={article} />;
-      })}
+    <div className="main-container">
+      <div className="article-container">
+        {!isLoading || profile === undefined ? (
+          ""
+        ) : (
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Avatar image={profile.image!} username={username} />
+            <FollowButton profile={profile!} />
+          </div>
+        )}
+        <Fragment>
+          <div className="tab-container">
+            <Tabs tabs={TABS} setCurrentTab={setCurrentTab} />
+          </div>
+          {articleList.map((article) => {
+            return <ArticleCard key={article.slug} article={article} />;
+          })}
 
-        <Pagination
-          count={articleCount}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      </Fragment>
-      )
+          <Pagination
+            count={articleCount}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </Fragment>
+        )
+      </div>
     </div>
   );
 };

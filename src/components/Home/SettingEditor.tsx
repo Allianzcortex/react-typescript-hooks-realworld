@@ -16,6 +16,7 @@ import { LoaderAction } from "../../redux/reducers/LoaderReducer";
 import {
   clearLoading,
   logoutUser,
+  setError,
   setLoading,
   setSuccess,
 } from "../../redux/actions";
@@ -76,20 +77,25 @@ export const SettingEditor = () => {
   }, [user]);
 
   const handleUpdateSettings = async () => {
-    loaderDiapatch(setLoading("update user"));
+    try {
+      loaderDiapatch(setLoading("update user"));
 
-    let payload: object = _.clone(user);
-    if (user.password === "") {
-      payload = _.omit(payload, "password");
+      let payload: object = _.clone(user);
+      if (user.password === "") {
+        payload = _.omit(payload, "password");
+      }
+      const res = await authService.updateUser(payload);
+
+      notifyDispatch(
+        setSuccess("You settings have been updated successfully.")
+      );
+      await retrieveCurrentUser();
+      history.go(0);
+    } catch (error) {
+      notifyDispatch(setError(error.data.errors));
+    } finally {
+      loaderDiapatch(clearLoading());
     }
-    const res = await authService.updateUser(payload);
-    console.log("update value");
-    console.log(res);
-    //TODO add successful information
-    await retrieveCurrentUser();
-
-    loaderDiapatch(clearLoading());
-    history.go(0);
   };
 
   const handleLogout = () => {
@@ -111,7 +117,6 @@ export const SettingEditor = () => {
             value={user.image}
           />
         </Form.Field>
-
         <Form.Field>
           <label>Username</label>
           <input
@@ -129,12 +134,10 @@ export const SettingEditor = () => {
             value={user.bio}
           />
         </Form.Field>
-
         <Form.Field>
           <label>Email</label>
           <input name="email" onChange={handleUpdateField} value={user.email} />
         </Form.Field>
-
         <Form.Field>
           <label>New Password</label>
           <input
@@ -143,7 +146,6 @@ export const SettingEditor = () => {
             value={user.password}
           />
         </Form.Field>
-
         <Button attached="right" color="green" onClick={handleUpdateSettings}>
           Update Setting
         </Button>
