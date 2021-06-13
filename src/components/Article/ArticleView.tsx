@@ -76,52 +76,54 @@ export const ArticleView = () => {
     return <Fragment></Fragment>;
   }
   return (
-    <div className="articleview-container">
-      <h2>{singleArticle.title}</h2>
-      <div style={{ display: "flex" }}>
-        <div style={{ paddingBottom: "3px" }}>
-          <Icon name="write" size="small" />
-        </div>
-        &nbsp;&nbsp;
-        <Link to={`/profile/${singleArticle.author.username}`}>
-          <Avatar
-            image={singleArticle.author.image!}
-            username={singleArticle.author.username}
-          />
-        </Link>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <FollowButton profile={singleArticle?.author} /> &nbsp;&nbsp;
-        <FavoriteButton iarticle={singleArticle!} />
-      </div>
-
-      <Divider />
-      <body>{singleArticle.body}</body>
-
-      {isAuthenticated && user === singleArticle.author.username ? (
-        <Fragment>
-          <Link to={`/article/edit/${slug}`}>
-            <Popup
-              content="edit article"
-              trigger={<Button size="mini" color={"green"} icon="pencil" />}
+    <div className="main-container">
+      <div className="articleview-container">
+        <h2>{singleArticle.title}</h2>
+        <div style={{ display: "flex" }}>
+          <div style={{ paddingBottom: "3px" }}>
+            <Icon name="write" size="small" />
+          </div>
+          &nbsp;&nbsp;
+          <Link to={`/profile/${singleArticle.author.username}`}>
+            <Avatar
+              image={singleArticle.author.image!}
+              username={singleArticle.author.username}
             />
           </Link>
-          <Popup
-            content="delete article"
-            trigger={
-              <Button
-                size="mini"
-                color={"grey"}
-                icon="trash"
-                onClick={handleDeleteArticle}
-              />
-            }
-          />
-        </Fragment>
-      ) : (
-        <></>
-      )}
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <FollowButton profile={singleArticle?.author} /> &nbsp;&nbsp;
+          <FavoriteButton iarticle={singleArticle!} />
+        </div>
 
-      <Comment slug={slug} />
+        <Divider />
+        <p>{singleArticle.body}</p>
+
+        {isAuthenticated && user === singleArticle.author.username ? (
+          <Fragment>
+            <Link to={`/article/edit/${slug}`}>
+              <Popup
+                content="edit article"
+                trigger={<Button size="mini" color={"green"} icon="pencil" />}
+              />
+            </Link>
+            <Popup
+              content="delete article"
+              trigger={
+                <Button
+                  size="mini"
+                  color={"grey"}
+                  icon="trash"
+                  onClick={handleDeleteArticle}
+                />
+              }
+            />
+          </Fragment>
+        ) : (
+          <></>
+        )}
+
+        <Comment slug={slug} />
+      </div>
     </div>
   );
 };

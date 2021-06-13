@@ -5,7 +5,7 @@
 .comment-container .button {
   /* TODO This is a tricky fix and we'll want to make button auto responsive 
   when more comments are added */
-  z-index: 999;
+  /* z-index: 999; */
 }
 
 .ui.card {

@@ -71,7 +71,7 @@ export const updateCreppyDefaultImage = (image: string) => {
 
   // Am I the only one that thinks default avatar is creppy ? 
   if (image === "https://static.productionready.io/images/smiley-cyrus.jpg") {
-    return 'https://www.minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg';
+    return 'default-avatar.jpg';
   }
   return image;
 };
