@@ -1,11 +1,23 @@
-import React, { Fragment, SyntheticEvent, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { Dispatch, Fragment, SyntheticEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Form, Icon, TextArea } from "semantic-ui-react";
+import {
+  Button,
+  Comment as SemanticComment,
+  Divider,
+  Form,
+  Icon,
+  TextArea,
+} from "semantic-ui-react";
 import { useCommentService } from "../../hooks";
 import { IComment } from "../../models/types";
 import { AppState } from "../../redux/store";
+import { updateCreppyDefaultImage } from "../../utils";
+import { LoaderAction } from "../../redux/reducers/LoaderReducer";
+
 import "./style.css";
+import { clearLoading, setLoading } from "../../redux/actions";
+import { loadDefs } from "nock/types";
 
 interface IProps {
   slug: string;
@@ -15,6 +27,7 @@ export const Comment = ({ slug }: IProps) => {
   const commentService = useCommentService();
   const [comments, setComments] = useState<IComment[]>([]);
   const [singleComment, setSingleComment] = useState<string>("");
+  const loaderDispatch = useDispatch<Dispatch<LoaderAction>>();
   const { isAuthenticated, user } = useSelector(
     (state: AppState) => state.auth
   );
@@ -31,8 +44,12 @@ export const Comment = ({ slug }: IProps) => {
 
   const handleSubmitComment = async () => {
     try {
+      loaderDispatch(setLoading("append comments"))
+
       await commentService.sendComment(slug, singleComment);
       await retrieveComments();
+
+      loaderDispatch(clearLoading())
     } catch (error) {
       // TODO handle error
     }
@@ -54,23 +71,41 @@ export const Comment = ({ slug }: IProps) => {
 
   return (
     <Fragment>
-      {comments.map((comment) => {
-        return (
-          <div key={comment.id}>
-            {comment.body}
-            {isAuthenticated && user === comment.author.username ? (
-              //    <Button size='tiny' icon>
-              <Icon
-                size="tiny"
-                onClick={() => handleDeleteComment(comment.id)}
-                name="trash alternate"
+      <h4>Comments</h4>
+      <Divider />
+      <SemanticComment.Group>
+        {comments.map((comment) => {
+          return (
+            <SemanticComment>
+              <SemanticComment.Avatar
+                src={updateCreppyDefaultImage(comment.author.image!)}
               />
-            ) : (
-              ""
-            )}
-          </div>
-        );
-      })}
+              <SemanticComment.Content>
+                <SemanticComment.Author as="a">
+                  {comment.author.username}
+                </SemanticComment.Author>
+                <SemanticComment.Metadata>
+                  <div>{comment.createdAt}</div>
+                </SemanticComment.Metadata>
+                <SemanticComment.Text>{comment.body}</SemanticComment.Text>
+                <SemanticComment.Action>
+                  {isAuthenticated && user === comment.author.username ? (
+                    <Icon
+                      size="tiny"
+                      onClick={() => handleDeleteComment(comment.id)}
+                      name="trash alternate"
+                    />
+                  ) : (
+                    ""
+                  )}
+                </SemanticComment.Action>
+                --------
+              </SemanticComment.Content>
+            </SemanticComment>
+            
+          );
+        })}
+      </SemanticComment.Group>
 
       <Form className="comment-container">
         <TextArea
@@ -82,6 +117,7 @@ export const Comment = ({ slug }: IProps) => {
             size="tiny"
             attached="right"
             color="green"
+            style={{ marginTop: "10px", marginLeft: "auto" }}
             onClick={handleSubmitComment}
           >
             Post Comment

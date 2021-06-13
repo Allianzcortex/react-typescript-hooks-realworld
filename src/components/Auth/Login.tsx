@@ -5,7 +5,7 @@ import React, {
   SyntheticEvent,
   useState,
 } from "react";
-import { Button, Form, Menu, Segment } from "semantic-ui-react";
+import { Button, Form, Input, Menu, Segment } from "semantic-ui-react";
 import "./Login.css";
 import { IError } from "../../models/types";
 import produce from "immer";
@@ -16,6 +16,7 @@ import { NotificationAction } from "../../redux/reducers/NotifyReducer";
 import { AuthAction } from "../../redux/reducers/AuthReducer";
 import { loadUser, setError, setSuccess } from "../../redux/actions";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   // handle email/password/loading/conditions
@@ -55,11 +56,17 @@ export default function Login() {
 
   return (
     <Fragment>
-      <div className="login-container">
+      <div className="auth-container">
+        {/* css-in-js can be a better solution here tho */}
+        <div className='banner'>
+          <h1>Sign in</h1>
+          <Link to="/register">Need an account?</Link>
+        </div>
         <Form>
           <Form.Field>
             <label>Email</label>
-            <input
+            <Input
+             size='small'
               name="Email"
               placeholder="Email"
               onChange={handleUpdateField}
@@ -68,7 +75,8 @@ export default function Login() {
           </Form.Field>
           <Form.Field>
             <label>Password</label>
-            <input
+            <Input
+             size='small'
               name="Password"
               type="password"
               placeholder="Password"
@@ -80,7 +88,7 @@ export default function Login() {
       <Checkbox label='I agree to the Terms and Conditions' />
     </Form.Field> */}
           <Button attached="right" color="green" onClick={handleSubmit}>
-            Submit
+            Sin In
           </Button>
         </Form>
       </div>

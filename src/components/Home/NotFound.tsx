@@ -16,9 +16,9 @@ export const NotFound = () => {
         "current path doesn't exist and you will be redirected to home page soon..."
       )
     );
-    // setTimeout(() => {
-    //   history.push("/");
-    // }, 2500);
+    setTimeout(() => {
+      history.push("/");
+    }, 2500);
   }, []);
 
   return (

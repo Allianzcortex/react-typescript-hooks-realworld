@@ -14,11 +14,11 @@ export const ArticleCard = ({ article }: IProps) => {
   const history = useHistory();
 
   const gotoArticle = () => {
-    history.push(`article/${article.slug}`);
+    history.push(`/article/${article.slug}`);
   };
 
   const gotoAuthor = () => {
-    history.push(`profile/${article.author.username}`);
+    history.push(`/profile/${article.author.username}`);
   };
 
   return (

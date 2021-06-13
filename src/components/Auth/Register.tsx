@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Input } from "semantic-ui-react";
 import { IRegisterUser } from "../../models/types";
 import _ from "lodash";
 import { useAuthService } from "../../hooks";
@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
 import { loadUser, setError, setSuccess } from "../../redux/actions";
 import { AuthAction } from "../../redux/reducers/AuthReducer";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const [user, setUser] = useState<IRegisterUser>({
@@ -61,12 +62,17 @@ export const Register = () => {
 
   return (
     <Fragment>
-      <div className="login-container">
-        Register your account
+      <div className="auth-container">
+      <div className='banner'>
+          <h1>Sign up</h1>
+          <Link to="/login">already have an account?</Link>
+        </div>
+       
         <Form>
           <Form.Field>
             <label>Username</label>
-            <input
+            <Input
+             size='small'
               name="username"
               placeholder="username"
               onChange={handleUpdateField}
@@ -76,7 +82,8 @@ export const Register = () => {
 
           <Form.Field>
             <label>Email</label>
-            <input
+            <Input
+             size='small'
               name="email"
               placeholder="Email"
               onChange={handleUpdateField}
@@ -85,7 +92,8 @@ export const Register = () => {
           </Form.Field>
           <Form.Field>
             <label>Password</label>
-            <input
+            <Input
+             size='small'
               name="password"
               type="password"
               placeholder="Password"
@@ -94,7 +102,7 @@ export const Register = () => {
             />
           </Form.Field>
           <Button attached="right" color="green" onClick={handleSubmit}>
-            Register
+            Sign up
           </Button>
         </Form>
       </div>

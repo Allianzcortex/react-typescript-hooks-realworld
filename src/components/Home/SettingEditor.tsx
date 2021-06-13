@@ -100,8 +100,7 @@ export const SettingEditor = () => {
   };
 
   return (
-    <Fragment>
-      Your Settings
+    <div className="setting-container">
       <Form>
         <Form.Field width={6}>
           <label>Profile</label>
@@ -148,11 +147,11 @@ export const SettingEditor = () => {
         <Button attached="right" color="green" onClick={handleUpdateSettings}>
           Update Setting
         </Button>
-
+        &nbsp;&nbsp;&nbsp;
         <Button attached="right" color="grey" onClick={handleLogout}>
           Logout
         </Button>
       </Form>
-    </Fragment>
+    </div>
   );
 };

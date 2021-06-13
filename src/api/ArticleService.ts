@@ -16,13 +16,13 @@ export class ArticleService {
         title: article.title,
         description: article.description,
         body: article.body,
-        tagList: article.tags,
+        tagList: article.tagList,
       },
     });
   }
 
   public updateArticle(slug: string, article: object) {
-    return this.api.put(`articles/${slug}`, article);
+    return this.api.put(`articles/${slug}`,article);
   }
 
   public deleteArticle(slug: string) {

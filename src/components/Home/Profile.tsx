@@ -18,6 +18,7 @@ import { Avatar } from "./Avatar";
 import { FollowButton } from "./FollowButton";
 import { Tabs } from "./Tabs";
 import { FavoriteButton } from "./FavoriteButton";
+import { ArticleCard } from "../Article/ArticleCard";
 
 interface routeProps {
   username: string;
@@ -89,27 +90,22 @@ export const Profile = () => {
   }, [currentTab]);
 
   return (
-    <div>
+    <div className="articleview-container">
       {!isLoading || profile === undefined ? (
         ""
       ) : (
-        <Fragment>
+        <div style={{display:'flex',justifyContent:'space-between'}}>
           <Avatar image={profile.image!} username={username} />
           <FollowButton profile={profile!} />
-        </Fragment>
+        </div>
       )}
       <Fragment>
         <div className="tab-container">
           <Tabs tabs={TABS} setCurrentTab={setCurrentTab} />
         </div>
         {articleList.map((article) => {
-          return (
-            <div>
-              {article.title}
-              <FavoriteButton iarticle={article} />{" "}
-            </div>
-          );
-        })}
+        return <ArticleCard key={article.slug} article={article} />;
+      })}
 
         <Pagination
           count={articleCount}

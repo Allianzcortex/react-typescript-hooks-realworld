@@ -9,10 +9,6 @@ body {
   margin: 0;
 }
 
-html, body {
-  
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -29,3 +25,8 @@ code {
   width:200px;
 }
 
+.setting-container {
+  width:600px;
+  margin-left: 30%;
+  /* margin-top:%; */
+}

@@ -2,7 +2,14 @@ import React, { Dispatch, Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { Button, Form, Icon, Popup, TextArea } from "semantic-ui-react";
+import {
+  Button,
+  Divider,
+  Form,
+  Icon,
+  Popup,
+  TextArea,
+} from "semantic-ui-react";
 import { useArticleService, useProfileService } from "../../hooks";
 import { IArticle } from "../../models/types";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
@@ -71,35 +78,49 @@ export const ArticleView = () => {
   return (
     <div className="articleview-container">
       <h2>{singleArticle.title}</h2>
-      <Icon name="write" size="small" />
-      <Avatar
-        image={singleArticle.author.image!}
-        username={singleArticle.author.username}
-      />
-      <hr/>
-      <body>{singleArticle.body}</body>
-      <Fragment>
-        <br />
-        <FollowButton profile={singleArticle?.author} />
-        <FavoriteButton iarticle={singleArticle!} />
-      </Fragment>
-      <Link to={`/article/edit/${slug}`}>
-        <Popup
-          content="edit article"
-          trigger={<Button size="tiny" color={"green"} icon="pencil" />}
-        />
-      </Link>
-      <Popup
-        content="delete article"
-        trigger={
-          <Button
-            size="tiny"
-            color={"grey"}
-            icon="trash"
-            onClick={handleDeleteArticle}
+      <div style={{ display: "flex" }}>
+        <div style={{ paddingBottom: "3px" }}>
+          <Icon name="write" size="small" />
+        </div>
+        &nbsp;&nbsp;
+        <Link to={`/profile/${singleArticle.author.username}`}>
+          <Avatar
+            image={singleArticle.author.image!}
+            username={singleArticle.author.username}
           />
-        }
-      />
+        </Link>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <FollowButton profile={singleArticle?.author} /> &nbsp;&nbsp;
+        <FavoriteButton iarticle={singleArticle!} />
+      </div>
+
+      <Divider />
+      <body>{singleArticle.body}</body>
+
+      {isAuthenticated && user === singleArticle.author.username ? (
+        <Fragment>
+          <Link to={`/article/edit/${slug}`}>
+            <Popup
+              content="edit article"
+              trigger={<Button size="mini" color={"green"} icon="pencil" />}
+            />
+          </Link>
+          <Popup
+            content="delete article"
+            trigger={
+              <Button
+                size="mini"
+                color={"grey"}
+                icon="trash"
+                onClick={handleDeleteArticle}
+              />
+            }
+          />
+        </Fragment>
+      ) : (
+        <></>
+      )}
+
       <Comment slug={slug} />
     </div>
   );

@@ -49,7 +49,7 @@ export interface IArticleMeta {
   title: string;
   description: string;
   body: string;
-  tags: string[];
+  tagList: string[];
 }
 
 export interface IComment {

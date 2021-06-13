@@ -20,7 +20,7 @@ export const ArticleEditor = () => {
     title: "",
     description: "",
     body: "",
-    tags: [],
+    tagList: [],
   });
   const [oldArticle, setOldArticle] = useState<IArticleMeta>();
 
@@ -47,26 +47,12 @@ export const ArticleEditor = () => {
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-
-    switch (name) {
-      case "tags":
-        // setEmail(value);
-        break;
-      default:
-        setArticle(
-          produce(article, (draft) => {
-            // immer doesn't support variable as key name
-            // so we use loadash to set it dynamically
-            _.set(draft, name, value);
-          })
-        );
-        break;
-    }
+    setArticle(
+      produce(article, (draft) => {
+        _.set(draft, name, name === "tags" ? value.split(",") : value);
+      })
+    );
   };
-
-  useEffect(() => {
-    console.log(article);
-  }, [article]);
 
   useEffect(() => {
     const retrieveSingleArticle = async () => {
@@ -82,7 +68,7 @@ export const ArticleEditor = () => {
   }, []);
 
   return (
-    <Fragment>
+    <div className="setting-container">
       <Form>
         <Form.Field width={6}>
           <label>Article Title</label>
@@ -115,10 +101,21 @@ export const ArticleEditor = () => {
             value={article.body}
           />
         </Form.Field>
+        <Form.Field>
+          <label>Tags</label>
+          <input
+            disabled={slug !== undefined}
+            name="tags"
+            placeholder="tags split with comma"
+            onChange={handleUpdateField}
+            value={(article.tagList.join(","))}
+            required
+          />
+        </Form.Field>
         <Button attached="right" color="green" onClick={handleCreateArticle}>
-          Create Article
+          {slug === undefined ? "create" : "edit"} Article
         </Button>
       </Form>
-    </Fragment>
+    </div>
   );
 };
