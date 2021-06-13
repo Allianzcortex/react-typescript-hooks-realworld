@@ -4,7 +4,7 @@ import { PER_PAGE_COUNT } from "../../utils";
 import "./style.css";
 
 interface IProps {
-  count: number; // all count
+  count: number;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
 }
@@ -15,7 +15,6 @@ interface IData {
 }
 
 export const Pagination = ({ count, currentPage, setCurrentPage }: IProps) => {
-  // <button></button>
   type xx=React.ButtonHTMLAttributes<HTMLButtonElement>
   const totalPages =
     count % PER_PAGE_COUNT == 0

@@ -1,12 +1,10 @@
-# react-typescript-hooks-realworld
-
-Tech Stack :
-
-React + Functional Component + Immer + Redux + Hooks + axios + Testing Library
+# react-typescript-hooks-realworld 
 
 ![build](https://github.com/Allianzcortex/react-typescript-hooks-realworld/actions/workflows/build.yml/badge.svg) ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=react-typescript-hooks-realworld)
 
-DEMO : [LINK]( https://react-typescript-hooks-realworld.vercel.app/)
+[real world api](http://https://realworld.io/) based on **_React FC + Immer + Redux + Hooks + axios + Testing Library_**
+
+DEMO : [LINK](https://react-typescript-hooks-realworld.vercel.app/)
 
 ---
 
