@@ -1,6 +1,9 @@
-
 .article-container {
-    width:800px;
-    margin-left:200px;
-    margin-bottom:50px;
+  width: 800px;
+  margin-left: 200px;
+  margin-bottom: 50px;
+}
+
+.article-container .card {
+  overflow-x: hidden;
 }

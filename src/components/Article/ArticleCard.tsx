@@ -51,12 +51,6 @@ export const ArticleCard = ({ article }: IProps) => {
           </a>
         </Card.Content>
       </Card>
-
-      {/* <Link to={`article/${article.slug}`} 
-        >{article.title}</Link> &nbsp;
-        ------------------------------
-        <Link to={`profile/${article.author.username}`} 
-        >{article.author.username}</Link>  */}
     </Fragment>
   );
 };
