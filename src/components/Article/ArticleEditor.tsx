@@ -68,6 +68,7 @@ export const ArticleEditor = () => {
   }, []);
 
   return (
+    <div className="main-container">
     <div className="setting-container">
       <Form>
         <Form.Field width={6}>
@@ -116,6 +117,7 @@ export const ArticleEditor = () => {
           {slug === undefined ? "create" : "edit"} Article
         </Button>
       </Form>
+    </div>
     </div>
   );
 };

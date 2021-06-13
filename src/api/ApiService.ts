@@ -45,19 +45,24 @@ export class ApiService<T> {
       // headers:headers,
     };
 
-    const token = getLocalStorage('token')
-    if (token!==null) {
+    const token = getLocalStorage("token");
+    if (token !== null) {
       axios.defaults.headers.common["Authorization"] = `Token ${getLocalStorage(
         "token"
       )}`;
     }
-  
+
     let res;
     await axios(options)
       .then((response) => {
         res = response;
       })
       .catch((error) => {
+        switch (error.response.status) {
+          case Status.NotFound:
+            // handle tricky resposne status in conduit API response
+            window.location.href = "/NotFound";
+        }
         res = Promise.reject(error.response);
       });
     return res;

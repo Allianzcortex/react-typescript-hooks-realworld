@@ -72,7 +72,6 @@ export const SettingEditor = () => {
     }
   };
 
-
   const handleUpdateSettings = async () => {
     try {
       loaderDiapatch(setLoading("update user"));
@@ -103,54 +102,60 @@ export const SettingEditor = () => {
   };
 
   return (
-    <div className="setting-container">
-      <Form>
-        <Form.Field width={6}>
-          <label>Profile</label>
-          <input
-            name="profile"
-            placeholder="URL of profile picture"
-            onChange={handleUpdateField}
-            value={user.image}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Username</label>
-          <input
-            name="username"
-            onChange={handleUpdateField}
-            value={user.username}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Short bio about you</label>
-          <TextArea
-            name="bio"
-            onChange={handleUpdateField}
-            style={{ minHeight: 100 }}
-            value={user.bio}
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Email</label>
-          <input name="email" onChange={handleUpdateField} value={user.email} />
-        </Form.Field>
-        <Form.Field>
-          <label>New Password</label>
-          <input
-            name="password"
-            onChange={handleUpdateField}
-            value={user.password}
-          />
-        </Form.Field>
-        <Button attached="right" color="green" onClick={handleUpdateSettings}>
-          Update Setting
-        </Button>
-        &nbsp;&nbsp;&nbsp;
-        <Button attached="right" color="grey" onClick={handleLogout}>
-          Logout
-        </Button>
-      </Form>
+    <div className="main-container">
+      <div className="setting-container">
+        <Form>
+          <Form.Field width={6}>
+            <label>Profile</label>
+            <input
+              name="profile"
+              placeholder="URL of profile picture"
+              onChange={handleUpdateField}
+              value={user.image}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Username</label>
+            <input
+              name="username"
+              onChange={handleUpdateField}
+              value={user.username}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Short bio about you</label>
+            <TextArea
+              name="bio"
+              onChange={handleUpdateField}
+              style={{ minHeight: 100 }}
+              value={user.bio}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Email</label>
+            <input
+              name="email"
+              onChange={handleUpdateField}
+              value={user.email}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>New Password</label>
+            <input
+              name="password"
+              onChange={handleUpdateField}
+              value={user.password}
+            />
+          </Form.Field>
+          <Button attached="right" color="green" onClick={handleUpdateSettings}>
+            Update Setting
+          </Button>
+          &nbsp;&nbsp;&nbsp;
+          <Button attached="right" color="grey" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 };
