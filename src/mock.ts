@@ -28,6 +28,7 @@ const handleFavorite = (article: IArticle) => {
   const favorited = !article.favorited;
   const count = article.favoritesCount;
   const favoritesCount = article.favorited ? count - 1 : count + 1;
+
   return Object.assign({}, article, {
     favorited: favorited,
     favoritesCount: favoritesCount,
@@ -36,8 +37,8 @@ const handleFavorite = (article: IArticle) => {
 
 export const mockArticleServer = nock(BASE_URL)
   .defaultReplyHeaders({ [Header.CORS]: "*" })
-  // here we may want to use .query({ limit: 10, offset: 10 })
-  .get("/articles?&limit=10&offset=0")
+  // here we may want to use .query({ limit: 6, offset: 10 })
+  .get("/articles?&limit=6&offset=0")
   .reply(Status.Ok, { articles: fakeArticles, count: fakeArticles.length })
   .get("/tags")
   .reply(Status.Ok, { tags: fakeTags })

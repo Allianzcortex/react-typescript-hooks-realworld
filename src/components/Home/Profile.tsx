@@ -85,10 +85,6 @@ export const Profile = () => {
     loadAllData();
   }, [currentPage, currentTab]);
 
-  useEffect(() => {
-    console.log(currentTab);
-  }, [currentTab]);
-
   return (
     <div className="main-container">
       <div className="article-container">

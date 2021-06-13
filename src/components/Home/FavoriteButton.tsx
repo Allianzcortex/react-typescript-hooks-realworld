@@ -38,7 +38,6 @@ export const FavoriteButton = ({ iarticle }: IProps) => {
       } else {
         res = await articleService.favoriteArticle(slug);
       }
-      console.log(res.data);
       const article = res.data.article as IArticle;
       setArticle(
         produce(article, (draft) => {

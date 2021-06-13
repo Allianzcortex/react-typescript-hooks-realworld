@@ -68,14 +68,12 @@ export const MainView = () => {
   );
 
   useEffect(() => {
-    console.log(currentPage);
     const retrieveArticle = async () => {
       if (!isAuthenticated && currentTab === "feed") {
         notifyDispatch(setWarning("You need to login firstly"));
         history.push("/login");
         return;
       }
-      console.log("dispatch--");
       loaderDiapatch(setLoading("fetch articles , generating pagination"));
       let articleRes;
       switch (currentTab) {

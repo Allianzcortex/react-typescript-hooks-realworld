@@ -9,6 +9,9 @@ import {
 } from "../../../models/Services";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { fakeTags, mockArticleServer } from "../../../mock";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { rootReducer } from "../../../redux/store";
 
 describe("test", () => {
   let services: IServices;
@@ -20,6 +23,7 @@ describe("test", () => {
   const renderResult: () => RenderResult = () => {
     return render(
       <Router>
+         <Provider store={createStore(rootReducer)}>
         <ServicesContext.Provider value={services}>
           <Fragment>
             <Switch>
@@ -29,6 +33,7 @@ describe("test", () => {
             </Switch>
           </Fragment>
         </ServicesContext.Provider>
+        </Provider>
       </Router>
     );
   };
@@ -42,7 +47,6 @@ describe("test", () => {
       fakeTags.forEach((tag)=>{
         expect(getByText(tag)).toBeInTheDocument;
       })
-      console.log(container.innerHTML);
     });
     // apparently only using getByText() without waitFor cannot work
     // await getByText("a")

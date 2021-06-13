@@ -49,7 +49,7 @@ export const ArticleEditor = () => {
     const { name, value } = event.target;
     setArticle(
       produce(article, (draft) => {
-        _.set(draft, name, name === "tags" ? value.split(",") : value);
+        _.set(draft, name, name === "tagList" ? value.split(",") : value);
       })
     );
   };
@@ -105,7 +105,7 @@ export const ArticleEditor = () => {
           <label>Tags</label>
           <input
             disabled={slug !== undefined}
-            name="tags"
+            name="tagList"
             placeholder="tags split with comma"
             onChange={handleUpdateField}
             value={(article.tagList.join(","))}

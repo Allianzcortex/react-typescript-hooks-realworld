@@ -12,30 +12,36 @@ import {
   ServicesContext,
 } from "../../../models/Services";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {
-  fakeArticles,
-  fakeSingleArticle,
-  fakeTags,
-  mockArticleServer,
-} from "../../../mock";
+import { fakeSingleArticle, mockArticleServer } from "../../../mock";
 import { FavoriteButton } from "../FavoriteButton";
 import { IArticle } from "../../../models/types";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { rootReducer } from "../../../redux/store";
+import { AuthState } from "../../../redux/reducers/AuthReducer";
 
 describe("test", () => {
   let services: IServices;
   let article: IArticle;
+  let initialState: AuthState;
 
   beforeEach(() => {
     services = initServices();
-    article = fakeArticles[0] as IArticle;
+    article = fakeSingleArticle as IArticle;
+    initialState = {
+      isAuthenticated: true,
+      user: "test",
+    };
   });
 
   const renderResult: () => RenderResult = () => {
     return render(
       <Router>
-        <ServicesContext.Provider value={services}>
-          <FavoriteButton iarticle={article} />
-        </ServicesContext.Provider>
+        <Provider store={createStore(rootReducer, { auth: initialState })}>
+          <ServicesContext.Provider value={services}>
+            <FavoriteButton iarticle={article} />
+          </ServicesContext.Provider>
+        </Provider>
       </Router>
     );
   };
@@ -45,8 +51,8 @@ describe("test", () => {
 
     const { container, getByRole, getByText } = renderResult();
     await waitFor(() => {
-     // The text is `Favorite&nbsp; (1)` and is splitting for multiple lines
-     // for display result here, so use {exact: false}
+      // The text is `Favorite&nbsp; (1)` and is splitting for multiple lines
+      // for display result here, so use {exact: false}
 
       expect(getByText(`Favorite`, { exact: false })).toBeInTheDocument;
       expect(getByText(`${fakeSingleArticle.favoritesCount}`, { exact: false }))

@@ -22,8 +22,6 @@ export const Tabs = ({ tabs, setCurrentTab }: IProps) => {
   const handleTabChange = (event: SyntheticEvent, data: object) => {
       // TODO destruct activeIndex in data directly
     const { activeIndex } = data as ITabChangeEvent;
-    console.log(activeIndex)
-    console.log(Object.keys(tabs)[Number(activeIndex)])
     setCurrentTab(Object.keys(tabs)[Number(activeIndex)]);
   };
 

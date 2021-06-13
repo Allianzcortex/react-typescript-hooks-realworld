@@ -4,7 +4,7 @@ import { errorReducer } from "./reducers/NotifyReducer";
 import { devToolsEnhancer } from 'redux-devtools-extension'
 import { loaderReducer } from "./reducers/LoaderReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     auth:authReducer,
     error:errorReducer,
     loader:loaderReducer,

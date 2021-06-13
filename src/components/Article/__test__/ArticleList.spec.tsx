@@ -8,25 +8,31 @@ import {
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { MainView } from "../../MainView";
 import { fakeArticles, mockArticleServer } from "../../../mock";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { rootReducer } from "../../../redux/store";
 
 describe("test", () => {
   let services: IServices;
 
   beforeEach(() => {
     services = initServices();
+    window.scrollTo = jest.fn();
   });
 
   const renderResult: () => RenderResult = () => {
     return render(
       <Router>
         <ServicesContext.Provider value={services}>
-          <Fragment>
-            <Switch>
-              <Route path="/" exact>
-                <MainView />
-              </Route>
-            </Switch>
-          </Fragment>
+          <Provider store={createStore(rootReducer)}>
+            <Fragment>
+              <Switch>
+                <Route path="/" exact>
+                  <MainView />
+                </Route>
+              </Switch>
+            </Fragment>
+          </Provider>
         </ServicesContext.Provider>
       </Router>
     );
@@ -39,7 +45,6 @@ describe("test", () => {
       fakeArticles.forEach((article) => {
         expect(getByText(article.title)).toBeInTheDocument;
       });
-      console.log(container.innerHTML);
     });
   });
 });

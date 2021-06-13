@@ -72,9 +72,6 @@ export const SettingEditor = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   const handleUpdateSettings = async () => {
     try {
