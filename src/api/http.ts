@@ -38,4 +38,4 @@ export enum Status {
   UnprocessEntity = 422,
 }
 
-export const BASE_URL = "https://conduit.productionready.io/api"
+export const BASE_URL = "https://conduit.productionready.io/api/"

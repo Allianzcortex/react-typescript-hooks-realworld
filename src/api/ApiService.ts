@@ -1,12 +1,8 @@
-import { Header, Type, Method, Status } from "./http";
+import { Header, Type, Method, Status, BASE_URL } from "./http";
 import axios from "axios";
 import { getLocalStorage } from "../utils";
 
-axios.defaults.baseURL = "https://conduit.productionready.io/api/";
-
-// const token =
-//   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjQ3MzEsInVzZXJuYW1lIjoiYWFhYWRkZGQiLCJleHAiOjE2Mjg1NTQ1NjN9.q-x_CDleFeSYuJfiaXChAc9DXodKjpQmg8uZt5YpTxg";
-// axios.defaults.headers.common["Authorization"] = `Token ${token}`;
+axios.defaults.baseURL = BASE_URL;
 
 export class ApiService<T> {
   public async get<T>(url: string, body?: object | FormData): Promise<any> {

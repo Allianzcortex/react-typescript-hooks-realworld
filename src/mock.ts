@@ -35,7 +35,8 @@ const handleFavorite = (article: IArticle) => {
   });
 };
 
-export const mockArticleServer = nock(BASE_URL)
+export const mockArticleServer = nock(BASE_URL.replace(/\/$/, ""))
+  .persist()
   .defaultReplyHeaders({ [Header.CORS]: "*" })
   // here we may want to use .query({ limit: 6, offset: 10 })
   .get("/articles?&limit=6&offset=0")
