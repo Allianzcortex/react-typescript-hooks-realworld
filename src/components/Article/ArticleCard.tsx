@@ -4,6 +4,8 @@ import { Card, Popup, Image, Icon } from "semantic-ui-react";
 import { useArticleService } from "../../hooks";
 import { IArticle } from "../../models/types";
 import { updateCreppyDefaultImage } from "../../utils";
+import { FavoriteButton } from "../Home/FavoriteButton";
+import { FollowButton } from "../Home/FollowButton";
 
 interface IProps {
   article: IArticle;
@@ -43,12 +45,13 @@ export const ArticleCard = ({ article }: IProps) => {
             {article.body}
           </Card.Description>
         </Card.Content>
-        <Card.Content extra onClick={gotoArticle}>
+        <Card.Content extra>
           <a>
             <Icon name="clock" />
             {/* Or to import a library to handle the date */}
-            {new Date(article.updatedAt).toString().split('GMT')[0]}
-          </a>
+            {new Date(article.updatedAt).toString().split("GMT")[0]}
+          </a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <FavoriteButton iarticle={article} />
         </Card.Content>
       </Card>
     </Fragment>

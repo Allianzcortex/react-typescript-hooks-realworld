@@ -8,6 +8,9 @@ interface props {
   Comp: FC;
 }
 
+// GuardProuter is only used to judge whether user has log in currently
+// TODO : we may want to add a `isRequired` param so users can be redirected
+// to log page directly
 export const GuardRouter = ({ Comp }: props) => {
 
   const authDispatch = useDispatch<Dispatch<AuthAction>>();
