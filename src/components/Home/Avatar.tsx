@@ -9,8 +9,6 @@ interface IProps {
 
 export const Avatar = ({ image, username }: IProps) => {
 
-  
-
   return (
     <div>
       <Image src={updateCreppyDefaultImage(image)} avatar />

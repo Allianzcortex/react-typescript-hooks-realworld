@@ -48,3 +48,4 @@ declare module 'react-simple-snackbar' {
   
     export default SnackbarProvider;
   }
+  

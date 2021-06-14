@@ -52,8 +52,8 @@ export const TagList = ({ tags, tab, currentTag, setCurrentTag }: IProps) => {
 
   return (
     <Fragment>
-      <Statistic label='Popular Tags' value={tags.length} />
-      <br/>
+      <Statistic label="Popular Tags" value={tags.length} />
+      <br />
       {tags.map((tag) => {
         return (
           <Label

@@ -27,6 +27,7 @@ export const MainView = () => {
   const [count, setCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentTag, setCurrentTag] = useState<string | undefined>(undefined);
+  const [isInitial, setInitial] = useState<boolean>(true);
   const notifyDispatch = useDispatch<Dispatch<NotificationAction>>();
   const history = useHistory();
 
@@ -42,17 +43,34 @@ export const MainView = () => {
   };
   const [currentTab, setCurrentTab] = useState<string>("global-feed");
 
-  useEffect(() => {
-    const retrieveTag = async () => {
-      loaderDiapatch(setLoading("fetch tags"));
+  const retrieveTag = async () => {
+    const tagRes = await articleService.getTags();
+    setTagList(tagRes.data.tags);
+  };
 
-      const tagRes = await articleService.getTags();
-      setTagList(tagRes.data.tags);
+  const retrieveArticle = async () => {
+    if (!isAuthenticated && currentTab === "feed") {
+      notifyDispatch(setWarning("You need to login firstly"));
+      history.push("/login");
+      return;
+    }
 
-      loaderDiapatch(clearLoading());
-    };
-    retrieveTag();
-  }, []);
+    let articleRes;
+    switch (currentTab) {
+      case "global-feed":
+        articleRes = await articleService.getArticles({
+          page: currentPage,
+          tag: currentTag,
+        });
+        break;
+      case "feed":
+        articleRes = await articleService.getFeed(currentPage);
+        break;
+    }
+
+    setArticleList(articleRes.data.articles);
+    setCount(articleRes.data.articlesCount);
+  };
 
   const memorizedSetTag = useCallback(
     (_: SyntheticEvent, data: object) => {
@@ -68,33 +86,27 @@ export const MainView = () => {
   );
 
   useEffect(() => {
-    const retrieveArticle = async () => {
-      if (!isAuthenticated && currentTab === "feed") {
-        notifyDispatch(setWarning("You need to login firstly"));
-        history.push("/login");
-        return;
-      }
-      loaderDiapatch(setLoading("fetch articles , generating pagination"));
-      let articleRes;
-      switch (currentTab) {
-        case "global-feed":
-          articleRes = await articleService.getArticles({
-            page: currentPage,
-            tag: currentTag,
-          });
-          break;
-        case "feed":
-          articleRes = await articleService.getFeed(currentPage);
-          break;
-      }
-
-      setArticleList(articleRes.data.articles);
-      setCount(articleRes.data.articlesCount);
-
+    const retrieve = async () => {
+      loaderDiapatch(
+        setLoading("fetch articles , tags , generating pagination")
+      );
+      await Promise.all([retrieveArticle(), retrieveTag()]);
+      setInitial(false);
       loaderDiapatch(clearLoading());
-      window.scrollTo(0, 0);
     };
-    retrieveArticle();
+    retrieve();
+  }, []);
+
+  useEffect(() => {
+    const retrieve = async () => {
+      loaderDiapatch(setLoading("fetch articles , generating pagination"));
+      await retrieveArticle();
+      if (!isInitial) {
+        loaderDiapatch(clearLoading());
+      }
+    };
+    retrieve();
+    window.scrollTo(0, 0);
   }, [currentPage, currentTag, currentTab]);
 
   return (

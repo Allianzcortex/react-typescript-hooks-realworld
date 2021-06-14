@@ -3,21 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { messageType } from "../../models/types";
 import { NotificationAction } from "../../redux/reducers/NotifyReducer";
 import { AppState } from "../../redux/store";
-import { SnackbarOptions, useSnackbar } from "react-simple-snackbar";
 import { clear } from "../../redux/actions";
-import { ToastProvider, useToasts,AppearanceTypes} from "react-toast-notifications";
+import { useToasts,AppearanceTypes} from "react-toast-notifications";
 
 export const Notification = () => {
   const { messageType, messageContent } = useSelector(
     (state: AppState) => state.error
   );
   const notifyDispatch = useDispatch<Dispatch<NotificationAction>>();
-  const options: SnackbarOptions = {
-    position: "top-center",
-  };
-  // const [openSnackbar, closeSnackbar] = useSnackbar(options);
-  const { addToast } = useToasts();
 
+  const { addToast } = useToasts();
   const handleContent = (content: object | string) => {
     let res = "";
     if (typeof content === "object") {

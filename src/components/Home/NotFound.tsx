@@ -30,6 +30,3 @@ export const NotFound = () => {
     </div>
   );
 };
-
-// src="notfound.jpg"
-// src="notfound.jpg"

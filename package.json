@@ -21,7 +21,6 @@
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "react-simple-snackbar": "^1.1.11",
     "react-toast-notifications": "^2.4.4",
     "redux": "^4.1.0",
     "semantic-ui-css": "^2.4.1",

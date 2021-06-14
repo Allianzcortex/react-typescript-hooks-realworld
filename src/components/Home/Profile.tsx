@@ -83,6 +83,7 @@ export const Profile = () => {
       loaderDiapatch(clearLoading());
     };
     loadAllData();
+    window.scrollTo(0, 0);
   }, [currentPage, currentTab]);
 
   return (
