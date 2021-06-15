@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect } from "react";
+import React, { Dispatch, Fragment, useEffect } from "react";
 import { Image } from "semantic-ui-react";
 import { updateCreppyDefaultImage } from "../../utils";
 
@@ -10,9 +10,9 @@ interface IProps {
 export const Avatar = ({ image, username }: IProps) => {
 
   return (
-    <div>
+    <a>
       <Image src={updateCreppyDefaultImage(image)} avatar />
       <span>{username}</span>
-    </div>
+    </a>
   );
 };
