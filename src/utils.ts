@@ -70,7 +70,7 @@ export const objectDiff = (a1: IArticleMeta, a2: IArticleMeta) => {
 export const updateCreppyDefaultImage = (image: string) => {
   // Am I the only one that thinks default avatar is creppy ?
   if (image === "https://static.productionready.io/images/smiley-cyrus.jpg") {
-    return process.env.PUBLIC_URL + "/default-avatar.jpg";
+    return `${process.env.PUBLIC_URL}/default-avatar.jpg}`;
   }
   return image;
 };

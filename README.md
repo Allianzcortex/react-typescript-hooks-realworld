@@ -8,22 +8,23 @@ DEMO : [LINK](https://react-typescript-hooks-realworld.vercel.app/)
 
 ---
 
-Build it with 2 ways :
+Build with 2 ways :
 
-1 With Docker :
+1 With `Docker` :
 
-run the command `docker-compose up --build`
+```bash
+docker-compose up --build
+```
 
-2 With NPM :
+2 With `npm`:
 
-a. run `npm install` to install all dependencies
-
-b. run `npm start` to run the app
+``` bash
+# install dependencies
+> npm install
+# run the server
+> npm start
+```
 
 ---
 
-TODO:
-
-- [ ] add tests for more components to improve coverage rate
-
-- [ ] use [class-transformer](https://github.com/typestack/class-transformer) or [serializr](https://github.com/mobxjs/serializr) to deserialize JSON to object instead of `JSON.parse()`
+Check [wiki](https://github.com/Allianzcortex/react-typescript-hooks-realworld/wiki) for more.
