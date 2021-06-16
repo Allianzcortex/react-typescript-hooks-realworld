@@ -86,7 +86,7 @@ export const Comment = ({ slug }: IProps) => {
                 src={updateCreppyDefaultImage(comment.author.image!)}
               />
               <SemanticComment.Content>
-                <Link to={`/profile/{comment.author.username}`}>
+                <Link to={`/profile/${comment.author.username}`}>
                   <SemanticComment.Author as="a">
                     {comment.author.username}
                   </SemanticComment.Author>
