@@ -2,7 +2,7 @@
 
 ![build](https://github.com/Allianzcortex/react-typescript-hooks-realworld/actions/workflows/build.yml/badge.svg) ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=react-typescript-hooks-realworld)
 
-[real world api](http://https://realworld.io/) based on **_React FC + Immer + Redux + Hooks + axios + Testing Library_**
+[real world api](https://realworld.io/) based on **_React FC + Immer + Redux + Hooks + axios + Testing Library_**
 
 DEMO : [LINK](https://react-typescript-hooks-realworld.vercel.app/)
 
