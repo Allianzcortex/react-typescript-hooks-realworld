@@ -5,7 +5,15 @@ import React, {
   SyntheticEvent,
   useState,
 } from "react";
-import { Button, Form, Input, Menu, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Input,
+  Menu,
+  Segment,
+  Popup,
+  Icon,
+} from "semantic-ui-react";
 import "./Login.css";
 import { IError } from "../../models/types";
 import produce from "immer";
@@ -20,8 +28,8 @@ import { Link } from "react-router-dom";
 
 export default function Login() {
   // handle email/password/loading/conditions
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("aaaaaaaa@aaa.com");
+  const [password, setPassword] = useState("aaaaaaaa");
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<IError>([]);
 
@@ -29,6 +37,7 @@ export default function Login() {
   const history = useHistory();
   const notifyDiapatch = useDispatch<Dispatch<NotificationAction>>();
   const authDispatch = useDispatch<Dispatch<AuthAction>>();
+
   const handleUpdateField = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     switch (name) {
@@ -58,37 +67,43 @@ export default function Login() {
     <Fragment>
       <div className="auth-container">
         {/* css-in-js can be a better solution here tho */}
-        <div className='banner'>
+        <div className="banner">
           <h1>Sign in</h1>
           <Link to="/register">Need an account?</Link>
         </div>
         <Form>
           <Form.Field>
-            <label>Email</label>
+            <Popup
+              content="aaaaaaaa is a sample email for use"
+              trigger={
+                <label>
+                  Email&nbsp;&nbsp;<Icon size="small" name="info"></Icon>
+                </label>
+              }
+            />
             <Input
-             size='small'
+              size="small"
               name="Email"
               placeholder="Email"
               onChange={handleUpdateField}
+              defaultValue="aaaaaaaa@aaa.com"
               required
             />
           </Form.Field>
           <Form.Field>
             <label>Password</label>
             <Input
-             size='small'
+              size="small"
               name="Password"
               type="password"
               placeholder="Password"
               onChange={handleUpdateField}
+              defaultValue="aaaaaaaa"
               required
             />
           </Form.Field>
-          {/* <Form.Field>
-      <Checkbox label='I agree to the Terms and Conditions' />
-    </Form.Field> */}
           <Button attached="right" color="green" onClick={handleSubmit}>
-            Sin In
+            Sign In
           </Button>
         </Form>
       </div>
