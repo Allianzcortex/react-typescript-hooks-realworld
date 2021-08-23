@@ -35,7 +35,7 @@ export default function Login() {
 
   const authService = useAuthService();
   const history = useHistory();
-  const notifyDiapatch = useDispatch<Dispatch<NotificationAction>>();
+  const notifyDispatch = useDispatch<Dispatch<NotificationAction>>();
   const authDispatch = useDispatch<Dispatch<AuthAction>>();
 
   const handleUpdateField = (event: ChangeEvent<HTMLInputElement>) => {
@@ -57,9 +57,9 @@ export default function Login() {
       // need type strickt check to know returned object is whether a
       authDispatch(loadUser(res));
       history.push("/");
-      notifyDiapatch(setSuccess("Login Successfully."));
+      notifyDispatch(setSuccess("Login Successfully."));
     } catch (error) {
-      notifyDiapatch(setError(error.data.errors));
+      notifyDispatch(setError(error.data.errors));
     }
   };
 
