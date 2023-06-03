@@ -4,7 +4,7 @@
 
 [real world api](https://realworld.io/) based on **_React FC + Immer + Redux + Hooks + axios + Testing Library_**
 
-Preview : [LINK](https://react-typescript-hooks-realworld.vercel.app/)
+Preview : [LINK](https://react-typescript-hooks-realworld.vercel.app/NotFound)
 
 ---
 
